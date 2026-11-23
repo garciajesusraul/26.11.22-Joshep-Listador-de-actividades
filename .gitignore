@@ -1,0 +1,12 @@
+# PDFs y textos extraídos (se regeneran con tools/)
+datos/stage/
+datos/pdfs/
+datos/png/
+datos/arbol_materias.json
+datos/detalles*.json
+
+# Temporales
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

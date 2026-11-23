@@ -1,0 +1,933 @@
+{
+  "titulo": "2do grado — Bimestre 4",
+  "grado": "2do grado",
+  "bimestre": "Bimestre 4",
+  "colegio": "Joseph's House School",
+  "fuente": "https://jhs.schoology.com",
+  "materias": [
+    {
+      "id": "ciencias",
+      "nombre": "Ciencias de la Vida",
+      "subtitulo": "Cuerpo y Salud",
+      "curso": "https://jhs.schoology.com/course/8203068582/materials",
+      "temas": [
+        {
+          "nombre": "Instrucciones del bimestre",
+          "items": [
+            {
+              "nombre": "Instrucciones Bimestre 4",
+              "tipo": "tarea",
+              "nota": "Este bimestre NO hay cuestionario RECOREMOS: en su lugar se entrega el video de la feria de misiones como PRIMERA actividad. Las tareas se reciben antes del examen final.",
+              "subtareas": [
+                "Leer las instrucciones del bimestre con el tutor",
+                "Presentar el video de la feria de misiones como primera actividad del bimestre"
+              ]
+            }
+          ]
+        },
+        {
+          "nombre": "Tema 14 — Organismos microscópicos y macroscópicos",
+          "items": [
+            { "nombre": "Video — Tema 14", "tipo": "video", "nota": "Solo se lista: el video lo ve el niño con el tutor." },
+            {
+              "nombre": "Guía de Trabajo — Tema 14",
+              "tipo": "guia",
+              "subtareas": [
+                "Completar los nombres de los macroorganismos y colorear cada uno",
+                "Explicar con tus propias palabras la diferencia entre un organismo microscópico y uno macroscópico, con un ejemplo de cada uno"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 15 — La célula y su descubrimiento",
+          "items": [
+            { "nombre": "Video — Tema 15", "tipo": "video" },
+            {
+              "nombre": "Guía de Trabajo — Tema 15",
+              "tipo": "guia",
+              "subtareas": [
+                "Investigar con papás el nombre del mayor número de organelos y escribirlos en el número que corresponde (1 al 14)",
+                "Construir la célula en un CD con plastilina: núcleo (paso 1)",
+                "Mitocondria (paso 2)",
+                "Vacuola (paso 3)",
+                "Centrosoma (paso 4)",
+                "Aparato de Golgi (paso 5)",
+                "Lisosoma (paso 6)",
+                "Retículo endoplasmático liso y rugoso (paso 7)",
+                "Ribosoma (paso 8)",
+                "Membrana celular (paso 9)",
+                "Citoplasma con pegamento y agua (paso 10)",
+                "Escribir los números de cada organelo según la página 146 (paso 11)",
+                "Pegar en la guía 2 fotos: una tuya trabajando y otra solo del trabajo terminado"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Medio Tiempo",
+          "items": [
+            {
+              "nombre": "Tarea Medio Tiempo",
+              "tipo": "tarea",
+              "nota": "Somos muy importantes para Dios: canción sobre ser creados completos.",
+              "subtareas": [
+                "Escuchar la canción con el tutor (el tutor escribe la letra)",
+                "Dibujar algunas partes de la canción para poder enseñarla a otras personas",
+                "Subir la canción en PDF para que sea calificada"
+              ]
+            }
+          ]
+        },
+        {
+          "nombre": "Tema 16 — Importancia del oxígeno para la célula",
+          "items": [
+            { "nombre": "Video — Tema 16", "tipo": "video" },
+            {
+              "nombre": "Guía de Trabajo — Tema 16",
+              "tipo": "guia",
+              "subtareas": [
+                "Unir con una línea cuáles de los elementos necesitan oxígeno para vivir"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 17 — De la célula al cuerpo",
+          "items": [
+            {
+              "nombre": "Guía de Trabajo — ¿Cómo funciona mi cuerpo?",
+              "tipo": "guia",
+              "subtareas": [
+                "Pintar la casilla con el color de la respuesta correcta"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "english",
+      "nombre": "English",
+      "subtitulo": "Basic B",
+      "curso": "https://jhs.schoology.com/course/8202980957/materials",
+      "temas": [
+        {
+          "nombre": "Lesson 8 — What are you doing?",
+          "items": [
+            { "nombre": "a. Video", "tipo": "video" },
+            { "nombre": "b. Video", "tipo": "video" },
+            {
+              "nombre": "c. Workbook 8",
+              "tipo": "guia",
+              "subtareas": [
+                "Activity 1: mirar el video de la lección, escuchar y repetir las rutinas diarias",
+                "Activity 2: tomar fotos, recortar y pegar imágenes de algunas de tus rutinas diarias",
+                "Activity 3: escribir tus rutinas diarias",
+                "Activity 4: grabar un audio MP3 diciendo tus rutinas diarias y subirlo a la plataforma",
+                "Activity 5: preguntar a un familiar sus rutinas diarias, escribirlas y dibujarlas"
+              ]
+            },
+            { "nombre": "d. Video", "tipo": "video" },
+            {
+              "nombre": "e. Workbook 8 — Grammar (Present progressive)",
+              "tipo": "guia",
+              "subtareas": [
+                "Activity 1: escribir los verbos en presente progresivo (wait, draw, do, look, help)",
+                "Activity 2: unir cada oración con su imagen",
+                "Activity 3: escuchar el audio y completar las 12 oraciones con el verbo en presente progresivo",
+                "Activity 4: escribir 8 oraciones usando presente progresivo"
+              ]
+            },
+            { "nombre": "f. Quiz 8", "tipo": "cuestionario" },
+            { "nombre": "g. Audio support", "tipo": "audio", "nota": "Audio de apoyo para la Activity 3 del Grammar (pág. 112)." },
+            { "nombre": "h. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Lesson 9 — Directions",
+          "items": [
+            { "nombre": "a. Video", "tipo": "video" },
+            { "nombre": "b. Video", "tipo": "video" },
+            {
+              "nombre": "c. Workbook 9",
+              "tipo": "guia",
+              "subtareas": [
+                "Activity 1: dibujar y colorear un mapa de tu barrio y mostrar cómo llegar al supermercado, parque, escuela y estación de policía",
+                "Activity 2: escribir las indicaciones para ir de tu casa al supermercado, al parque y a la estación de policía",
+                "Activity 3: dibujar los verbos break, prepare, wash e invite"
+              ]
+            },
+            { "nombre": "d. Video", "tipo": "video" },
+            {
+              "nombre": "e. Workbook 9 — Grammar (Prepositions of place)",
+              "tipo": "guia",
+              "subtareas": [
+                "Activity 1: completar las 5 oraciones con in, on o at",
+                "Activity 2: escuchar y completar las 6 oraciones con la preposición de lugar",
+                "Activity 3: dibujar en los recuadros según la preposición at, on e in"
+              ]
+            },
+            { "nombre": "f. Quiz 9", "tipo": "cuestionario" },
+            { "nombre": "g. Audio support", "tipo": "audio", "nota": "Audio de apoyo para la Activity 2 del Grammar (pág. 125)." },
+            { "nombre": "h. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Lesson 10 — Telephone call",
+          "items": [
+            { "nombre": "a. Video", "tipo": "video" },
+            { "nombre": "b. Video", "tipo": "video" },
+            {
+              "nombre": "c. Workbook 10",
+              "tipo": "guia",
+              "subtareas": [
+                "Activity 1: encerrar con azul el vocabulario de la llamada telefónica",
+                "Activity 2: elegir una de las llamadas de la lección, leerla varias veces, dibujarla y grabar un audio MP3 para subirlo a la plataforma"
+              ]
+            },
+            { "nombre": "d. Quiz 10", "tipo": "cuestionario" },
+            { "nombre": "e. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "historia",
+      "nombre": "Historia",
+      "subtitulo": "Principios y reglas",
+      "curso": "https://jhs.schoology.com/course/8201912196/materials",
+      "temas": [
+        {
+          "nombre": "Tema 13 — Los diez mandamientos",
+          "items": [
+            { "nombre": "1. Video — Los diez mandamientos", "tipo": "video" },
+            {
+              "nombre": "2. Guía de trabajo — Los diez mandamientos",
+              "tipo": "guia",
+              "subtareas": [
+                "Dibujar y colorear los dos cuadros: «Amarás al Señor tu Dios por sobre todas las cosas» y «Honra a tu padre y a tu madre»",
+                "Cortar un pedazo de cartón con forma de tablas, de unos 30 x 20 cm (paso 1)",
+                "Recortar papel de periódico y pegarlo en la tabla con mezcla de agua y pegamento (paso 2)",
+                "Dar tres capas de papel y una capa final solo de cola blanca, y dejar secar (paso 3)",
+                "Pintar ambas caras con color piedra (gris, plomo o café claro) (paso 4)",
+                "Recortar los diez mandamientos impresos en la guía (paso 5)",
+                "Pegar los mandamientos siguiendo el orden (paso 6)",
+                "Tomar una fotografía de tus tablas terminadas y pegarla en la guía (paso 7)"
+              ]
+            },
+            { "nombre": "3. Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "4. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 14 — Principios de vida",
+          "items": [
+            { "nombre": "a. Video — Principios de vida", "tipo": "video" },
+            {
+              "nombre": "b. Guía de trabajo — Principios de vida",
+              "tipo": "guia",
+              "subtareas": [
+                "Colorear solo las imágenes que muestren el principio de vida del agradecimiento",
+                "Encontrar y colorear en la sopa de letras: gentileza, respeto, amor, bondad, dar, compartir",
+                "Escribir 3 formas de mostrar el agradecimiento",
+                "Escribir 3 formas de mostrar la gentileza",
+                "Escribir 3 formas de mostrar el respeto"
+              ]
+            },
+            { "nombre": "c. Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "d. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Foro — Practicando los principios de vida",
+          "extra": true,
+          "items": [
+            {
+              "nombre": "Foro: «Practicando los principios de vida»",
+              "tipo": "foro",
+              "nota": "Será calificado por el profesor.",
+              "subtareas": [
+                "Imprimir la cartilla del foro",
+                "Seguir los pasos que pide la cartilla",
+                "Publicar la evidencia en el foro"
+              ]
+            }
+          ]
+        },
+        {
+          "nombre": "Tema 15 — Principales autoridades de mi nación",
+          "items": [
+            { "nombre": "a. Video — Principales autoridades de mi nación", "tipo": "video" },
+            {
+              "nombre": "b. Guía de trabajo — Principales autoridades de mi nación",
+              "tipo": "guia",
+              "subtareas": [
+                "Escribir los datos del presidente y vicepresidente de tu nación y comentar una noticia sobre ellos",
+                "Resolver el crucigrama de las autoridades"
+              ]
+            },
+            { "nombre": "c. Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "d. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 16 — Reglas y normas de vialidad",
+          "items": [
+            { "nombre": "a. Video — Reglas y normas de vialidad", "tipo": "video" },
+            {
+              "nombre": "b. Guía de trabajo — Maqueta de vialidad",
+              "tipo": "guia",
+              "subtareas": [
+                "Imprimir y recortar las imágenes de las páginas siguientes (a)",
+                "Armar y pegar cada imagen haciendo los dobleces correspondientes (b)",
+                "Conseguir un pedazo de cartón como base, no muy grande (c)",
+                "Armar en la base el escenario de una parte de tu ciudad o barrio y ubicar los personajes (d)",
+                "Armar y decorar la maqueta a tu gusto (e)",
+                "Tomar 3 fotografías del proceso y subirlas al Foro «Mi maqueta» (f)"
+              ]
+            },
+            { "nombre": "c. Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "d. Foro «Mi maqueta»", "tipo": "foro", "subtareas": ["Subir las 3 fotografías del proceso de la maqueta"] },
+            { "nombre": "e. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lenguaje",
+      "nombre": "Lenguaje",
+      "subtitulo": "Lectura y escritura",
+      "curso": "https://jhs.schoology.com/course/8202997484/materials",
+      "temas": [
+        {
+          "nombre": "Tema 20 — Las mascotas",
+          "items": [
+            { "nombre": "Material del tema 20 — Las mascotas", "tipo": "enlace" },
+            {
+              "nombre": "Oraciones para escribir «Las mascotas»",
+              "tipo": "tarea",
+              "subtareas": [
+                "Elegir 7 palabras del tema y escribir 7 oraciones",
+                "Practicar la lectura de las oraciones",
+                "Grabarlas en mp3 y subirlas a la plataforma"
+              ]
+            },
+            {
+              "nombre": "Guía y audio — Las mascotas",
+              "tipo": "guia",
+              "subtareas": [
+                "Responder qué mascota querían Ana y Andrés, con quién hablaron sus papás y qué cuidados necesita esa mascota",
+                "Describir las mascotas: pastor alemán, caniche, chihuahua y golden retriever",
+                "Investigar las características de tu perro y anotar tres; pegar la foto de tu mascota",
+                "Dibujar el perrito de vecinos, amigos o familiares",
+                "Preguntar y anotar al menos 4 marcas de alimento balanceado de tu barrio",
+                "Hacer el dictado de palabras con el tutor",
+                "Opcional: collage de las mascotas que más te gustan"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 21 — Mi responsabilidad con los animales",
+          "items": [
+            { "nombre": "Material del tema 21 — Mi responsabilidad con los animales", "tipo": "enlace" },
+            {
+              "nombre": "Palabras para escribir «Mi responsabilidad con los animales»",
+              "tipo": "tarea",
+              "nota": "La plataforma no muestra instrucciones escritas para esta tarea: seguí las indicaciones de la guía del tema."
+            },
+            {
+              "nombre": "Guía — Mi responsabilidad con los animales",
+              "tipo": "guia",
+              "subtareas": [
+                "Buscar en la sopa de letras los nombres de las mascotas",
+                "Escribir o inventar una historia de una aventura que hayas tenido o quisieras tener con una mascota",
+                "Relacionar y ordenar la secuencia de cómo limpiar a nuestra mascota",
+                "Recortar 6 tipos de perros y escribir sus nombres o razas",
+                "Opcional: pegar una foto con tu mascota o dibujar el animal que te gustaría tener"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 22 — Mi huerta",
+          "items": [
+            { "nombre": "Material del tema 22 — Mi huerta", "tipo": "enlace" },
+            {
+              "nombre": "Oraciones «Mi huerta»",
+              "tipo": "tarea",
+              "nota": "La plataforma no muestra instrucciones escritas para esta tarea: seguí las indicaciones de la guía del tema."
+            },
+            {
+              "nombre": "Guía — Mi huerta",
+              "tipo": "guia",
+              "subtareas": [
+                "Reunir los materiales: porotos, tierra, recipiente de plástico, agua y un lugar con sol",
+                "Poner a remojar los porotos por una tarde (paso 1)",
+                "Poner la tierra en el recipiente de plástico (paso 2)",
+                "Poner las semillas en surcos y luego taparlas (paso 3)",
+                "Regar cada 2 días (paso 4)",
+                "Dibujar en el cuadro los cambios observados del día 1, día 10, día 15 y día 20 (paso 5)"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 23 — Mi huerta: cuidado",
+          "items": [
+            { "nombre": "Material del tema 23 — Mi huerta: cuidado", "tipo": "enlace" },
+            {
+              "nombre": "Oraciones para leer «Mi huerta - cuidado»",
+              "tipo": "tarea",
+              "subtareas": [
+                "Elegir 7 palabras de la guía y crear 7 oraciones",
+                "Escribirlas en la hoja cuadriculada",
+                "Repasar su lectura",
+                "Grabarlas en mp3 y subirlas a la plataforma"
+              ]
+            },
+            {
+              "nombre": "Guía — Mi huerta: cuidado",
+              "tipo": "guia",
+              "subtareas": [
+                "Responder cuándo debemos regar las plantas, qué debemos cuidar de un huerto y cómo cuidamos las plantas de las plagas",
+                "Observar tu jardín y dibujar los insectos o bichos que hay",
+                "Dibujar los dos momentos más importantes en que debemos regar las plantas"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 24 — Mi huerta: cosecha",
+          "items": [
+            { "nombre": "Material del tema 24 — Mi huerta: cosecha", "tipo": "enlace" },
+            {
+              "nombre": "Oraciones para leer «Mi huerta - cosecha»",
+              "tipo": "tarea",
+              "subtareas": [
+                "Escribir una oración con cada palabra: maduro, fruto, recolectar, hortaliza, tomate, cosecha",
+                "Grabarlas en mp3 y subirlas a la plataforma"
+              ]
+            },
+            {
+              "nombre": "Guía — Mi huerta: cosecha",
+              "tipo": "guia",
+              "subtareas": [
+                "Responder cómo estaban los tomates, quién llamó a Logos para sacarlos y qué recordó la abuelita",
+                "Buscar 4 recortes de diferentes cosechas y pegarlos",
+                "Describir la lámina del cuadro",
+                "Dibujar la cosecha que hayas realizado con tus papás"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 25 — El parrillero",
+          "items": [
+            { "nombre": "Material del tema 25 — El parrillero", "tipo": "enlace" },
+            {
+              "nombre": "Oraciones «El parrillero»",
+              "tipo": "tarea",
+              "subtareas": [
+                "Escribir 7 oraciones con palabras de la guía",
+                "Aprender las oraciones",
+                "Grabarlas en mp3 y subirlas a la plataforma"
+              ]
+            },
+            {
+              "nombre": "Guía — El parrillero",
+              "tipo": "guia",
+              "subtareas": [
+                "Definir con tus palabras qué es una parrillada y mencionar 5 elementos que se ocupan en una",
+                "Dibujar cómo te imaginas la historia que leíste",
+                "Describir en un audio mp3 una parrillada que hayas hecho con tu familia y mostrar fotografías (si nunca participaste, grabar cómo te imaginas que sería)"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Semana 8 — Puesta al día",
+          "extra": true,
+          "items": [
+            {
+              "nombre": "Semana de ponerse al día con el material",
+              "tipo": "tarea",
+              "nota": "La plataforma indica que este punto es del examen: sirve para planificar cómo hacerlo."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "luces",
+      "nombre": "Luces y Colores",
+      "subtitulo": "Artes Visuales",
+      "curso": "https://jhs.schoology.com/course/8201804045/materials",
+      "temas": [
+        {
+          "nombre": "Tema 16 — El ritmo en el dibujo",
+          "items": [
+            { "nombre": "1. Video — El ritmo en el dibujo", "tipo": "video" },
+            {
+              "nombre": "2. Guía — El ritmo en el dibujo",
+              "tipo": "guia",
+              "subtareas": [
+                "Recortar las imágenes de los anexos, separar las similares en color o forma y pegarlas en orden en cada rectángulo (ritmo visual)",
+                "Marcar Sí o No debajo de cada imagen según tenga o no ritmo visual",
+                "Recortar círculos de diferentes colores y tamaños (paso 1)",
+                "Armar las hojas del árbol pegando círculos superpuestos de mayor a menor, unas 15 hojas (paso 2)",
+                "Pegar las hojas de colores en la imagen del árbol (paso 3)",
+                "Colorear el fondo de la imagen (paso 4)"
+              ]
+            },
+            {
+              "nombre": "3. Cartilla de motricidad — Tema 16",
+              "tipo": "cartilla",
+              "subtareas": [
+                "Completar el dibujo con bolitas de papel crepé de colores",
+                "Pegar la fotografía del trabajo terminado en la cartilla"
+              ]
+            },
+            { "nombre": "4. Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "5. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 17 — Telar",
+          "items": [
+            {
+              "nombre": "1. Guía — Telar",
+              "tipo": "guia",
+              "subtareas": [
+                "Reunir materiales: cartón, lana gruesa, tijeras, regla y lápiz",
+                "Cortar el cartón rectangular de unos 17 x 20 cm y marcar (paso 1, lo realiza el tutor)",
+                "Con ayuda de una tijera cortar sobre las marcas (paso 2)",
+                "Colocar la punta de la lana en el primer corte y fijar con un nudo detrás (paso 3)",
+                "Pegar dos palitos de helado para dar altura a la lana (paso 4)",
+                "Armar la urdimbre según indica la guía (paso 5)",
+                "Tejer con la lana el tejido rectangular"
+              ]
+            },
+            { "nombre": "2. Cuestionario (niño)", "tipo": "cuestionario" },
+            {
+              "nombre": "3. Cartilla de motricidad — Tema 17",
+              "tipo": "cartilla",
+              "subtareas": [
+                "Recortar las formas de los animales y los accesorios del final de la cartilla (paso 1)",
+                "El tutor pasa el estilete por las líneas punteadas del pez, el conejo y la meduza (paso 2)",
+                "Entretejer las cintas de colores como en el ejemplo (paso 3)",
+                "El tutor recorta los sobrantes de las cintas (paso 4)",
+                "Pegar los accesorios en el lugar que corresponde de cada animal (paso 5)",
+                "Subir la fotografía del trabajo terminado al foro de la actividad"
+              ]
+            },
+            {
+              "nombre": "4. Foro — Telar",
+              "tipo": "foro",
+              "subtareas": ["Subir la fotografía del telar terminado"]
+            }
+          ]
+        },
+        {
+          "nombre": "Foro — Clase en vivo (17 de noviembre)",
+          "extra": true,
+          "items": [
+            { "nombre": "Foro de «Clase en vivo»", "tipo": "foro", "nota": "Foro de la clase en vivo del 17 de noviembre." }
+          ]
+        },
+        {
+          "nombre": "Tema 18 — El collage",
+          "items": [
+            { "nombre": "1. Video — El collage", "tipo": "video" },
+            {
+              "nombre": "2. Guía — El collage",
+              "tipo": "guia",
+              "subtareas": [
+                "Reunir materiales: lienzos pequeños, telas estampadas, hojas blancas, papeles de colores, tijeras, rotulador negro, pegamento y los recortes del final de la guía",
+                "Seguir los pasos del video de la clase y realizar los mini cuadros con telas",
+                "Subir la fotografía de la manualidad terminada al foro de la clase"
+              ]
+            },
+            { "nombre": "3. Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "4. Foro — El collage", "tipo": "foro", "subtareas": ["Subir la foto del collage terminado"] },
+            { "nombre": "5. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Foro — La creatividad",
+          "extra": true,
+          "items": [
+            { "nombre": "Foro: «La creatividad»", "tipo": "foro" }
+          ]
+        },
+        {
+          "nombre": "Tema 19 — A cada escultura su técnica",
+          "items": [
+            { "nombre": "1. Video — A cada escultura su técnica", "tipo": "video" },
+            {
+              "nombre": "2. Guía — A cada escultura su técnica",
+              "tipo": "guia",
+              "subtareas": [
+                "Reunir materiales: alambre de medio metro, goma Eva o papeles de colores, plastoformo de 15 x 20 cm y un alicate (uso del tutor)",
+                "Recortar trozos de goma Eva de colores de forma irregular (paso 1)",
+                "Con ayuda de un tutor cortar dos pedazos de alambre de 20 cm e insertar los papeles creando movimientos y diseños (paso 2)",
+                "Insertar los alambres en la base de plastoformo (paso 3)",
+                "Pegar la foto del trabajo terminado en la guía"
+              ]
+            },
+            { "nombre": "3. Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "4. Cartilla de manualidad — Tema 19", "tipo": "cartilla" },
+            { "nombre": "5. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "matematicas",
+      "nombre": "Matemáticas",
+      "subtitulo": "MAT-G2",
+      "curso": "https://jhs.schoology.com/course/8202767047/materials",
+      "temas": [
+        {
+          "nombre": "Tema 21 — Estimaciones a la decena",
+          "items": [
+            { "nombre": "a. Video 21", "tipo": "video" },
+            {
+              "nombre": "b. Guía T21",
+              "tipo": "guia",
+              "subtareas": [
+                "Estimar la cantidad de botellas de jugo y otros elementos",
+                "Realizar las estimaciones de los 9 números a la decena, siguiendo el ejemplo",
+                "Aproximar a la decena el precio de las 6 prendas y sumar todas las estimaciones",
+                "Realizar las restas encontrando el valor exacto y el valor aproximado",
+                "Completar la tabla del 6 y colorear los resultados en el recuadro",
+                "Escuchar la canción de la tabla del 6, memorizarla y grabar un video representándola"
+              ]
+            },
+            { "nombre": "c. Canción — Tabla del 6 (mp3)", "tipo": "audio" },
+            { "nombre": "d. Canción Tabla del 6 (PDF)", "tipo": "cancion" },
+            { "nombre": "e. Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "f. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 22 — Cuerpos geométricos y sus elementos",
+          "items": [
+            { "nombre": "a. Video 22", "tipo": "video" },
+            {
+              "nombre": "b. Guía T22",
+              "tipo": "guia",
+              "subtareas": [
+                "Escribir debajo de cada dibujo el nombre del cuerpo geométrico (12 casos)",
+                "Elegir la figura que responde a cada una de las 3 preguntas",
+                "Buscar con tus padres 4 objetos de la casa con forma de cuerpo geométrico, tomar fotos y pegarlas",
+                "Marcar base, aristas, caras laterales y vértices en los cuerpos geométricos indicados",
+                "Realizar 10 tarjetas de la tabla del 6 (6 x 1 a 6 x 10) en cartulina y practicar con las 6 formas sugeridas",
+                "Sacar una foto de tus tarjetas de la tabla del 6 contigo y pegarla"
+              ]
+            },
+            { "nombre": "c. Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "d. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 23 — Unión e intersección de conjuntos",
+          "items": [
+            { "nombre": "a. Video 23", "tipo": "video" },
+            {
+              "nombre": "b. Guía T23",
+              "tipo": "guia",
+              "subtareas": [
+                "Representar la unión de los conjuntos M y A",
+                "Escribir la intersección de los conjuntos dados (rojo/verde/celeste/azul, Juan/Camel/Zoe/María, etc.)",
+                "Resolver los problemas de unión e intersección y graficar (cuadernos de Carla y Julio, gimnasia y fútbol)",
+                "Completar la tabla del 7 y colorear los resultados en el recuadro",
+                "Escuchar la canción de la tabla del 7, memorizarla y grabar un audio cantándola con la familia"
+              ]
+            },
+            { "nombre": "c. Canción — Tabla del 7 (mp3)", "tipo": "audio" },
+            { "nombre": "d. Canción Tabla del 7 (PDF)", "tipo": "cancion" },
+            { "nombre": "e. Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "f. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 24 — Medidas de longitud, peso y capacidad",
+          "items": [
+            { "nombre": "a. Video 24", "tipo": "video" },
+            {
+              "nombre": "b. Guía T24",
+              "tipo": "guia",
+              "subtareas": [
+                "Medir con tus pasos el largo del dormitorio, la sala y otros objetos",
+                "Medir con tus manos el largo y ancho de la mesa y de tu cama",
+                "Medir con un patrón elegido (lápices, palitos, clips) la pantalla del computador y la ventana",
+                "Realizar la balanza casera con gancho, recipientes y soga, y comparar qué artículo pesa más",
+                "Completar cuántos vasos, tazas y cucharas caben en la jarra",
+                "Enviar fotos de tus mediciones",
+                "Completar los círculos multiplicando por el número del centro",
+                "Practicar la tabla del 7 con tarjetas y sacar la foto correspondiente"
+              ]
+            },
+            { "nombre": "c. Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "d. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Cuadernillo 13 — Relación de comparación",
+          "items": [
+            {
+              "nombre": "a. Cuadernillo 13",
+              "tipo": "guia",
+              "subtareas": [
+                "Ordenar los precios de los objetos de mayor a menor",
+                "Ordenar los precios de los objetos de menor a mayor",
+                "Completar los círculos multiplicando cada número por el número del centro",
+                "Ordenar las figuras dibujándolas de grande a pequeño",
+                "Completar la tabla del 8 y colorear los resultados en el recuadro"
+              ]
+            },
+            { "nombre": "b. Canción — Tabla del 8 (mp3)", "tipo": "audio" },
+            { "nombre": "c. Canción Tabla del 8 (PDF)", "tipo": "cancion" },
+            { "nombre": "d. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Cuadernillo 14 — La tabla del 8",
+          "items": [
+            {
+              "nombre": "a. Cuadernillo 14",
+              "tipo": "guia",
+              "subtareas": [
+                "Realizar 10 tarjetas de la tabla del 8 (8 x 1 a 8 x 10) en cartulina, iguales a las de la tabla del 2",
+                "Practicar con las formas 1 a 6 sugeridas en el cuadernillo",
+                "Sacar una foto de tus tarjetas de la tabla del 8 contigo y pegarla"
+              ]
+            },
+            { "nombre": "b. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Cuadernillo 15 — Estimaciones a la decena",
+          "items": [
+            {
+              "nombre": "a. Cuadernillo 15",
+              "tipo": "guia",
+              "subtareas": [
+                "Realizar las estimaciones de los 8 números a la decena",
+                "Aproximar a la decena el precio de los 8 objetos de Mateo y sumar las estimaciones",
+                "Realizar las restas con valor exacto y valor aproximado",
+                "Completar la tabla del 9 y colorear los resultados en el recuadro",
+                "Escuchar la canción de la tabla del 9, memorizarla y grabar un video cantándola"
+              ]
+            },
+            { "nombre": "b. Canción — Tabla del 9 (mp3)", "tipo": "audio" },
+            { "nombre": "c. Canción Tabla del 9 (PDF)", "tipo": "cancion" },
+            { "nombre": "d. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Cuadernillo 16 — La tabla del 9",
+          "items": [
+            {
+              "nombre": "a. Cuadernillo 16",
+              "tipo": "guia",
+              "subtareas": [
+                "Realizar 10 tarjetas de la tabla del 9 (9 x 1 a 9 x 10) en cartulina, iguales a las de la tabla del 2",
+                "Practicar con las formas 1 a 6 sugeridas en el cuadernillo",
+                "Sacar una foto de tus tarjetas de la tabla del 9 contigo y pegarla"
+              ]
+            },
+            { "nombre": "b. Cuestionario tutor", "tipo": "tutor" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sonidos",
+      "nombre": "Sonidos",
+      "subtitulo": "Música y canto",
+      "curso": "https://jhs.schoology.com/course/8201681261/materials",
+      "temas": [
+        {
+          "nombre": "Tema 13 — Explorando nuestro cuerpo para cantar",
+          "items": [
+            { "nombre": "Video 13", "tipo": "video" },
+            {
+              "nombre": "Guía de Trabajo — Explorando nuestro cuerpo para cantar",
+              "tipo": "guia",
+              "subtareas": [
+                "Pintar las figuras de la hoja de anexos con los elementos y colores que quieras",
+                "Pegar la hoja sobre cartón u hoja gruesa y pedir a una persona mayor que corte los recuadros",
+                "Copiar la frase del profe Samu en el orden correcto",
+                "Escuchar la canción «Caminando - Caminando» y repetir las frases de color azul",
+                "Grabar el video de la canción usando los cuadros de figuras cada vez que aparezca la frase"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            {
+              "nombre": "Audio de apoyo",
+              "tipo": "audio",
+              "subtareas": [
+                "Escuchar el audio guía «Explorando nuestro cuerpo para cantar»",
+                "Escuchar la pista «Caminando - Caminando»"
+              ]
+            },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 14 — Respiremos",
+          "items": [
+            { "nombre": "Video 14 — Respiremos", "tipo": "video" },
+            {
+              "nombre": "Guía de Trabajo 14 — Respiremos",
+              "tipo": "guia",
+              "subtareas": [
+                "Pintar los palitos de helado y los ganchos de ropa para diseñar el avión (paso 1)",
+                "Poner de pie los palitos y unirlos al gancho de ropa (paso 2)",
+                "Practicar los ejercicios con el avión ganchito (paso 3)",
+                "Pegar la foto del «avión ganchito» en la guía",
+                "Cortar círculos de papel de diferente tamaño para el árbol (paso 1)",
+                "Unir tres o más arbolitos de mayor a menor (paso 2)",
+                "Usar un ganchito como tronco y otros dos para sostener el árbol (paso 3)",
+                "Pegar la foto de los árboles de papel en la guía",
+                "Repasar las líneas punteadas con lápices de colores",
+                "Inventar y dibujar una figura o letra como desafío",
+                "Completar el certificado derribando árboles con el soplido"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "Audio de apoyo — Respiremos", "tipo": "audio" },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Semana sin actividades (semana 3)",
+          "extra": true,
+          "items": [
+            { "nombre": "Sin actividades asignadas", "tipo": "nota", "bloqueado": true }
+          ]
+        },
+        {
+          "nombre": "Juegos y prácticas",
+          "items": [
+            { "nombre": "Video — Juegos y prácticas", "tipo": "video" },
+            {
+              "nombre": "Guía de Trabajo — Juegos y prácticas",
+              "tipo": "guia",
+              "subtareas": [
+                "Completar la página de la Actividad 1 siguiendo las indicaciones del video",
+                "Escribir «Sí» en los cuadrados del camino correcto y pintarlos de amarillo",
+                "Escribir «No» en los círculos del camino correcto y pintarlos de naranja",
+                "Resolver el laberinto «Ojo, pestaña y oreja» hasta la meta",
+                "Pintar con tus colores las palabras en blanco de la canción de la rueda",
+                "Practicar la frase «Rápido ruedan las ruedas del ferrocarril» en 5 velocidades distintas",
+                "Grabar un video de tu práctica y subirlo al foro «Rápido ruedan las ruedas del ferrocarril»"
+              ]
+            },
+            {
+              "nombre": "Foro — «Rápido ruedan las ruedas del ferrocarril»",
+              "tipo": "foro",
+              "subtareas": ["Subir el video de la práctica al foro"]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            { "nombre": "Audio de apoyo — Juegos y prácticas", "tipo": "audio" },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Tema 15 — Cantemos",
+          "items": [
+            { "nombre": "Video 15 — Cantemos", "tipo": "video" },
+            {
+              "nombre": "Guía de Trabajo 15 — Cantemos",
+              "tipo": "guia",
+              "subtareas": [
+                "Dar un masaje al rostro con ayuda de mamá, papá o un hermano",
+                "Pegar fotos tuyas imitando los gestos: sorpresa, limón, enojo y alegría",
+                "Dibujar y pintar la Flor Blanca (1 tiempo de aspiración y 1 de exhalación)",
+                "Dibujar la Flor Azul (2 tiempos de aspiración y 2 de exhalación)",
+                "Dibujar la Flor Lila (3 tiempos de aspiración y 3 de exhalación)",
+                "Realizar la vocalización con 2, 3 y 5 sonidos junto al audio de apoyo"
+              ]
+            },
+            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            {
+              "nombre": "Audio de apoyo — Cantemos",
+              "tipo": "audio",
+              "subtareas": [
+                "Escuchar el audio «Actividad 1 - Cantemos»",
+                "Escuchar el audio «Actividad 2»",
+                "Escuchar el audio «Actividad 3»",
+                "Escuchar el audio «Actividad 4 - Cantemos»"
+              ]
+            },
+            {
+              "nombre": "Foro — «Calentamiento de mi propia autoría»",
+              "tipo": "foro",
+              "subtareas": [
+                "Crear tu propio ejercicio de calentamiento",
+                "Publicarlo en el foro y compartirlo con la clase"
+              ]
+            },
+            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+          ]
+        },
+        {
+          "nombre": "Semana sin actividades (semana 6)",
+          "extra": true,
+          "items": [
+            { "nombre": "Sin actividades asignadas", "tipo": "nota", "bloqueado": true }
+          ]
+        },
+        {
+          "nombre": "Semana de clases en vivo (semana 7)",
+          "extra": true,
+          "items": [
+            { "nombre": "Semana de clases en vivo", "tipo": "nota", "nota": "Semana dedicada a las clases en vivo." }
+          ]
+        },
+        {
+          "nombre": "Tema 16 — Descubramos: sonidos y tecnología",
+          "extra": true,
+          "items": [
+            {
+              "nombre": "Foro — DESCUBRAMOS: Sonidos y Tecnología",
+              "tipo": "foro",
+              "nota": "Actividad para trabajar junto a una persona mayor.",
+              "subtareas": [
+                "Explorar el laboratorio de sonidos en línea Chrome Music Lab (recomendado: RYTHM)",
+                "Parte escrita 1: escribir cuál fue el juego que más te gustó y por qué",
+                "Parte escrita 2: contar si pudiste crear alguna melodía, en cuál juego y cómo la hiciste",
+                "Parte escrita 3: inventar un juego para enseñar los sonidos a tus compañeros",
+                "Escribir una palabra de bendición para tus compañeros",
+                "Grabar un video de uno de los juegos que más te gustó y compartirlo en el foro"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

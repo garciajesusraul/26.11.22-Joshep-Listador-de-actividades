@@ -1,0 +1,4567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2do grado — Bimestre 4 — Joseph&#x27;s House School</title>
+<style>
+  :root {
+    --bg: #f6f4ef;
+    --card: #ffffff;
+    --ink: #23262b;
+    --muted: #6b7280;
+    --line: #e5e1d8;
+    --brand: #1f6f5c;
+    --brand-soft: #e6f2ee;
+    --accent: #c9752b;
+    --done: #97a3a0;
+    --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.05);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px 64px; }
+
+  header.top {
+    background: linear-gradient(160deg, #1f6f5c 0%, #2b8a72 60%, #3ba07f 100%);
+    color: #fff; padding: 28px 0 22px; margin-bottom: 18px;
+  }
+  header.top .wrap { padding-bottom: 0; }
+  header.top h1 { margin: 0 0 4px; font-size: clamp(22px, 3.4vw, 34px); letter-spacing: .2px; }
+  header.top p { margin: 0; opacity: .9; font-size: 14px; }
+
+  .toolbar {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(246,244,239,.94); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line); padding: 10px 0; margin-bottom: 18px;
+  }
+  .toolbar .wrap { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; padding-bottom: 0; }
+  .progress-shell { flex: 1 1 220px; min-width: 180px; }
+  .progress-bar { height: 10px; background: #e2ded4; border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #2b8a72, #7cc4a9); transition: width .25s; }
+  .progress-text { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+  .progress-text b { color: var(--brand); }
+
+  .btn {
+    appearance: none; border: 1px solid var(--line); background: #fff; color: var(--ink);
+    padding: 8px 13px; border-radius: 9px; font-size: 13.5px; cursor: pointer; font-weight: 600;
+    transition: .15s; white-space: nowrap;
+  }
+  .btn:hover { border-color: var(--brand); color: var(--brand); }
+  .btn.on { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .btn-ghost { background: transparent; }
+  .btn-mini { font-size: 12px; color: var(--brand); text-decoration: none; border: 1px solid #cfe3dc; padding: 4px 9px; border-radius: 8px; }
+  .btn-mini:hover { background: var(--brand-soft); }
+  input[type="search"] {
+    padding: 8px 12px; border-radius: 9px; border: 1px solid var(--line); font-size: 13.5px;
+    min-width: 170px; background: #fff;
+  }
+
+  nav.chips { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 10px; }
+  .chip {
+    flex: 0 0 auto; text-decoration: none; color: var(--brand); background: var(--brand-soft);
+    border: 1px solid #cfe3dc; padding: 6px 12px; border-radius: 99px; font-size: 13px; font-weight: 600;
+  }
+  .chip:hover { background: #d5ebe3; }
+
+  .materia { margin-bottom: 26px; }
+  .materia-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    border-bottom: 3px solid var(--brand); padding-bottom: 6px; margin-bottom: 12px;
+  }
+  .materia-head h2 { margin: 0; font-size: clamp(18px, 2.4vw, 23px); color: var(--brand); }
+  .materia-head h2 small { font-weight: 500; color: var(--muted); font-size: 13px; }
+  .materia-meta { display: flex; align-items: center; gap: 10px; }
+  .materia-progress { font-size: 12.5px; font-weight: 700; color: var(--brand); }
+
+  .tema {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px 16px 8px; margin-bottom: 12px; box-shadow: var(--shadow);
+  }
+  .tema-extra { border-left: 4px solid var(--accent); }
+  .tema-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .tema-head h3 { margin: 0 0 8px; font-size: 15.5px; }
+  .tema-progress { font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+  ul.items, ul.subs { list-style: none; margin: 0; padding: 0; }
+  li.item { padding: 7px 0; border-top: 1px dashed #eeebe3; }
+  li.item:first-child { border-top: 0; }
+  .item-head { display: flex; align-items: flex-start; gap: 8px; }
+  .item-num { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 2px; min-width: 20px; }
+  .item-label { display: flex; align-items: flex-start; gap: 9px; cursor: pointer; flex: 1 1 auto; }
+  .item-label input { margin: 4px 0 0; width: 17px; height: 17px; accent-color: var(--brand); cursor: pointer; }
+  .item-name { font-size: 14.5px; font-weight: 600; }
+  .badge {
+    flex: 0 0 auto; font-size: 11px; font-weight: 700; letter-spacing: .2px; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 6px; background: #f0eee8; color: var(--muted); white-space: nowrap;
+  }
+  .badge-video { background: #eef2fb; color: #3a5ba0; }
+  .badge-guia { background: #e9f5ef; color: #1f6f5c; }
+  .badge-foro { background: #fdf1e3; color: #a9611f; }
+  .badge-cuestionario, .badge-tutor { background: #f3e9ee; color: #8c4a63; }
+  .badge-audio, .badge-cancion { background: #f2ecfa; color: #6a4a9e; }
+  .badge-cartilla { background: #eef7f9; color: #2c7a8c; }
+  .lock { font-size: 12px; }
+
+  .item-progress { font-size: 11.5px; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
+  .nota { margin: 4px 0 2px 29px; font-size: 12.5px; color: var(--muted); font-style: italic; }
+
+  ul.subs { margin: 4px 0 6px 29px; border-left: 2px solid var(--brand-soft); padding-left: 12px; }
+  li.sub { padding: 3px 0; }
+  .sub-label { display: flex; align-items: flex-start; gap: 8px; cursor: pointer; }
+  .sub-label input { margin: 3px 0 0; width: 15px; height: 15px; accent-color: var(--brand); cursor: pointer; }
+  .sub-tag { font-size: 11.5px; font-weight: 700; color: var(--brand); background: var(--brand-soft); padding: 1px 6px; border-radius: 5px; white-space: nowrap; }
+  .sub-text { font-size: 13.5px; color: #3b4048; }
+
+  input[type="checkbox"]:checked + .item-name,
+  input[type="checkbox"]:checked ~ .sub-text { text-decoration: line-through; color: var(--done); }
+  li.is-done .item-name { color: var(--done); }
+
+  .hide-done li.is-done, .hide-done li.item.is-done { display: none; }
+  .hide-done section.tema.all-done, .hide-done section.materia.all-done { display: none; }
+  .hidden { display: none !important; }
+
+  .empty { text-align: center; color: var(--muted); padding: 40px 10px; }
+
+  footer { text-align: center; color: var(--muted); font-size: 12px; padding: 26px 10px 0; }
+  footer code { background: #efede6; padding: 1px 5px; border-radius: 4px; }
+
+  @media (max-width: 640px) {
+    .badge { display: none; }
+    .item-name { font-size: 14px; }
+    .sub-text { font-size: 13px; }
+    header.top { padding: 20px 0 16px; }
+  }
+  @media print {
+    .toolbar, nav.chips, .btn, .btn-mini { display: none !important; }
+    body { background: #fff; }
+    .tema { box-shadow: none; break-inside: avoid; }
+    .hide-done li.is-done { display: list-item; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1>✅ 2do grado — Bimestre 4</h1>
+    <p>Joseph&#x27;s House School · 165 ítems · tildá lo que ya está hecho</p>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="wrap">
+    <div class="progress-shell">
+      <div class="progress-bar"><div class="progress-fill" id="globalFill"></div></div>
+      <div class="progress-text"><b id="globalPct">0%</b> completado · <span id="globalCount">0 de 0</span></div>
+    </div>
+    <input type="search" id="buscar" placeholder="Buscar actividad…" aria-label="Buscar actividad">
+    <button class="btn" id="btnPendientes" aria-pressed="false">Ocultar tildados</button>
+    <button class="btn btn-ghost" id="btnExportar">Exportar</button>
+    <button class="btn btn-ghost" id="btnImportar">Importar</button>
+    <input type="file" id="fileImport" accept="application/json" class="hidden">
+    <button class="btn btn-ghost" id="btnReset" title="Borra todo el progreso guardado">Reiniciar</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <nav class="chips">
+    <a class="chip" href="#materia-ciencias">Ciencias de la Vida</a>
+<a class="chip" href="#materia-english">English</a>
+<a class="chip" href="#materia-historia">Historia</a>
+<a class="chip" href="#materia-lenguaje">Lenguaje</a>
+<a class="chip" href="#materia-luces">Luces y Colores</a>
+<a class="chip" href="#materia-matematicas">Matemáticas</a>
+<a class="chip" href="#materia-sonidos">Sonidos</a>
+  </nav>
+
+  <section class="materia" id="materia-ciencias" data-materia="m0">
+    <header class="materia-head">
+      <h2>Ciencias de la Vida <small>Cuerpo y Salud</small></h2>
+      <div class="materia-meta">
+        <span class="materia-progress" data-materia-progress="m0">0%</span>
+        <a class="btn-mini" href="https://jhs.schoology.com/course/8203068582/materials" target="_blank" rel="noopener">Abrir en Schoology</a>
+      </div>
+    </header>
+    <section class="tema" data-tema="m0t0">
+      <header class="tema-head">
+        <h3>Instrucciones del bimestre</h3>
+        <span class="tema-progress" data-tema-progress="m0t0"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m0t0i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m0t0i0">
+              <input type="checkbox" id="m0t0i0" data-check="m0t0i0" data-children="1">
+              <span class="item-name">Instrucciones Bimestre 4</span>
+            </label>
+            <span class="badge badge-tarea">📝 Tarea</span>
+            
+            <span class="item-progress" data-progress="m0t0i0">0/2</span>
+          </div>
+          <p class="nota">Este bimestre NO hay cuestionario RECOREMOS: en su lugar se entrega el video de la feria de misiones como PRIMERA actividad. Las tareas se reciben antes del examen final.</p>
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m0t0i0-s0">
+            <input type="checkbox" id="m0t0i0-s0" data-check="m0t0i0-s0">
+            <span class="sub-tag">1-A</span>
+            <span class="sub-text">Leer las instrucciones del bimestre con el tutor</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t0i0-s1">
+            <input type="checkbox" id="m0t0i0-s1" data-check="m0t0i0-s1">
+            <span class="sub-tag">1-B</span>
+            <span class="sub-text">Presentar el video de la feria de misiones como primera actividad del bimestre</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m0t1">
+      <header class="tema-head">
+        <h3>Tema 14 — Organismos microscópicos y macroscópicos</h3>
+        <span class="tema-progress" data-tema-progress="m0t1"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m0t1i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m0t1i0">
+              <input type="checkbox" id="m0t1i0" data-check="m0t1i0">
+              <span class="item-name">Video — Tema 14</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          <p class="nota">Solo se lista: el video lo ve el niño con el tutor.</p>
+      
+    </li>
+<li class="item" data-item-id="m0t1i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m0t1i1">
+              <input type="checkbox" id="m0t1i1" data-check="m0t1i1" data-children="1">
+              <span class="item-name">Guía de Trabajo — Tema 14</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m0t1i1">0/2</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m0t1i1-s0">
+            <input type="checkbox" id="m0t1i1-s0" data-check="m0t1i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Completar los nombres de los macroorganismos y colorear cada uno</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t1i1-s1">
+            <input type="checkbox" id="m0t1i1-s1" data-check="m0t1i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Explicar con tus propias palabras la diferencia entre un organismo microscópico y uno macroscópico, con un ejemplo de cada uno</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m0t1i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m0t1i2">
+              <input type="checkbox" id="m0t1i2" data-check="m0t1i2">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m0t1i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m0t1i3">
+              <input type="checkbox" id="m0t1i3" data-check="m0t1i3">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m0t2">
+      <header class="tema-head">
+        <h3>Tema 15 — La célula y su descubrimiento</h3>
+        <span class="tema-progress" data-tema-progress="m0t2"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m0t2i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m0t2i0">
+              <input type="checkbox" id="m0t2i0" data-check="m0t2i0">
+              <span class="item-name">Video — Tema 15</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m0t2i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m0t2i1">
+              <input type="checkbox" id="m0t2i1" data-check="m0t2i1" data-children="1">
+              <span class="item-name">Guía de Trabajo — Tema 15</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m0t2i1">0/13</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s0">
+            <input type="checkbox" id="m0t2i1-s0" data-check="m0t2i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Investigar con papás el nombre del mayor número de organelos y escribirlos en el número que corresponde (1 al 14)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s1">
+            <input type="checkbox" id="m0t2i1-s1" data-check="m0t2i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Construir la célula en un CD con plastilina: núcleo (paso 1)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s2">
+            <input type="checkbox" id="m0t2i1-s2" data-check="m0t2i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Mitocondria (paso 2)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s3">
+            <input type="checkbox" id="m0t2i1-s3" data-check="m0t2i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Vacuola (paso 3)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s4">
+            <input type="checkbox" id="m0t2i1-s4" data-check="m0t2i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Centrosoma (paso 4)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s5">
+            <input type="checkbox" id="m0t2i1-s5" data-check="m0t2i1-s5">
+            <span class="sub-tag">2-F</span>
+            <span class="sub-text">Aparato de Golgi (paso 5)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s6">
+            <input type="checkbox" id="m0t2i1-s6" data-check="m0t2i1-s6">
+            <span class="sub-tag">2-G</span>
+            <span class="sub-text">Lisosoma (paso 6)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s7">
+            <input type="checkbox" id="m0t2i1-s7" data-check="m0t2i1-s7">
+            <span class="sub-tag">2-H</span>
+            <span class="sub-text">Retículo endoplasmático liso y rugoso (paso 7)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s8">
+            <input type="checkbox" id="m0t2i1-s8" data-check="m0t2i1-s8">
+            <span class="sub-tag">2-I</span>
+            <span class="sub-text">Ribosoma (paso 8)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s9">
+            <input type="checkbox" id="m0t2i1-s9" data-check="m0t2i1-s9">
+            <span class="sub-tag">2-J</span>
+            <span class="sub-text">Membrana celular (paso 9)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s10">
+            <input type="checkbox" id="m0t2i1-s10" data-check="m0t2i1-s10">
+            <span class="sub-tag">2-K</span>
+            <span class="sub-text">Citoplasma con pegamento y agua (paso 10)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s11">
+            <input type="checkbox" id="m0t2i1-s11" data-check="m0t2i1-s11">
+            <span class="sub-tag">2-L</span>
+            <span class="sub-text">Escribir los números de cada organelo según la página 146 (paso 11)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t2i1-s12">
+            <input type="checkbox" id="m0t2i1-s12" data-check="m0t2i1-s12">
+            <span class="sub-tag">2-M</span>
+            <span class="sub-text">Pegar en la guía 2 fotos: una tuya trabajando y otra solo del trabajo terminado</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m0t2i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m0t2i2">
+              <input type="checkbox" id="m0t2i2" data-check="m0t2i2">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m0t2i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m0t2i3">
+              <input type="checkbox" id="m0t2i3" data-check="m0t2i3">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m0t3">
+      <header class="tema-head">
+        <h3>Medio Tiempo</h3>
+        <span class="tema-progress" data-tema-progress="m0t3"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m0t3i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m0t3i0">
+              <input type="checkbox" id="m0t3i0" data-check="m0t3i0" data-children="1">
+              <span class="item-name">Tarea Medio Tiempo</span>
+            </label>
+            <span class="badge badge-tarea">📝 Tarea</span>
+            
+            <span class="item-progress" data-progress="m0t3i0">0/3</span>
+          </div>
+          <p class="nota">Somos muy importantes para Dios: canción sobre ser creados completos.</p>
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m0t3i0-s0">
+            <input type="checkbox" id="m0t3i0-s0" data-check="m0t3i0-s0">
+            <span class="sub-tag">1-A</span>
+            <span class="sub-text">Escuchar la canción con el tutor (el tutor escribe la letra)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t3i0-s1">
+            <input type="checkbox" id="m0t3i0-s1" data-check="m0t3i0-s1">
+            <span class="sub-tag">1-B</span>
+            <span class="sub-text">Dibujar algunas partes de la canción para poder enseñarla a otras personas</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m0t3i0-s2">
+            <input type="checkbox" id="m0t3i0-s2" data-check="m0t3i0-s2">
+            <span class="sub-tag">1-C</span>
+            <span class="sub-text">Subir la canción en PDF para que sea calificada</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m0t4">
+      <header class="tema-head">
+        <h3>Tema 16 — Importancia del oxígeno para la célula</h3>
+        <span class="tema-progress" data-tema-progress="m0t4"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m0t4i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m0t4i0">
+              <input type="checkbox" id="m0t4i0" data-check="m0t4i0">
+              <span class="item-name">Video — Tema 16</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m0t4i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m0t4i1">
+              <input type="checkbox" id="m0t4i1" data-check="m0t4i1" data-children="1">
+              <span class="item-name">Guía de Trabajo — Tema 16</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m0t4i1">0/1</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m0t4i1-s0">
+            <input type="checkbox" id="m0t4i1-s0" data-check="m0t4i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Unir con una línea cuáles de los elementos necesitan oxígeno para vivir</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m0t4i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m0t4i2">
+              <input type="checkbox" id="m0t4i2" data-check="m0t4i2">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m0t4i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m0t4i3">
+              <input type="checkbox" id="m0t4i3" data-check="m0t4i3">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m0t5">
+      <header class="tema-head">
+        <h3>Tema 17 — De la célula al cuerpo</h3>
+        <span class="tema-progress" data-tema-progress="m0t5"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m0t5i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m0t5i0">
+              <input type="checkbox" id="m0t5i0" data-check="m0t5i0" data-children="1">
+              <span class="item-name">Guía de Trabajo — ¿Cómo funciona mi cuerpo?</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m0t5i0">0/1</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m0t5i0-s0">
+            <input type="checkbox" id="m0t5i0-s0" data-check="m0t5i0-s0">
+            <span class="sub-tag">1-A</span>
+            <span class="sub-text">Pintar la casilla con el color de la respuesta correcta</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m0t5i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m0t5i1">
+              <input type="checkbox" id="m0t5i1" data-check="m0t5i1">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+  </section>
+<section class="materia" id="materia-english" data-materia="m1">
+    <header class="materia-head">
+      <h2>English <small>Basic B</small></h2>
+      <div class="materia-meta">
+        <span class="materia-progress" data-materia-progress="m1">0%</span>
+        <a class="btn-mini" href="https://jhs.schoology.com/course/8202980957/materials" target="_blank" rel="noopener">Abrir en Schoology</a>
+      </div>
+    </header>
+    <section class="tema" data-tema="m1t0">
+      <header class="tema-head">
+        <h3>Lesson 8 — What are you doing?</h3>
+        <span class="tema-progress" data-tema-progress="m1t0"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m1t0i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m1t0i0">
+              <input type="checkbox" id="m1t0i0" data-check="m1t0i0">
+              <span class="item-name">a. Video</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m1t0i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m1t0i1">
+              <input type="checkbox" id="m1t0i1" data-check="m1t0i1">
+              <span class="item-name">b. Video</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m1t0i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m1t0i2">
+              <input type="checkbox" id="m1t0i2" data-check="m1t0i2" data-children="1">
+              <span class="item-name">c. Workbook 8</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m1t0i2">0/5</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m1t0i2-s0">
+            <input type="checkbox" id="m1t0i2-s0" data-check="m1t0i2-s0">
+            <span class="sub-tag">3-A</span>
+            <span class="sub-text">Activity 1: mirar el video de la lección, escuchar y repetir las rutinas diarias</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m1t0i2-s1">
+            <input type="checkbox" id="m1t0i2-s1" data-check="m1t0i2-s1">
+            <span class="sub-tag">3-B</span>
+            <span class="sub-text">Activity 2: tomar fotos, recortar y pegar imágenes de algunas de tus rutinas diarias</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m1t0i2-s2">
+            <input type="checkbox" id="m1t0i2-s2" data-check="m1t0i2-s2">
+            <span class="sub-tag">3-C</span>
+            <span class="sub-text">Activity 3: escribir tus rutinas diarias</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m1t0i2-s3">
+            <input type="checkbox" id="m1t0i2-s3" data-check="m1t0i2-s3">
+            <span class="sub-tag">3-D</span>
+            <span class="sub-text">Activity 4: grabar un audio MP3 diciendo tus rutinas diarias y subirlo a la plataforma</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m1t0i2-s4">
+            <input type="checkbox" id="m1t0i2-s4" data-check="m1t0i2-s4">
+            <span class="sub-tag">3-E</span>
+            <span class="sub-text">Activity 5: preguntar a un familiar sus rutinas diarias, escribirlas y dibujarlas</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m1t0i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m1t0i3">
+              <input type="checkbox" id="m1t0i3" data-check="m1t0i3">
+              <span class="item-name">d. Video</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m1t0i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m1t0i4">
+              <input type="checkbox" id="m1t0i4" data-check="m1t0i4" data-children="1">
+              <span class="item-name">e. Workbook 8 — Grammar (Present progressive)</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m1t0i4">0/4</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m1t0i4-s0">
+            <input type="checkbox" id="m1t0i4-s0" data-check="m1t0i4-s0">
+            <span class="sub-tag">5-A</span>
+            <span class="sub-text">Activity 1: escribir los verbos en presente progresivo (wait, draw, do, look, help)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m1t0i4-s1">
+            <input type="checkbox" id="m1t0i4-s1" data-check="m1t0i4-s1">
+            <span class="sub-tag">5-B</span>
+            <span class="sub-text">Activity 2: unir cada oración con su imagen</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m1t0i4-s2">
+            <input type="checkbox" id="m1t0i4-s2" data-check="m1t0i4-s2">
+            <span class="sub-tag">5-C</span>
+            <span class="sub-text">Activity 3: escuchar el audio y completar las 12 oraciones con el verbo en presente progresivo</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m1t0i4-s3">
+            <input type="checkbox" id="m1t0i4-s3" data-check="m1t0i4-s3">
+            <span class="sub-tag">5-D</span>
+            <span class="sub-text">Activity 4: escribir 8 oraciones usando presente progresivo</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m1t0i5" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">6.</span>
+            <label class="item-label" for="m1t0i5">
+              <input type="checkbox" id="m1t0i5" data-check="m1t0i5">
+              <span class="item-name">f. Quiz 8</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m1t0i6" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">7.</span>
+            <label class="item-label" for="m1t0i6">
+              <input type="checkbox" id="m1t0i6" data-check="m1t0i6">
+              <span class="item-name">g. Audio support</span>
+            </label>
+            <span class="badge badge-audio">🎧 Audio</span>
+            
+          </div>
+          <p class="nota">Audio de apoyo para la Activity 3 del Grammar (pág. 112).</p>
+      
+    </li>
+<li class="item" data-item-id="m1t0i7" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">8.</span>
+            <label class="item-label" for="m1t0i7">
+              <input type="checkbox" id="m1t0i7" data-check="m1t0i7">
+              <span class="item-name">h. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m1t1">
+      <header class="tema-head">
+        <h3>Lesson 9 — Directions</h3>
+        <span class="tema-progress" data-tema-progress="m1t1"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m1t1i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m1t1i0">
+              <input type="checkbox" id="m1t1i0" data-check="m1t1i0">
+              <span class="item-name">a. Video</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m1t1i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m1t1i1">
+              <input type="checkbox" id="m1t1i1" data-check="m1t1i1">
+              <span class="item-name">b. Video</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m1t1i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m1t1i2">
+              <input type="checkbox" id="m1t1i2" data-check="m1t1i2" data-children="1">
+              <span class="item-name">c. Workbook 9</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m1t1i2">0/3</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m1t1i2-s0">
+            <input type="checkbox" id="m1t1i2-s0" data-check="m1t1i2-s0">
+            <span class="sub-tag">3-A</span>
+            <span class="sub-text">Activity 1: dibujar y colorear un mapa de tu barrio y mostrar cómo llegar al supermercado, parque, escuela y estación de policía</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m1t1i2-s1">
+            <input type="checkbox" id="m1t1i2-s1" data-check="m1t1i2-s1">
+            <span class="sub-tag">3-B</span>
+            <span class="sub-text">Activity 2: escribir las indicaciones para ir de tu casa al supermercado, al parque y a la estación de policía</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m1t1i2-s2">
+            <input type="checkbox" id="m1t1i2-s2" data-check="m1t1i2-s2">
+            <span class="sub-tag">3-C</span>
+            <span class="sub-text">Activity 3: dibujar los verbos break, prepare, wash e invite</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m1t1i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m1t1i3">
+              <input type="checkbox" id="m1t1i3" data-check="m1t1i3">
+              <span class="item-name">d. Video</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m1t1i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m1t1i4">
+              <input type="checkbox" id="m1t1i4" data-check="m1t1i4" data-children="1">
+              <span class="item-name">e. Workbook 9 — Grammar (Prepositions of place)</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m1t1i4">0/3</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m1t1i4-s0">
+            <input type="checkbox" id="m1t1i4-s0" data-check="m1t1i4-s0">
+            <span class="sub-tag">5-A</span>
+            <span class="sub-text">Activity 1: completar las 5 oraciones con in, on o at</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m1t1i4-s1">
+            <input type="checkbox" id="m1t1i4-s1" data-check="m1t1i4-s1">
+            <span class="sub-tag">5-B</span>
+            <span class="sub-text">Activity 2: escuchar y completar las 6 oraciones con la preposición de lugar</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m1t1i4-s2">
+            <input type="checkbox" id="m1t1i4-s2" data-check="m1t1i4-s2">
+            <span class="sub-tag">5-C</span>
+            <span class="sub-text">Activity 3: dibujar en los recuadros según la preposición at, on e in</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m1t1i5" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">6.</span>
+            <label class="item-label" for="m1t1i5">
+              <input type="checkbox" id="m1t1i5" data-check="m1t1i5">
+              <span class="item-name">f. Quiz 9</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m1t1i6" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">7.</span>
+            <label class="item-label" for="m1t1i6">
+              <input type="checkbox" id="m1t1i6" data-check="m1t1i6">
+              <span class="item-name">g. Audio support</span>
+            </label>
+            <span class="badge badge-audio">🎧 Audio</span>
+            
+          </div>
+          <p class="nota">Audio de apoyo para la Activity 2 del Grammar (pág. 125).</p>
+      
+    </li>
+<li class="item" data-item-id="m1t1i7" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">8.</span>
+            <label class="item-label" for="m1t1i7">
+              <input type="checkbox" id="m1t1i7" data-check="m1t1i7">
+              <span class="item-name">h. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m1t2">
+      <header class="tema-head">
+        <h3>Lesson 10 — Telephone call</h3>
+        <span class="tema-progress" data-tema-progress="m1t2"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m1t2i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m1t2i0">
+              <input type="checkbox" id="m1t2i0" data-check="m1t2i0">
+              <span class="item-name">a. Video</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m1t2i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m1t2i1">
+              <input type="checkbox" id="m1t2i1" data-check="m1t2i1">
+              <span class="item-name">b. Video</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m1t2i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m1t2i2">
+              <input type="checkbox" id="m1t2i2" data-check="m1t2i2" data-children="1">
+              <span class="item-name">c. Workbook 10</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m1t2i2">0/2</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m1t2i2-s0">
+            <input type="checkbox" id="m1t2i2-s0" data-check="m1t2i2-s0">
+            <span class="sub-tag">3-A</span>
+            <span class="sub-text">Activity 1: encerrar con azul el vocabulario de la llamada telefónica</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m1t2i2-s1">
+            <input type="checkbox" id="m1t2i2-s1" data-check="m1t2i2-s1">
+            <span class="sub-tag">3-B</span>
+            <span class="sub-text">Activity 2: elegir una de las llamadas de la lección, leerla varias veces, dibujarla y grabar un audio MP3 para subirlo a la plataforma</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m1t2i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m1t2i3">
+              <input type="checkbox" id="m1t2i3" data-check="m1t2i3">
+              <span class="item-name">d. Quiz 10</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m1t2i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m1t2i4">
+              <input type="checkbox" id="m1t2i4" data-check="m1t2i4">
+              <span class="item-name">e. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+  </section>
+<section class="materia" id="materia-historia" data-materia="m2">
+    <header class="materia-head">
+      <h2>Historia <small>Principios y reglas</small></h2>
+      <div class="materia-meta">
+        <span class="materia-progress" data-materia-progress="m2">0%</span>
+        <a class="btn-mini" href="https://jhs.schoology.com/course/8201912196/materials" target="_blank" rel="noopener">Abrir en Schoology</a>
+      </div>
+    </header>
+    <section class="tema" data-tema="m2t0">
+      <header class="tema-head">
+        <h3>Tema 13 — Los diez mandamientos</h3>
+        <span class="tema-progress" data-tema-progress="m2t0"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m2t0i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m2t0i0">
+              <input type="checkbox" id="m2t0i0" data-check="m2t0i0">
+              <span class="item-name">1. Video — Los diez mandamientos</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m2t0i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m2t0i1">
+              <input type="checkbox" id="m2t0i1" data-check="m2t0i1" data-children="1">
+              <span class="item-name">2. Guía de trabajo — Los diez mandamientos</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m2t0i1">0/8</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m2t0i1-s0">
+            <input type="checkbox" id="m2t0i1-s0" data-check="m2t0i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Dibujar y colorear los dos cuadros: «Amarás al Señor tu Dios por sobre todas las cosas» y «Honra a tu padre y a tu madre»</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t0i1-s1">
+            <input type="checkbox" id="m2t0i1-s1" data-check="m2t0i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Cortar un pedazo de cartón con forma de tablas, de unos 30 x 20 cm (paso 1)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t0i1-s2">
+            <input type="checkbox" id="m2t0i1-s2" data-check="m2t0i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Recortar papel de periódico y pegarlo en la tabla con mezcla de agua y pegamento (paso 2)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t0i1-s3">
+            <input type="checkbox" id="m2t0i1-s3" data-check="m2t0i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Dar tres capas de papel y una capa final solo de cola blanca, y dejar secar (paso 3)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t0i1-s4">
+            <input type="checkbox" id="m2t0i1-s4" data-check="m2t0i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Pintar ambas caras con color piedra (gris, plomo o café claro) (paso 4)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t0i1-s5">
+            <input type="checkbox" id="m2t0i1-s5" data-check="m2t0i1-s5">
+            <span class="sub-tag">2-F</span>
+            <span class="sub-text">Recortar los diez mandamientos impresos en la guía (paso 5)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t0i1-s6">
+            <input type="checkbox" id="m2t0i1-s6" data-check="m2t0i1-s6">
+            <span class="sub-tag">2-G</span>
+            <span class="sub-text">Pegar los mandamientos siguiendo el orden (paso 6)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t0i1-s7">
+            <input type="checkbox" id="m2t0i1-s7" data-check="m2t0i1-s7">
+            <span class="sub-tag">2-H</span>
+            <span class="sub-text">Tomar una fotografía de tus tablas terminadas y pegarla en la guía (paso 7)</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m2t0i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m2t0i2">
+              <input type="checkbox" id="m2t0i2" data-check="m2t0i2">
+              <span class="item-name">3. Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m2t0i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m2t0i3">
+              <input type="checkbox" id="m2t0i3" data-check="m2t0i3">
+              <span class="item-name">4. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m2t1">
+      <header class="tema-head">
+        <h3>Tema 14 — Principios de vida</h3>
+        <span class="tema-progress" data-tema-progress="m2t1"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m2t1i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m2t1i0">
+              <input type="checkbox" id="m2t1i0" data-check="m2t1i0">
+              <span class="item-name">a. Video — Principios de vida</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m2t1i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m2t1i1">
+              <input type="checkbox" id="m2t1i1" data-check="m2t1i1" data-children="1">
+              <span class="item-name">b. Guía de trabajo — Principios de vida</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m2t1i1">0/5</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m2t1i1-s0">
+            <input type="checkbox" id="m2t1i1-s0" data-check="m2t1i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Colorear solo las imágenes que muestren el principio de vida del agradecimiento</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t1i1-s1">
+            <input type="checkbox" id="m2t1i1-s1" data-check="m2t1i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Encontrar y colorear en la sopa de letras: gentileza, respeto, amor, bondad, dar, compartir</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t1i1-s2">
+            <input type="checkbox" id="m2t1i1-s2" data-check="m2t1i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Escribir 3 formas de mostrar el agradecimiento</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t1i1-s3">
+            <input type="checkbox" id="m2t1i1-s3" data-check="m2t1i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Escribir 3 formas de mostrar la gentileza</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t1i1-s4">
+            <input type="checkbox" id="m2t1i1-s4" data-check="m2t1i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Escribir 3 formas de mostrar el respeto</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m2t1i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m2t1i2">
+              <input type="checkbox" id="m2t1i2" data-check="m2t1i2">
+              <span class="item-name">c. Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m2t1i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m2t1i3">
+              <input type="checkbox" id="m2t1i3" data-check="m2t1i3">
+              <span class="item-name">d. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema tema-extra" data-tema="m2t2">
+      <header class="tema-head">
+        <h3>Foro — Practicando los principios de vida</h3>
+        <span class="tema-progress" data-tema-progress="m2t2"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m2t2i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m2t2i0">
+              <input type="checkbox" id="m2t2i0" data-check="m2t2i0" data-children="1">
+              <span class="item-name">Foro: «Practicando los principios de vida»</span>
+            </label>
+            <span class="badge badge-foro">💬 Foro</span>
+            
+            <span class="item-progress" data-progress="m2t2i0">0/3</span>
+          </div>
+          <p class="nota">Será calificado por el profesor.</p>
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m2t2i0-s0">
+            <input type="checkbox" id="m2t2i0-s0" data-check="m2t2i0-s0">
+            <span class="sub-tag">1-A</span>
+            <span class="sub-text">Imprimir la cartilla del foro</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t2i0-s1">
+            <input type="checkbox" id="m2t2i0-s1" data-check="m2t2i0-s1">
+            <span class="sub-tag">1-B</span>
+            <span class="sub-text">Seguir los pasos que pide la cartilla</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t2i0-s2">
+            <input type="checkbox" id="m2t2i0-s2" data-check="m2t2i0-s2">
+            <span class="sub-tag">1-C</span>
+            <span class="sub-text">Publicar la evidencia en el foro</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m2t3">
+      <header class="tema-head">
+        <h3>Tema 15 — Principales autoridades de mi nación</h3>
+        <span class="tema-progress" data-tema-progress="m2t3"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m2t3i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m2t3i0">
+              <input type="checkbox" id="m2t3i0" data-check="m2t3i0">
+              <span class="item-name">a. Video — Principales autoridades de mi nación</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m2t3i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m2t3i1">
+              <input type="checkbox" id="m2t3i1" data-check="m2t3i1" data-children="1">
+              <span class="item-name">b. Guía de trabajo — Principales autoridades de mi nación</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m2t3i1">0/2</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m2t3i1-s0">
+            <input type="checkbox" id="m2t3i1-s0" data-check="m2t3i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Escribir los datos del presidente y vicepresidente de tu nación y comentar una noticia sobre ellos</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t3i1-s1">
+            <input type="checkbox" id="m2t3i1-s1" data-check="m2t3i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Resolver el crucigrama de las autoridades</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m2t3i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m2t3i2">
+              <input type="checkbox" id="m2t3i2" data-check="m2t3i2">
+              <span class="item-name">c. Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m2t3i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m2t3i3">
+              <input type="checkbox" id="m2t3i3" data-check="m2t3i3">
+              <span class="item-name">d. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m2t4">
+      <header class="tema-head">
+        <h3>Tema 16 — Reglas y normas de vialidad</h3>
+        <span class="tema-progress" data-tema-progress="m2t4"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m2t4i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m2t4i0">
+              <input type="checkbox" id="m2t4i0" data-check="m2t4i0">
+              <span class="item-name">a. Video — Reglas y normas de vialidad</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m2t4i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m2t4i1">
+              <input type="checkbox" id="m2t4i1" data-check="m2t4i1" data-children="1">
+              <span class="item-name">b. Guía de trabajo — Maqueta de vialidad</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m2t4i1">0/6</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m2t4i1-s0">
+            <input type="checkbox" id="m2t4i1-s0" data-check="m2t4i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Imprimir y recortar las imágenes de las páginas siguientes (a)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t4i1-s1">
+            <input type="checkbox" id="m2t4i1-s1" data-check="m2t4i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Armar y pegar cada imagen haciendo los dobleces correspondientes (b)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t4i1-s2">
+            <input type="checkbox" id="m2t4i1-s2" data-check="m2t4i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Conseguir un pedazo de cartón como base, no muy grande (c)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t4i1-s3">
+            <input type="checkbox" id="m2t4i1-s3" data-check="m2t4i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Armar en la base el escenario de una parte de tu ciudad o barrio y ubicar los personajes (d)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t4i1-s4">
+            <input type="checkbox" id="m2t4i1-s4" data-check="m2t4i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Armar y decorar la maqueta a tu gusto (e)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m2t4i1-s5">
+            <input type="checkbox" id="m2t4i1-s5" data-check="m2t4i1-s5">
+            <span class="sub-tag">2-F</span>
+            <span class="sub-text">Tomar 3 fotografías del proceso y subirlas al Foro «Mi maqueta» (f)</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m2t4i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m2t4i2">
+              <input type="checkbox" id="m2t4i2" data-check="m2t4i2">
+              <span class="item-name">c. Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m2t4i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m2t4i3">
+              <input type="checkbox" id="m2t4i3" data-check="m2t4i3" data-children="1">
+              <span class="item-name">d. Foro «Mi maqueta»</span>
+            </label>
+            <span class="badge badge-foro">💬 Foro</span>
+            
+            <span class="item-progress" data-progress="m2t4i3">0/1</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m2t4i3-s0">
+            <input type="checkbox" id="m2t4i3-s0" data-check="m2t4i3-s0">
+            <span class="sub-tag">4-A</span>
+            <span class="sub-text">Subir las 3 fotografías del proceso de la maqueta</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m2t4i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m2t4i4">
+              <input type="checkbox" id="m2t4i4" data-check="m2t4i4">
+              <span class="item-name">e. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+  </section>
+<section class="materia" id="materia-lenguaje" data-materia="m3">
+    <header class="materia-head">
+      <h2>Lenguaje <small>Lectura y escritura</small></h2>
+      <div class="materia-meta">
+        <span class="materia-progress" data-materia-progress="m3">0%</span>
+        <a class="btn-mini" href="https://jhs.schoology.com/course/8202997484/materials" target="_blank" rel="noopener">Abrir en Schoology</a>
+      </div>
+    </header>
+    <section class="tema" data-tema="m3t0">
+      <header class="tema-head">
+        <h3>Tema 20 — Las mascotas</h3>
+        <span class="tema-progress" data-tema-progress="m3t0"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m3t0i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m3t0i0">
+              <input type="checkbox" id="m3t0i0" data-check="m3t0i0">
+              <span class="item-name">Material del tema 20 — Las mascotas</span>
+            </label>
+            <span class="badge badge-enlace">🔗 Material</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m3t0i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m3t0i1">
+              <input type="checkbox" id="m3t0i1" data-check="m3t0i1" data-children="1">
+              <span class="item-name">Oraciones para escribir «Las mascotas»</span>
+            </label>
+            <span class="badge badge-tarea">📝 Tarea</span>
+            
+            <span class="item-progress" data-progress="m3t0i1">0/3</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m3t0i1-s0">
+            <input type="checkbox" id="m3t0i1-s0" data-check="m3t0i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Elegir 7 palabras del tema y escribir 7 oraciones</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t0i1-s1">
+            <input type="checkbox" id="m3t0i1-s1" data-check="m3t0i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Practicar la lectura de las oraciones</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t0i1-s2">
+            <input type="checkbox" id="m3t0i1-s2" data-check="m3t0i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Grabarlas en mp3 y subirlas a la plataforma</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m3t0i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m3t0i2">
+              <input type="checkbox" id="m3t0i2" data-check="m3t0i2" data-children="1">
+              <span class="item-name">Guía y audio — Las mascotas</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m3t0i2">0/7</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m3t0i2-s0">
+            <input type="checkbox" id="m3t0i2-s0" data-check="m3t0i2-s0">
+            <span class="sub-tag">3-A</span>
+            <span class="sub-text">Responder qué mascota querían Ana y Andrés, con quién hablaron sus papás y qué cuidados necesita esa mascota</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t0i2-s1">
+            <input type="checkbox" id="m3t0i2-s1" data-check="m3t0i2-s1">
+            <span class="sub-tag">3-B</span>
+            <span class="sub-text">Describir las mascotas: pastor alemán, caniche, chihuahua y golden retriever</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t0i2-s2">
+            <input type="checkbox" id="m3t0i2-s2" data-check="m3t0i2-s2">
+            <span class="sub-tag">3-C</span>
+            <span class="sub-text">Investigar las características de tu perro y anotar tres; pegar la foto de tu mascota</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t0i2-s3">
+            <input type="checkbox" id="m3t0i2-s3" data-check="m3t0i2-s3">
+            <span class="sub-tag">3-D</span>
+            <span class="sub-text">Dibujar el perrito de vecinos, amigos o familiares</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t0i2-s4">
+            <input type="checkbox" id="m3t0i2-s4" data-check="m3t0i2-s4">
+            <span class="sub-tag">3-E</span>
+            <span class="sub-text">Preguntar y anotar al menos 4 marcas de alimento balanceado de tu barrio</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t0i2-s5">
+            <input type="checkbox" id="m3t0i2-s5" data-check="m3t0i2-s5">
+            <span class="sub-tag">3-F</span>
+            <span class="sub-text">Hacer el dictado de palabras con el tutor</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t0i2-s6">
+            <input type="checkbox" id="m3t0i2-s6" data-check="m3t0i2-s6">
+            <span class="sub-tag">3-G</span>
+            <span class="sub-text">Opcional: collage de las mascotas que más te gustan</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m3t0i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m3t0i3">
+              <input type="checkbox" id="m3t0i3" data-check="m3t0i3">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m3t0i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m3t0i4">
+              <input type="checkbox" id="m3t0i4" data-check="m3t0i4">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m3t1">
+      <header class="tema-head">
+        <h3>Tema 21 — Mi responsabilidad con los animales</h3>
+        <span class="tema-progress" data-tema-progress="m3t1"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m3t1i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m3t1i0">
+              <input type="checkbox" id="m3t1i0" data-check="m3t1i0">
+              <span class="item-name">Material del tema 21 — Mi responsabilidad con los animales</span>
+            </label>
+            <span class="badge badge-enlace">🔗 Material</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m3t1i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m3t1i1">
+              <input type="checkbox" id="m3t1i1" data-check="m3t1i1">
+              <span class="item-name">Palabras para escribir «Mi responsabilidad con los animales»</span>
+            </label>
+            <span class="badge badge-tarea">📝 Tarea</span>
+            
+          </div>
+          <p class="nota">La plataforma no muestra instrucciones escritas para esta tarea: seguí las indicaciones de la guía del tema.</p>
+      
+    </li>
+<li class="item" data-item-id="m3t1i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m3t1i2">
+              <input type="checkbox" id="m3t1i2" data-check="m3t1i2" data-children="1">
+              <span class="item-name">Guía — Mi responsabilidad con los animales</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m3t1i2">0/5</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m3t1i2-s0">
+            <input type="checkbox" id="m3t1i2-s0" data-check="m3t1i2-s0">
+            <span class="sub-tag">3-A</span>
+            <span class="sub-text">Buscar en la sopa de letras los nombres de las mascotas</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t1i2-s1">
+            <input type="checkbox" id="m3t1i2-s1" data-check="m3t1i2-s1">
+            <span class="sub-tag">3-B</span>
+            <span class="sub-text">Escribir o inventar una historia de una aventura que hayas tenido o quisieras tener con una mascota</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t1i2-s2">
+            <input type="checkbox" id="m3t1i2-s2" data-check="m3t1i2-s2">
+            <span class="sub-tag">3-C</span>
+            <span class="sub-text">Relacionar y ordenar la secuencia de cómo limpiar a nuestra mascota</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t1i2-s3">
+            <input type="checkbox" id="m3t1i2-s3" data-check="m3t1i2-s3">
+            <span class="sub-tag">3-D</span>
+            <span class="sub-text">Recortar 6 tipos de perros y escribir sus nombres o razas</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t1i2-s4">
+            <input type="checkbox" id="m3t1i2-s4" data-check="m3t1i2-s4">
+            <span class="sub-tag">3-E</span>
+            <span class="sub-text">Opcional: pegar una foto con tu mascota o dibujar el animal que te gustaría tener</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m3t1i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m3t1i3">
+              <input type="checkbox" id="m3t1i3" data-check="m3t1i3">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m3t1i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m3t1i4">
+              <input type="checkbox" id="m3t1i4" data-check="m3t1i4">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m3t2">
+      <header class="tema-head">
+        <h3>Tema 22 — Mi huerta</h3>
+        <span class="tema-progress" data-tema-progress="m3t2"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m3t2i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m3t2i0">
+              <input type="checkbox" id="m3t2i0" data-check="m3t2i0">
+              <span class="item-name">Material del tema 22 — Mi huerta</span>
+            </label>
+            <span class="badge badge-enlace">🔗 Material</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m3t2i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m3t2i1">
+              <input type="checkbox" id="m3t2i1" data-check="m3t2i1">
+              <span class="item-name">Oraciones «Mi huerta»</span>
+            </label>
+            <span class="badge badge-tarea">📝 Tarea</span>
+            
+          </div>
+          <p class="nota">La plataforma no muestra instrucciones escritas para esta tarea: seguí las indicaciones de la guía del tema.</p>
+      
+    </li>
+<li class="item" data-item-id="m3t2i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m3t2i2">
+              <input type="checkbox" id="m3t2i2" data-check="m3t2i2" data-children="1">
+              <span class="item-name">Guía — Mi huerta</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m3t2i2">0/6</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m3t2i2-s0">
+            <input type="checkbox" id="m3t2i2-s0" data-check="m3t2i2-s0">
+            <span class="sub-tag">3-A</span>
+            <span class="sub-text">Reunir los materiales: porotos, tierra, recipiente de plástico, agua y un lugar con sol</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t2i2-s1">
+            <input type="checkbox" id="m3t2i2-s1" data-check="m3t2i2-s1">
+            <span class="sub-tag">3-B</span>
+            <span class="sub-text">Poner a remojar los porotos por una tarde (paso 1)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t2i2-s2">
+            <input type="checkbox" id="m3t2i2-s2" data-check="m3t2i2-s2">
+            <span class="sub-tag">3-C</span>
+            <span class="sub-text">Poner la tierra en el recipiente de plástico (paso 2)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t2i2-s3">
+            <input type="checkbox" id="m3t2i2-s3" data-check="m3t2i2-s3">
+            <span class="sub-tag">3-D</span>
+            <span class="sub-text">Poner las semillas en surcos y luego taparlas (paso 3)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t2i2-s4">
+            <input type="checkbox" id="m3t2i2-s4" data-check="m3t2i2-s4">
+            <span class="sub-tag">3-E</span>
+            <span class="sub-text">Regar cada 2 días (paso 4)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t2i2-s5">
+            <input type="checkbox" id="m3t2i2-s5" data-check="m3t2i2-s5">
+            <span class="sub-tag">3-F</span>
+            <span class="sub-text">Dibujar en el cuadro los cambios observados del día 1, día 10, día 15 y día 20 (paso 5)</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m3t2i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m3t2i3">
+              <input type="checkbox" id="m3t2i3" data-check="m3t2i3">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m3t2i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m3t2i4">
+              <input type="checkbox" id="m3t2i4" data-check="m3t2i4">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m3t3">
+      <header class="tema-head">
+        <h3>Tema 23 — Mi huerta: cuidado</h3>
+        <span class="tema-progress" data-tema-progress="m3t3"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m3t3i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m3t3i0">
+              <input type="checkbox" id="m3t3i0" data-check="m3t3i0">
+              <span class="item-name">Material del tema 23 — Mi huerta: cuidado</span>
+            </label>
+            <span class="badge badge-enlace">🔗 Material</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m3t3i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m3t3i1">
+              <input type="checkbox" id="m3t3i1" data-check="m3t3i1" data-children="1">
+              <span class="item-name">Oraciones para leer «Mi huerta - cuidado»</span>
+            </label>
+            <span class="badge badge-tarea">📝 Tarea</span>
+            
+            <span class="item-progress" data-progress="m3t3i1">0/4</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m3t3i1-s0">
+            <input type="checkbox" id="m3t3i1-s0" data-check="m3t3i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Elegir 7 palabras de la guía y crear 7 oraciones</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t3i1-s1">
+            <input type="checkbox" id="m3t3i1-s1" data-check="m3t3i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Escribirlas en la hoja cuadriculada</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t3i1-s2">
+            <input type="checkbox" id="m3t3i1-s2" data-check="m3t3i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Repasar su lectura</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t3i1-s3">
+            <input type="checkbox" id="m3t3i1-s3" data-check="m3t3i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Grabarlas en mp3 y subirlas a la plataforma</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m3t3i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m3t3i2">
+              <input type="checkbox" id="m3t3i2" data-check="m3t3i2" data-children="1">
+              <span class="item-name">Guía — Mi huerta: cuidado</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m3t3i2">0/3</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m3t3i2-s0">
+            <input type="checkbox" id="m3t3i2-s0" data-check="m3t3i2-s0">
+            <span class="sub-tag">3-A</span>
+            <span class="sub-text">Responder cuándo debemos regar las plantas, qué debemos cuidar de un huerto y cómo cuidamos las plantas de las plagas</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t3i2-s1">
+            <input type="checkbox" id="m3t3i2-s1" data-check="m3t3i2-s1">
+            <span class="sub-tag">3-B</span>
+            <span class="sub-text">Observar tu jardín y dibujar los insectos o bichos que hay</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t3i2-s2">
+            <input type="checkbox" id="m3t3i2-s2" data-check="m3t3i2-s2">
+            <span class="sub-tag">3-C</span>
+            <span class="sub-text">Dibujar los dos momentos más importantes en que debemos regar las plantas</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m3t3i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m3t3i3">
+              <input type="checkbox" id="m3t3i3" data-check="m3t3i3">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m3t3i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m3t3i4">
+              <input type="checkbox" id="m3t3i4" data-check="m3t3i4">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m3t4">
+      <header class="tema-head">
+        <h3>Tema 24 — Mi huerta: cosecha</h3>
+        <span class="tema-progress" data-tema-progress="m3t4"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m3t4i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m3t4i0">
+              <input type="checkbox" id="m3t4i0" data-check="m3t4i0">
+              <span class="item-name">Material del tema 24 — Mi huerta: cosecha</span>
+            </label>
+            <span class="badge badge-enlace">🔗 Material</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m3t4i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m3t4i1">
+              <input type="checkbox" id="m3t4i1" data-check="m3t4i1" data-children="1">
+              <span class="item-name">Oraciones para leer «Mi huerta - cosecha»</span>
+            </label>
+            <span class="badge badge-tarea">📝 Tarea</span>
+            
+            <span class="item-progress" data-progress="m3t4i1">0/2</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m3t4i1-s0">
+            <input type="checkbox" id="m3t4i1-s0" data-check="m3t4i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Escribir una oración con cada palabra: maduro, fruto, recolectar, hortaliza, tomate, cosecha</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t4i1-s1">
+            <input type="checkbox" id="m3t4i1-s1" data-check="m3t4i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Grabarlas en mp3 y subirlas a la plataforma</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m3t4i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m3t4i2">
+              <input type="checkbox" id="m3t4i2" data-check="m3t4i2" data-children="1">
+              <span class="item-name">Guía — Mi huerta: cosecha</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m3t4i2">0/4</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m3t4i2-s0">
+            <input type="checkbox" id="m3t4i2-s0" data-check="m3t4i2-s0">
+            <span class="sub-tag">3-A</span>
+            <span class="sub-text">Responder cómo estaban los tomates, quién llamó a Logos para sacarlos y qué recordó la abuelita</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t4i2-s1">
+            <input type="checkbox" id="m3t4i2-s1" data-check="m3t4i2-s1">
+            <span class="sub-tag">3-B</span>
+            <span class="sub-text">Buscar 4 recortes de diferentes cosechas y pegarlos</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t4i2-s2">
+            <input type="checkbox" id="m3t4i2-s2" data-check="m3t4i2-s2">
+            <span class="sub-tag">3-C</span>
+            <span class="sub-text">Describir la lámina del cuadro</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t4i2-s3">
+            <input type="checkbox" id="m3t4i2-s3" data-check="m3t4i2-s3">
+            <span class="sub-tag">3-D</span>
+            <span class="sub-text">Dibujar la cosecha que hayas realizado con tus papás</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m3t4i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m3t4i3">
+              <input type="checkbox" id="m3t4i3" data-check="m3t4i3">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m3t4i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m3t4i4">
+              <input type="checkbox" id="m3t4i4" data-check="m3t4i4">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m3t5">
+      <header class="tema-head">
+        <h3>Tema 25 — El parrillero</h3>
+        <span class="tema-progress" data-tema-progress="m3t5"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m3t5i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m3t5i0">
+              <input type="checkbox" id="m3t5i0" data-check="m3t5i0">
+              <span class="item-name">Material del tema 25 — El parrillero</span>
+            </label>
+            <span class="badge badge-enlace">🔗 Material</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m3t5i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m3t5i1">
+              <input type="checkbox" id="m3t5i1" data-check="m3t5i1" data-children="1">
+              <span class="item-name">Oraciones «El parrillero»</span>
+            </label>
+            <span class="badge badge-tarea">📝 Tarea</span>
+            
+            <span class="item-progress" data-progress="m3t5i1">0/3</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m3t5i1-s0">
+            <input type="checkbox" id="m3t5i1-s0" data-check="m3t5i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Escribir 7 oraciones con palabras de la guía</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t5i1-s1">
+            <input type="checkbox" id="m3t5i1-s1" data-check="m3t5i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Aprender las oraciones</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t5i1-s2">
+            <input type="checkbox" id="m3t5i1-s2" data-check="m3t5i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Grabarlas en mp3 y subirlas a la plataforma</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m3t5i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m3t5i2">
+              <input type="checkbox" id="m3t5i2" data-check="m3t5i2" data-children="1">
+              <span class="item-name">Guía — El parrillero</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m3t5i2">0/3</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m3t5i2-s0">
+            <input type="checkbox" id="m3t5i2-s0" data-check="m3t5i2-s0">
+            <span class="sub-tag">3-A</span>
+            <span class="sub-text">Definir con tus palabras qué es una parrillada y mencionar 5 elementos que se ocupan en una</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t5i2-s1">
+            <input type="checkbox" id="m3t5i2-s1" data-check="m3t5i2-s1">
+            <span class="sub-tag">3-B</span>
+            <span class="sub-text">Dibujar cómo te imaginas la historia que leíste</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m3t5i2-s2">
+            <input type="checkbox" id="m3t5i2-s2" data-check="m3t5i2-s2">
+            <span class="sub-tag">3-C</span>
+            <span class="sub-text">Describir en un audio mp3 una parrillada que hayas hecho con tu familia y mostrar fotografías (si nunca participaste, grabar cómo te imaginas que sería)</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m3t5i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m3t5i3">
+              <input type="checkbox" id="m3t5i3" data-check="m3t5i3">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m3t5i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m3t5i4">
+              <input type="checkbox" id="m3t5i4" data-check="m3t5i4">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema tema-extra" data-tema="m3t6">
+      <header class="tema-head">
+        <h3>Semana 8 — Puesta al día</h3>
+        <span class="tema-progress" data-tema-progress="m3t6"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m3t6i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m3t6i0">
+              <input type="checkbox" id="m3t6i0" data-check="m3t6i0">
+              <span class="item-name">Semana de ponerse al día con el material</span>
+            </label>
+            <span class="badge badge-tarea">📝 Tarea</span>
+            
+          </div>
+          <p class="nota">La plataforma indica que este punto es del examen: sirve para planificar cómo hacerlo.</p>
+      
+    </li>
+      </ul>
+    </section>
+  </section>
+<section class="materia" id="materia-luces" data-materia="m4">
+    <header class="materia-head">
+      <h2>Luces y Colores <small>Artes Visuales</small></h2>
+      <div class="materia-meta">
+        <span class="materia-progress" data-materia-progress="m4">0%</span>
+        <a class="btn-mini" href="https://jhs.schoology.com/course/8201804045/materials" target="_blank" rel="noopener">Abrir en Schoology</a>
+      </div>
+    </header>
+    <section class="tema" data-tema="m4t0">
+      <header class="tema-head">
+        <h3>Tema 16 — El ritmo en el dibujo</h3>
+        <span class="tema-progress" data-tema-progress="m4t0"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m4t0i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m4t0i0">
+              <input type="checkbox" id="m4t0i0" data-check="m4t0i0">
+              <span class="item-name">1. Video — El ritmo en el dibujo</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m4t0i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m4t0i1">
+              <input type="checkbox" id="m4t0i1" data-check="m4t0i1" data-children="1">
+              <span class="item-name">2. Guía — El ritmo en el dibujo</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m4t0i1">0/6</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m4t0i1-s0">
+            <input type="checkbox" id="m4t0i1-s0" data-check="m4t0i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Recortar las imágenes de los anexos, separar las similares en color o forma y pegarlas en orden en cada rectángulo (ritmo visual)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t0i1-s1">
+            <input type="checkbox" id="m4t0i1-s1" data-check="m4t0i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Marcar Sí o No debajo de cada imagen según tenga o no ritmo visual</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t0i1-s2">
+            <input type="checkbox" id="m4t0i1-s2" data-check="m4t0i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Recortar círculos de diferentes colores y tamaños (paso 1)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t0i1-s3">
+            <input type="checkbox" id="m4t0i1-s3" data-check="m4t0i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Armar las hojas del árbol pegando círculos superpuestos de mayor a menor, unas 15 hojas (paso 2)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t0i1-s4">
+            <input type="checkbox" id="m4t0i1-s4" data-check="m4t0i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Pegar las hojas de colores en la imagen del árbol (paso 3)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t0i1-s5">
+            <input type="checkbox" id="m4t0i1-s5" data-check="m4t0i1-s5">
+            <span class="sub-tag">2-F</span>
+            <span class="sub-text">Colorear el fondo de la imagen (paso 4)</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m4t0i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m4t0i2">
+              <input type="checkbox" id="m4t0i2" data-check="m4t0i2" data-children="1">
+              <span class="item-name">3. Cartilla de motricidad — Tema 16</span>
+            </label>
+            <span class="badge badge-cartilla">✂️ Cartilla</span>
+            
+            <span class="item-progress" data-progress="m4t0i2">0/2</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m4t0i2-s0">
+            <input type="checkbox" id="m4t0i2-s0" data-check="m4t0i2-s0">
+            <span class="sub-tag">3-A</span>
+            <span class="sub-text">Completar el dibujo con bolitas de papel crepé de colores</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t0i2-s1">
+            <input type="checkbox" id="m4t0i2-s1" data-check="m4t0i2-s1">
+            <span class="sub-tag">3-B</span>
+            <span class="sub-text">Pegar la fotografía del trabajo terminado en la cartilla</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m4t0i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m4t0i3">
+              <input type="checkbox" id="m4t0i3" data-check="m4t0i3">
+              <span class="item-name">4. Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m4t0i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m4t0i4">
+              <input type="checkbox" id="m4t0i4" data-check="m4t0i4">
+              <span class="item-name">5. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m4t1">
+      <header class="tema-head">
+        <h3>Tema 17 — Telar</h3>
+        <span class="tema-progress" data-tema-progress="m4t1"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m4t1i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m4t1i0">
+              <input type="checkbox" id="m4t1i0" data-check="m4t1i0" data-children="1">
+              <span class="item-name">1. Guía — Telar</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m4t1i0">0/7</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m4t1i0-s0">
+            <input type="checkbox" id="m4t1i0-s0" data-check="m4t1i0-s0">
+            <span class="sub-tag">1-A</span>
+            <span class="sub-text">Reunir materiales: cartón, lana gruesa, tijeras, regla y lápiz</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t1i0-s1">
+            <input type="checkbox" id="m4t1i0-s1" data-check="m4t1i0-s1">
+            <span class="sub-tag">1-B</span>
+            <span class="sub-text">Cortar el cartón rectangular de unos 17 x 20 cm y marcar (paso 1, lo realiza el tutor)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t1i0-s2">
+            <input type="checkbox" id="m4t1i0-s2" data-check="m4t1i0-s2">
+            <span class="sub-tag">1-C</span>
+            <span class="sub-text">Con ayuda de una tijera cortar sobre las marcas (paso 2)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t1i0-s3">
+            <input type="checkbox" id="m4t1i0-s3" data-check="m4t1i0-s3">
+            <span class="sub-tag">1-D</span>
+            <span class="sub-text">Colocar la punta de la lana en el primer corte y fijar con un nudo detrás (paso 3)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t1i0-s4">
+            <input type="checkbox" id="m4t1i0-s4" data-check="m4t1i0-s4">
+            <span class="sub-tag">1-E</span>
+            <span class="sub-text">Pegar dos palitos de helado para dar altura a la lana (paso 4)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t1i0-s5">
+            <input type="checkbox" id="m4t1i0-s5" data-check="m4t1i0-s5">
+            <span class="sub-tag">1-F</span>
+            <span class="sub-text">Armar la urdimbre según indica la guía (paso 5)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t1i0-s6">
+            <input type="checkbox" id="m4t1i0-s6" data-check="m4t1i0-s6">
+            <span class="sub-tag">1-G</span>
+            <span class="sub-text">Tejer con la lana el tejido rectangular</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m4t1i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m4t1i1">
+              <input type="checkbox" id="m4t1i1" data-check="m4t1i1">
+              <span class="item-name">2. Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m4t1i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m4t1i2">
+              <input type="checkbox" id="m4t1i2" data-check="m4t1i2" data-children="1">
+              <span class="item-name">3. Cartilla de motricidad — Tema 17</span>
+            </label>
+            <span class="badge badge-cartilla">✂️ Cartilla</span>
+            
+            <span class="item-progress" data-progress="m4t1i2">0/6</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m4t1i2-s0">
+            <input type="checkbox" id="m4t1i2-s0" data-check="m4t1i2-s0">
+            <span class="sub-tag">3-A</span>
+            <span class="sub-text">Recortar las formas de los animales y los accesorios del final de la cartilla (paso 1)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t1i2-s1">
+            <input type="checkbox" id="m4t1i2-s1" data-check="m4t1i2-s1">
+            <span class="sub-tag">3-B</span>
+            <span class="sub-text">El tutor pasa el estilete por las líneas punteadas del pez, el conejo y la meduza (paso 2)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t1i2-s2">
+            <input type="checkbox" id="m4t1i2-s2" data-check="m4t1i2-s2">
+            <span class="sub-tag">3-C</span>
+            <span class="sub-text">Entretejer las cintas de colores como en el ejemplo (paso 3)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t1i2-s3">
+            <input type="checkbox" id="m4t1i2-s3" data-check="m4t1i2-s3">
+            <span class="sub-tag">3-D</span>
+            <span class="sub-text">El tutor recorta los sobrantes de las cintas (paso 4)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t1i2-s4">
+            <input type="checkbox" id="m4t1i2-s4" data-check="m4t1i2-s4">
+            <span class="sub-tag">3-E</span>
+            <span class="sub-text">Pegar los accesorios en el lugar que corresponde de cada animal (paso 5)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t1i2-s5">
+            <input type="checkbox" id="m4t1i2-s5" data-check="m4t1i2-s5">
+            <span class="sub-tag">3-F</span>
+            <span class="sub-text">Subir la fotografía del trabajo terminado al foro de la actividad</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m4t1i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m4t1i3">
+              <input type="checkbox" id="m4t1i3" data-check="m4t1i3" data-children="1">
+              <span class="item-name">4. Foro — Telar</span>
+            </label>
+            <span class="badge badge-foro">💬 Foro</span>
+            
+            <span class="item-progress" data-progress="m4t1i3">0/1</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m4t1i3-s0">
+            <input type="checkbox" id="m4t1i3-s0" data-check="m4t1i3-s0">
+            <span class="sub-tag">4-A</span>
+            <span class="sub-text">Subir la fotografía del telar terminado</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+      </ul>
+    </section>
+<section class="tema tema-extra" data-tema="m4t2">
+      <header class="tema-head">
+        <h3>Foro — Clase en vivo (17 de noviembre)</h3>
+        <span class="tema-progress" data-tema-progress="m4t2"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m4t2i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m4t2i0">
+              <input type="checkbox" id="m4t2i0" data-check="m4t2i0">
+              <span class="item-name">Foro de «Clase en vivo»</span>
+            </label>
+            <span class="badge badge-foro">💬 Foro</span>
+            
+          </div>
+          <p class="nota">Foro de la clase en vivo del 17 de noviembre.</p>
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m4t3">
+      <header class="tema-head">
+        <h3>Tema 18 — El collage</h3>
+        <span class="tema-progress" data-tema-progress="m4t3"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m4t3i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m4t3i0">
+              <input type="checkbox" id="m4t3i0" data-check="m4t3i0">
+              <span class="item-name">1. Video — El collage</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m4t3i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m4t3i1">
+              <input type="checkbox" id="m4t3i1" data-check="m4t3i1" data-children="1">
+              <span class="item-name">2. Guía — El collage</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m4t3i1">0/3</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m4t3i1-s0">
+            <input type="checkbox" id="m4t3i1-s0" data-check="m4t3i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Reunir materiales: lienzos pequeños, telas estampadas, hojas blancas, papeles de colores, tijeras, rotulador negro, pegamento y los recortes del final de la guía</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t3i1-s1">
+            <input type="checkbox" id="m4t3i1-s1" data-check="m4t3i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Seguir los pasos del video de la clase y realizar los mini cuadros con telas</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t3i1-s2">
+            <input type="checkbox" id="m4t3i1-s2" data-check="m4t3i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Subir la fotografía de la manualidad terminada al foro de la clase</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m4t3i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m4t3i2">
+              <input type="checkbox" id="m4t3i2" data-check="m4t3i2">
+              <span class="item-name">3. Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m4t3i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m4t3i3">
+              <input type="checkbox" id="m4t3i3" data-check="m4t3i3" data-children="1">
+              <span class="item-name">4. Foro — El collage</span>
+            </label>
+            <span class="badge badge-foro">💬 Foro</span>
+            
+            <span class="item-progress" data-progress="m4t3i3">0/1</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m4t3i3-s0">
+            <input type="checkbox" id="m4t3i3-s0" data-check="m4t3i3-s0">
+            <span class="sub-tag">4-A</span>
+            <span class="sub-text">Subir la foto del collage terminado</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m4t3i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m4t3i4">
+              <input type="checkbox" id="m4t3i4" data-check="m4t3i4">
+              <span class="item-name">5. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema tema-extra" data-tema="m4t4">
+      <header class="tema-head">
+        <h3>Foro — La creatividad</h3>
+        <span class="tema-progress" data-tema-progress="m4t4"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m4t4i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m4t4i0">
+              <input type="checkbox" id="m4t4i0" data-check="m4t4i0">
+              <span class="item-name">Foro: «La creatividad»</span>
+            </label>
+            <span class="badge badge-foro">💬 Foro</span>
+            
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m4t5">
+      <header class="tema-head">
+        <h3>Tema 19 — A cada escultura su técnica</h3>
+        <span class="tema-progress" data-tema-progress="m4t5"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m4t5i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m4t5i0">
+              <input type="checkbox" id="m4t5i0" data-check="m4t5i0">
+              <span class="item-name">1. Video — A cada escultura su técnica</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m4t5i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m4t5i1">
+              <input type="checkbox" id="m4t5i1" data-check="m4t5i1" data-children="1">
+              <span class="item-name">2. Guía — A cada escultura su técnica</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m4t5i1">0/5</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m4t5i1-s0">
+            <input type="checkbox" id="m4t5i1-s0" data-check="m4t5i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Reunir materiales: alambre de medio metro, goma Eva o papeles de colores, plastoformo de 15 x 20 cm y un alicate (uso del tutor)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t5i1-s1">
+            <input type="checkbox" id="m4t5i1-s1" data-check="m4t5i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Recortar trozos de goma Eva de colores de forma irregular (paso 1)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t5i1-s2">
+            <input type="checkbox" id="m4t5i1-s2" data-check="m4t5i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Con ayuda de un tutor cortar dos pedazos de alambre de 20 cm e insertar los papeles creando movimientos y diseños (paso 2)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t5i1-s3">
+            <input type="checkbox" id="m4t5i1-s3" data-check="m4t5i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Insertar los alambres en la base de plastoformo (paso 3)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m4t5i1-s4">
+            <input type="checkbox" id="m4t5i1-s4" data-check="m4t5i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Pegar la foto del trabajo terminado en la guía</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m4t5i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m4t5i2">
+              <input type="checkbox" id="m4t5i2" data-check="m4t5i2">
+              <span class="item-name">3. Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m4t5i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m4t5i3">
+              <input type="checkbox" id="m4t5i3" data-check="m4t5i3">
+              <span class="item-name">4. Cartilla de manualidad — Tema 19</span>
+            </label>
+            <span class="badge badge-cartilla">✂️ Cartilla</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m4t5i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m4t5i4">
+              <input type="checkbox" id="m4t5i4" data-check="m4t5i4">
+              <span class="item-name">5. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+  </section>
+<section class="materia" id="materia-matematicas" data-materia="m5">
+    <header class="materia-head">
+      <h2>Matemáticas <small>MAT-G2</small></h2>
+      <div class="materia-meta">
+        <span class="materia-progress" data-materia-progress="m5">0%</span>
+        <a class="btn-mini" href="https://jhs.schoology.com/course/8202767047/materials" target="_blank" rel="noopener">Abrir en Schoology</a>
+      </div>
+    </header>
+    <section class="tema" data-tema="m5t0">
+      <header class="tema-head">
+        <h3>Tema 21 — Estimaciones a la decena</h3>
+        <span class="tema-progress" data-tema-progress="m5t0"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m5t0i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m5t0i0">
+              <input type="checkbox" id="m5t0i0" data-check="m5t0i0">
+              <span class="item-name">a. Video 21</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t0i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m5t0i1">
+              <input type="checkbox" id="m5t0i1" data-check="m5t0i1" data-children="1">
+              <span class="item-name">b. Guía T21</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m5t0i1">0/6</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m5t0i1-s0">
+            <input type="checkbox" id="m5t0i1-s0" data-check="m5t0i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Estimar la cantidad de botellas de jugo y otros elementos</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t0i1-s1">
+            <input type="checkbox" id="m5t0i1-s1" data-check="m5t0i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Realizar las estimaciones de los 9 números a la decena, siguiendo el ejemplo</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t0i1-s2">
+            <input type="checkbox" id="m5t0i1-s2" data-check="m5t0i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Aproximar a la decena el precio de las 6 prendas y sumar todas las estimaciones</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t0i1-s3">
+            <input type="checkbox" id="m5t0i1-s3" data-check="m5t0i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Realizar las restas encontrando el valor exacto y el valor aproximado</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t0i1-s4">
+            <input type="checkbox" id="m5t0i1-s4" data-check="m5t0i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Completar la tabla del 6 y colorear los resultados en el recuadro</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t0i1-s5">
+            <input type="checkbox" id="m5t0i1-s5" data-check="m5t0i1-s5">
+            <span class="sub-tag">2-F</span>
+            <span class="sub-text">Escuchar la canción de la tabla del 6, memorizarla y grabar un video representándola</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m5t0i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m5t0i2">
+              <input type="checkbox" id="m5t0i2" data-check="m5t0i2">
+              <span class="item-name">c. Canción — Tabla del 6 (mp3)</span>
+            </label>
+            <span class="badge badge-audio">🎧 Audio</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t0i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m5t0i3">
+              <input type="checkbox" id="m5t0i3" data-check="m5t0i3">
+              <span class="item-name">d. Canción Tabla del 6 (PDF)</span>
+            </label>
+            <span class="badge badge-cancion">🎵 Canción</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t0i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m5t0i4">
+              <input type="checkbox" id="m5t0i4" data-check="m5t0i4">
+              <span class="item-name">e. Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t0i5" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">6.</span>
+            <label class="item-label" for="m5t0i5">
+              <input type="checkbox" id="m5t0i5" data-check="m5t0i5">
+              <span class="item-name">f. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m5t1">
+      <header class="tema-head">
+        <h3>Tema 22 — Cuerpos geométricos y sus elementos</h3>
+        <span class="tema-progress" data-tema-progress="m5t1"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m5t1i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m5t1i0">
+              <input type="checkbox" id="m5t1i0" data-check="m5t1i0">
+              <span class="item-name">a. Video 22</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t1i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m5t1i1">
+              <input type="checkbox" id="m5t1i1" data-check="m5t1i1" data-children="1">
+              <span class="item-name">b. Guía T22</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m5t1i1">0/6</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m5t1i1-s0">
+            <input type="checkbox" id="m5t1i1-s0" data-check="m5t1i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Escribir debajo de cada dibujo el nombre del cuerpo geométrico (12 casos)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t1i1-s1">
+            <input type="checkbox" id="m5t1i1-s1" data-check="m5t1i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Elegir la figura que responde a cada una de las 3 preguntas</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t1i1-s2">
+            <input type="checkbox" id="m5t1i1-s2" data-check="m5t1i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Buscar con tus padres 4 objetos de la casa con forma de cuerpo geométrico, tomar fotos y pegarlas</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t1i1-s3">
+            <input type="checkbox" id="m5t1i1-s3" data-check="m5t1i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Marcar base, aristas, caras laterales y vértices en los cuerpos geométricos indicados</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t1i1-s4">
+            <input type="checkbox" id="m5t1i1-s4" data-check="m5t1i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Realizar 10 tarjetas de la tabla del 6 (6 x 1 a 6 x 10) en cartulina y practicar con las 6 formas sugeridas</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t1i1-s5">
+            <input type="checkbox" id="m5t1i1-s5" data-check="m5t1i1-s5">
+            <span class="sub-tag">2-F</span>
+            <span class="sub-text">Sacar una foto de tus tarjetas de la tabla del 6 contigo y pegarla</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m5t1i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m5t1i2">
+              <input type="checkbox" id="m5t1i2" data-check="m5t1i2">
+              <span class="item-name">c. Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t1i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m5t1i3">
+              <input type="checkbox" id="m5t1i3" data-check="m5t1i3">
+              <span class="item-name">d. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m5t2">
+      <header class="tema-head">
+        <h3>Tema 23 — Unión e intersección de conjuntos</h3>
+        <span class="tema-progress" data-tema-progress="m5t2"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m5t2i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m5t2i0">
+              <input type="checkbox" id="m5t2i0" data-check="m5t2i0">
+              <span class="item-name">a. Video 23</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t2i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m5t2i1">
+              <input type="checkbox" id="m5t2i1" data-check="m5t2i1" data-children="1">
+              <span class="item-name">b. Guía T23</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m5t2i1">0/5</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m5t2i1-s0">
+            <input type="checkbox" id="m5t2i1-s0" data-check="m5t2i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Representar la unión de los conjuntos M y A</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t2i1-s1">
+            <input type="checkbox" id="m5t2i1-s1" data-check="m5t2i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Escribir la intersección de los conjuntos dados (rojo/verde/celeste/azul, Juan/Camel/Zoe/María, etc.)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t2i1-s2">
+            <input type="checkbox" id="m5t2i1-s2" data-check="m5t2i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Resolver los problemas de unión e intersección y graficar (cuadernos de Carla y Julio, gimnasia y fútbol)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t2i1-s3">
+            <input type="checkbox" id="m5t2i1-s3" data-check="m5t2i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Completar la tabla del 7 y colorear los resultados en el recuadro</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t2i1-s4">
+            <input type="checkbox" id="m5t2i1-s4" data-check="m5t2i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Escuchar la canción de la tabla del 7, memorizarla y grabar un audio cantándola con la familia</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m5t2i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m5t2i2">
+              <input type="checkbox" id="m5t2i2" data-check="m5t2i2">
+              <span class="item-name">c. Canción — Tabla del 7 (mp3)</span>
+            </label>
+            <span class="badge badge-audio">🎧 Audio</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t2i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m5t2i3">
+              <input type="checkbox" id="m5t2i3" data-check="m5t2i3">
+              <span class="item-name">d. Canción Tabla del 7 (PDF)</span>
+            </label>
+            <span class="badge badge-cancion">🎵 Canción</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t2i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m5t2i4">
+              <input type="checkbox" id="m5t2i4" data-check="m5t2i4">
+              <span class="item-name">e. Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t2i5" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">6.</span>
+            <label class="item-label" for="m5t2i5">
+              <input type="checkbox" id="m5t2i5" data-check="m5t2i5">
+              <span class="item-name">f. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m5t3">
+      <header class="tema-head">
+        <h3>Tema 24 — Medidas de longitud, peso y capacidad</h3>
+        <span class="tema-progress" data-tema-progress="m5t3"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m5t3i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m5t3i0">
+              <input type="checkbox" id="m5t3i0" data-check="m5t3i0">
+              <span class="item-name">a. Video 24</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t3i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m5t3i1">
+              <input type="checkbox" id="m5t3i1" data-check="m5t3i1" data-children="1">
+              <span class="item-name">b. Guía T24</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m5t3i1">0/8</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m5t3i1-s0">
+            <input type="checkbox" id="m5t3i1-s0" data-check="m5t3i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Medir con tus pasos el largo del dormitorio, la sala y otros objetos</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t3i1-s1">
+            <input type="checkbox" id="m5t3i1-s1" data-check="m5t3i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Medir con tus manos el largo y ancho de la mesa y de tu cama</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t3i1-s2">
+            <input type="checkbox" id="m5t3i1-s2" data-check="m5t3i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Medir con un patrón elegido (lápices, palitos, clips) la pantalla del computador y la ventana</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t3i1-s3">
+            <input type="checkbox" id="m5t3i1-s3" data-check="m5t3i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Realizar la balanza casera con gancho, recipientes y soga, y comparar qué artículo pesa más</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t3i1-s4">
+            <input type="checkbox" id="m5t3i1-s4" data-check="m5t3i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Completar cuántos vasos, tazas y cucharas caben en la jarra</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t3i1-s5">
+            <input type="checkbox" id="m5t3i1-s5" data-check="m5t3i1-s5">
+            <span class="sub-tag">2-F</span>
+            <span class="sub-text">Enviar fotos de tus mediciones</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t3i1-s6">
+            <input type="checkbox" id="m5t3i1-s6" data-check="m5t3i1-s6">
+            <span class="sub-tag">2-G</span>
+            <span class="sub-text">Completar los círculos multiplicando por el número del centro</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t3i1-s7">
+            <input type="checkbox" id="m5t3i1-s7" data-check="m5t3i1-s7">
+            <span class="sub-tag">2-H</span>
+            <span class="sub-text">Practicar la tabla del 7 con tarjetas y sacar la foto correspondiente</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m5t3i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m5t3i2">
+              <input type="checkbox" id="m5t3i2" data-check="m5t3i2">
+              <span class="item-name">c. Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t3i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m5t3i3">
+              <input type="checkbox" id="m5t3i3" data-check="m5t3i3">
+              <span class="item-name">d. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m5t4">
+      <header class="tema-head">
+        <h3>Cuadernillo 13 — Relación de comparación</h3>
+        <span class="tema-progress" data-tema-progress="m5t4"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m5t4i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m5t4i0">
+              <input type="checkbox" id="m5t4i0" data-check="m5t4i0" data-children="1">
+              <span class="item-name">a. Cuadernillo 13</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m5t4i0">0/5</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m5t4i0-s0">
+            <input type="checkbox" id="m5t4i0-s0" data-check="m5t4i0-s0">
+            <span class="sub-tag">1-A</span>
+            <span class="sub-text">Ordenar los precios de los objetos de mayor a menor</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t4i0-s1">
+            <input type="checkbox" id="m5t4i0-s1" data-check="m5t4i0-s1">
+            <span class="sub-tag">1-B</span>
+            <span class="sub-text">Ordenar los precios de los objetos de menor a mayor</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t4i0-s2">
+            <input type="checkbox" id="m5t4i0-s2" data-check="m5t4i0-s2">
+            <span class="sub-tag">1-C</span>
+            <span class="sub-text">Completar los círculos multiplicando cada número por el número del centro</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t4i0-s3">
+            <input type="checkbox" id="m5t4i0-s3" data-check="m5t4i0-s3">
+            <span class="sub-tag">1-D</span>
+            <span class="sub-text">Ordenar las figuras dibujándolas de grande a pequeño</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t4i0-s4">
+            <input type="checkbox" id="m5t4i0-s4" data-check="m5t4i0-s4">
+            <span class="sub-tag">1-E</span>
+            <span class="sub-text">Completar la tabla del 8 y colorear los resultados en el recuadro</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m5t4i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m5t4i1">
+              <input type="checkbox" id="m5t4i1" data-check="m5t4i1">
+              <span class="item-name">b. Canción — Tabla del 8 (mp3)</span>
+            </label>
+            <span class="badge badge-audio">🎧 Audio</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t4i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m5t4i2">
+              <input type="checkbox" id="m5t4i2" data-check="m5t4i2">
+              <span class="item-name">c. Canción Tabla del 8 (PDF)</span>
+            </label>
+            <span class="badge badge-cancion">🎵 Canción</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t4i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m5t4i3">
+              <input type="checkbox" id="m5t4i3" data-check="m5t4i3">
+              <span class="item-name">d. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m5t5">
+      <header class="tema-head">
+        <h3>Cuadernillo 14 — La tabla del 8</h3>
+        <span class="tema-progress" data-tema-progress="m5t5"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m5t5i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m5t5i0">
+              <input type="checkbox" id="m5t5i0" data-check="m5t5i0" data-children="1">
+              <span class="item-name">a. Cuadernillo 14</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m5t5i0">0/3</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m5t5i0-s0">
+            <input type="checkbox" id="m5t5i0-s0" data-check="m5t5i0-s0">
+            <span class="sub-tag">1-A</span>
+            <span class="sub-text">Realizar 10 tarjetas de la tabla del 8 (8 x 1 a 8 x 10) en cartulina, iguales a las de la tabla del 2</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t5i0-s1">
+            <input type="checkbox" id="m5t5i0-s1" data-check="m5t5i0-s1">
+            <span class="sub-tag">1-B</span>
+            <span class="sub-text">Practicar con las formas 1 a 6 sugeridas en el cuadernillo</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t5i0-s2">
+            <input type="checkbox" id="m5t5i0-s2" data-check="m5t5i0-s2">
+            <span class="sub-tag">1-C</span>
+            <span class="sub-text">Sacar una foto de tus tarjetas de la tabla del 8 contigo y pegarla</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m5t5i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m5t5i1">
+              <input type="checkbox" id="m5t5i1" data-check="m5t5i1">
+              <span class="item-name">b. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m5t6">
+      <header class="tema-head">
+        <h3>Cuadernillo 15 — Estimaciones a la decena</h3>
+        <span class="tema-progress" data-tema-progress="m5t6"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m5t6i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m5t6i0">
+              <input type="checkbox" id="m5t6i0" data-check="m5t6i0" data-children="1">
+              <span class="item-name">a. Cuadernillo 15</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m5t6i0">0/5</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m5t6i0-s0">
+            <input type="checkbox" id="m5t6i0-s0" data-check="m5t6i0-s0">
+            <span class="sub-tag">1-A</span>
+            <span class="sub-text">Realizar las estimaciones de los 8 números a la decena</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t6i0-s1">
+            <input type="checkbox" id="m5t6i0-s1" data-check="m5t6i0-s1">
+            <span class="sub-tag">1-B</span>
+            <span class="sub-text">Aproximar a la decena el precio de los 8 objetos de Mateo y sumar las estimaciones</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t6i0-s2">
+            <input type="checkbox" id="m5t6i0-s2" data-check="m5t6i0-s2">
+            <span class="sub-tag">1-C</span>
+            <span class="sub-text">Realizar las restas con valor exacto y valor aproximado</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t6i0-s3">
+            <input type="checkbox" id="m5t6i0-s3" data-check="m5t6i0-s3">
+            <span class="sub-tag">1-D</span>
+            <span class="sub-text">Completar la tabla del 9 y colorear los resultados en el recuadro</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t6i0-s4">
+            <input type="checkbox" id="m5t6i0-s4" data-check="m5t6i0-s4">
+            <span class="sub-tag">1-E</span>
+            <span class="sub-text">Escuchar la canción de la tabla del 9, memorizarla y grabar un video cantándola</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m5t6i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m5t6i1">
+              <input type="checkbox" id="m5t6i1" data-check="m5t6i1">
+              <span class="item-name">b. Canción — Tabla del 9 (mp3)</span>
+            </label>
+            <span class="badge badge-audio">🎧 Audio</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t6i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m5t6i2">
+              <input type="checkbox" id="m5t6i2" data-check="m5t6i2">
+              <span class="item-name">c. Canción Tabla del 9 (PDF)</span>
+            </label>
+            <span class="badge badge-cancion">🎵 Canción</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m5t6i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m5t6i3">
+              <input type="checkbox" id="m5t6i3" data-check="m5t6i3">
+              <span class="item-name">d. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m5t7">
+      <header class="tema-head">
+        <h3>Cuadernillo 16 — La tabla del 9</h3>
+        <span class="tema-progress" data-tema-progress="m5t7"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m5t7i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m5t7i0">
+              <input type="checkbox" id="m5t7i0" data-check="m5t7i0" data-children="1">
+              <span class="item-name">a. Cuadernillo 16</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m5t7i0">0/3</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m5t7i0-s0">
+            <input type="checkbox" id="m5t7i0-s0" data-check="m5t7i0-s0">
+            <span class="sub-tag">1-A</span>
+            <span class="sub-text">Realizar 10 tarjetas de la tabla del 9 (9 x 1 a 9 x 10) en cartulina, iguales a las de la tabla del 2</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t7i0-s1">
+            <input type="checkbox" id="m5t7i0-s1" data-check="m5t7i0-s1">
+            <span class="sub-tag">1-B</span>
+            <span class="sub-text">Practicar con las formas 1 a 6 sugeridas en el cuadernillo</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m5t7i0-s2">
+            <input type="checkbox" id="m5t7i0-s2" data-check="m5t7i0-s2">
+            <span class="sub-tag">1-C</span>
+            <span class="sub-text">Sacar una foto de tus tarjetas de la tabla del 9 contigo y pegarla</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m5t7i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m5t7i1">
+              <input type="checkbox" id="m5t7i1" data-check="m5t7i1">
+              <span class="item-name">b. Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+  </section>
+<section class="materia" id="materia-sonidos" data-materia="m6">
+    <header class="materia-head">
+      <h2>Sonidos <small>Música y canto</small></h2>
+      <div class="materia-meta">
+        <span class="materia-progress" data-materia-progress="m6">0%</span>
+        <a class="btn-mini" href="https://jhs.schoology.com/course/8201681261/materials" target="_blank" rel="noopener">Abrir en Schoology</a>
+      </div>
+    </header>
+    <section class="tema" data-tema="m6t0">
+      <header class="tema-head">
+        <h3>Tema 13 — Explorando nuestro cuerpo para cantar</h3>
+        <span class="tema-progress" data-tema-progress="m6t0"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m6t0i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m6t0i0">
+              <input type="checkbox" id="m6t0i0" data-check="m6t0i0">
+              <span class="item-name">Video 13</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m6t0i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m6t0i1">
+              <input type="checkbox" id="m6t0i1" data-check="m6t0i1" data-children="1">
+              <span class="item-name">Guía de Trabajo — Explorando nuestro cuerpo para cantar</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m6t0i1">0/5</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m6t0i1-s0">
+            <input type="checkbox" id="m6t0i1-s0" data-check="m6t0i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Pintar las figuras de la hoja de anexos con los elementos y colores que quieras</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t0i1-s1">
+            <input type="checkbox" id="m6t0i1-s1" data-check="m6t0i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Pegar la hoja sobre cartón u hoja gruesa y pedir a una persona mayor que corte los recuadros</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t0i1-s2">
+            <input type="checkbox" id="m6t0i1-s2" data-check="m6t0i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Copiar la frase del profe Samu en el orden correcto</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t0i1-s3">
+            <input type="checkbox" id="m6t0i1-s3" data-check="m6t0i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Escuchar la canción «Caminando - Caminando» y repetir las frases de color azul</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t0i1-s4">
+            <input type="checkbox" id="m6t0i1-s4" data-check="m6t0i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Grabar el video de la canción usando los cuadros de figuras cada vez que aparezca la frase</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m6t0i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m6t0i2">
+              <input type="checkbox" id="m6t0i2" data-check="m6t0i2">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m6t0i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m6t0i3">
+              <input type="checkbox" id="m6t0i3" data-check="m6t0i3" data-children="1">
+              <span class="item-name">Audio de apoyo</span>
+            </label>
+            <span class="badge badge-audio">🎧 Audio</span>
+            
+            <span class="item-progress" data-progress="m6t0i3">0/2</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m6t0i3-s0">
+            <input type="checkbox" id="m6t0i3-s0" data-check="m6t0i3-s0">
+            <span class="sub-tag">4-A</span>
+            <span class="sub-text">Escuchar el audio guía «Explorando nuestro cuerpo para cantar»</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t0i3-s1">
+            <input type="checkbox" id="m6t0i3-s1" data-check="m6t0i3-s1">
+            <span class="sub-tag">4-B</span>
+            <span class="sub-text">Escuchar la pista «Caminando - Caminando»</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m6t0i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m6t0i4">
+              <input type="checkbox" id="m6t0i4" data-check="m6t0i4">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m6t1">
+      <header class="tema-head">
+        <h3>Tema 14 — Respiremos</h3>
+        <span class="tema-progress" data-tema-progress="m6t1"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m6t1i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m6t1i0">
+              <input type="checkbox" id="m6t1i0" data-check="m6t1i0">
+              <span class="item-name">Video 14 — Respiremos</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m6t1i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m6t1i1">
+              <input type="checkbox" id="m6t1i1" data-check="m6t1i1" data-children="1">
+              <span class="item-name">Guía de Trabajo 14 — Respiremos</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m6t1i1">0/11</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m6t1i1-s0">
+            <input type="checkbox" id="m6t1i1-s0" data-check="m6t1i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Pintar los palitos de helado y los ganchos de ropa para diseñar el avión (paso 1)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t1i1-s1">
+            <input type="checkbox" id="m6t1i1-s1" data-check="m6t1i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Poner de pie los palitos y unirlos al gancho de ropa (paso 2)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t1i1-s2">
+            <input type="checkbox" id="m6t1i1-s2" data-check="m6t1i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Practicar los ejercicios con el avión ganchito (paso 3)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t1i1-s3">
+            <input type="checkbox" id="m6t1i1-s3" data-check="m6t1i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Pegar la foto del «avión ganchito» en la guía</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t1i1-s4">
+            <input type="checkbox" id="m6t1i1-s4" data-check="m6t1i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Cortar círculos de papel de diferente tamaño para el árbol (paso 1)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t1i1-s5">
+            <input type="checkbox" id="m6t1i1-s5" data-check="m6t1i1-s5">
+            <span class="sub-tag">2-F</span>
+            <span class="sub-text">Unir tres o más arbolitos de mayor a menor (paso 2)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t1i1-s6">
+            <input type="checkbox" id="m6t1i1-s6" data-check="m6t1i1-s6">
+            <span class="sub-tag">2-G</span>
+            <span class="sub-text">Usar un ganchito como tronco y otros dos para sostener el árbol (paso 3)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t1i1-s7">
+            <input type="checkbox" id="m6t1i1-s7" data-check="m6t1i1-s7">
+            <span class="sub-tag">2-H</span>
+            <span class="sub-text">Pegar la foto de los árboles de papel en la guía</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t1i1-s8">
+            <input type="checkbox" id="m6t1i1-s8" data-check="m6t1i1-s8">
+            <span class="sub-tag">2-I</span>
+            <span class="sub-text">Repasar las líneas punteadas con lápices de colores</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t1i1-s9">
+            <input type="checkbox" id="m6t1i1-s9" data-check="m6t1i1-s9">
+            <span class="sub-tag">2-J</span>
+            <span class="sub-text">Inventar y dibujar una figura o letra como desafío</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t1i1-s10">
+            <input type="checkbox" id="m6t1i1-s10" data-check="m6t1i1-s10">
+            <span class="sub-tag">2-K</span>
+            <span class="sub-text">Completar el certificado derribando árboles con el soplido</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m6t1i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m6t1i2">
+              <input type="checkbox" id="m6t1i2" data-check="m6t1i2">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m6t1i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m6t1i3">
+              <input type="checkbox" id="m6t1i3" data-check="m6t1i3">
+              <span class="item-name">Audio de apoyo — Respiremos</span>
+            </label>
+            <span class="badge badge-audio">🎧 Audio</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m6t1i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m6t1i4">
+              <input type="checkbox" id="m6t1i4" data-check="m6t1i4">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema tema-extra" data-tema="m6t2">
+      <header class="tema-head">
+        <h3>Semana sin actividades (semana 3)</h3>
+        <span class="tema-progress" data-tema-progress="m6t2"></span>
+      </header>
+      <ul class="items">
+        <li class="item item-nota" data-item-id="m6t2i0" data-parent-id="">
+          <div class="item-head">
+            <span class="item-num">1.</span>
+            <span class="item-name">Sin actividades asignadas</span>
+            <span class="badge badge-nota">Aviso</span>
+          </div>
+          
+        </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m6t3">
+      <header class="tema-head">
+        <h3>Juegos y prácticas</h3>
+        <span class="tema-progress" data-tema-progress="m6t3"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m6t3i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m6t3i0">
+              <input type="checkbox" id="m6t3i0" data-check="m6t3i0">
+              <span class="item-name">Video — Juegos y prácticas</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m6t3i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m6t3i1">
+              <input type="checkbox" id="m6t3i1" data-check="m6t3i1" data-children="1">
+              <span class="item-name">Guía de Trabajo — Juegos y prácticas</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m6t3i1">0/7</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m6t3i1-s0">
+            <input type="checkbox" id="m6t3i1-s0" data-check="m6t3i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Completar la página de la Actividad 1 siguiendo las indicaciones del video</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t3i1-s1">
+            <input type="checkbox" id="m6t3i1-s1" data-check="m6t3i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Escribir «Sí» en los cuadrados del camino correcto y pintarlos de amarillo</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t3i1-s2">
+            <input type="checkbox" id="m6t3i1-s2" data-check="m6t3i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Escribir «No» en los círculos del camino correcto y pintarlos de naranja</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t3i1-s3">
+            <input type="checkbox" id="m6t3i1-s3" data-check="m6t3i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Resolver el laberinto «Ojo, pestaña y oreja» hasta la meta</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t3i1-s4">
+            <input type="checkbox" id="m6t3i1-s4" data-check="m6t3i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Pintar con tus colores las palabras en blanco de la canción de la rueda</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t3i1-s5">
+            <input type="checkbox" id="m6t3i1-s5" data-check="m6t3i1-s5">
+            <span class="sub-tag">2-F</span>
+            <span class="sub-text">Practicar la frase «Rápido ruedan las ruedas del ferrocarril» en 5 velocidades distintas</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t3i1-s6">
+            <input type="checkbox" id="m6t3i1-s6" data-check="m6t3i1-s6">
+            <span class="sub-tag">2-G</span>
+            <span class="sub-text">Grabar un video de tu práctica y subirlo al foro «Rápido ruedan las ruedas del ferrocarril»</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m6t3i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m6t3i2">
+              <input type="checkbox" id="m6t3i2" data-check="m6t3i2" data-children="1">
+              <span class="item-name">Foro — «Rápido ruedan las ruedas del ferrocarril»</span>
+            </label>
+            <span class="badge badge-foro">💬 Foro</span>
+            
+            <span class="item-progress" data-progress="m6t3i2">0/1</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m6t3i2-s0">
+            <input type="checkbox" id="m6t3i2-s0" data-check="m6t3i2-s0">
+            <span class="sub-tag">3-A</span>
+            <span class="sub-text">Subir el video de la práctica al foro</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m6t3i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m6t3i3">
+              <input type="checkbox" id="m6t3i3" data-check="m6t3i3">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m6t3i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m6t3i4">
+              <input type="checkbox" id="m6t3i4" data-check="m6t3i4">
+              <span class="item-name">Audio de apoyo — Juegos y prácticas</span>
+            </label>
+            <span class="badge badge-audio">🎧 Audio</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m6t3i5" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">6.</span>
+            <label class="item-label" for="m6t3i5">
+              <input type="checkbox" id="m6t3i5" data-check="m6t3i5">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema" data-tema="m6t4">
+      <header class="tema-head">
+        <h3>Tema 15 — Cantemos</h3>
+        <span class="tema-progress" data-tema-progress="m6t4"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m6t4i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m6t4i0">
+              <input type="checkbox" id="m6t4i0" data-check="m6t4i0">
+              <span class="item-name">Video 15 — Cantemos</span>
+            </label>
+            <span class="badge badge-video">🎬 Video</span>
+            
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m6t4i1" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">2.</span>
+            <label class="item-label" for="m6t4i1">
+              <input type="checkbox" id="m6t4i1" data-check="m6t4i1" data-children="1">
+              <span class="item-name">Guía de Trabajo 15 — Cantemos</span>
+            </label>
+            <span class="badge badge-guia">📘 Guía</span>
+            
+            <span class="item-progress" data-progress="m6t4i1">0/6</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m6t4i1-s0">
+            <input type="checkbox" id="m6t4i1-s0" data-check="m6t4i1-s0">
+            <span class="sub-tag">2-A</span>
+            <span class="sub-text">Dar un masaje al rostro con ayuda de mamá, papá o un hermano</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t4i1-s1">
+            <input type="checkbox" id="m6t4i1-s1" data-check="m6t4i1-s1">
+            <span class="sub-tag">2-B</span>
+            <span class="sub-text">Pegar fotos tuyas imitando los gestos: sorpresa, limón, enojo y alegría</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t4i1-s2">
+            <input type="checkbox" id="m6t4i1-s2" data-check="m6t4i1-s2">
+            <span class="sub-tag">2-C</span>
+            <span class="sub-text">Dibujar y pintar la Flor Blanca (1 tiempo de aspiración y 1 de exhalación)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t4i1-s3">
+            <input type="checkbox" id="m6t4i1-s3" data-check="m6t4i1-s3">
+            <span class="sub-tag">2-D</span>
+            <span class="sub-text">Dibujar la Flor Azul (2 tiempos de aspiración y 2 de exhalación)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t4i1-s4">
+            <input type="checkbox" id="m6t4i1-s4" data-check="m6t4i1-s4">
+            <span class="sub-tag">2-E</span>
+            <span class="sub-text">Dibujar la Flor Lila (3 tiempos de aspiración y 3 de exhalación)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t4i1-s5">
+            <input type="checkbox" id="m6t4i1-s5" data-check="m6t4i1-s5">
+            <span class="sub-tag">2-F</span>
+            <span class="sub-text">Realizar la vocalización con 2, 3 y 5 sonidos junto al audio de apoyo</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m6t4i2" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">3.</span>
+            <label class="item-label" for="m6t4i2">
+              <input type="checkbox" id="m6t4i2" data-check="m6t4i2">
+              <span class="item-name">Cuestionario (niño)</span>
+            </label>
+            <span class="badge badge-cuestionario">🔒 Solo lo abre el niño</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+<li class="item" data-item-id="m6t4i3" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">4.</span>
+            <label class="item-label" for="m6t4i3">
+              <input type="checkbox" id="m6t4i3" data-check="m6t4i3" data-children="1">
+              <span class="item-name">Audio de apoyo — Cantemos</span>
+            </label>
+            <span class="badge badge-audio">🎧 Audio</span>
+            
+            <span class="item-progress" data-progress="m6t4i3">0/4</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m6t4i3-s0">
+            <input type="checkbox" id="m6t4i3-s0" data-check="m6t4i3-s0">
+            <span class="sub-tag">4-A</span>
+            <span class="sub-text">Escuchar el audio «Actividad 1 - Cantemos»</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t4i3-s1">
+            <input type="checkbox" id="m6t4i3-s1" data-check="m6t4i3-s1">
+            <span class="sub-tag">4-B</span>
+            <span class="sub-text">Escuchar el audio «Actividad 2»</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t4i3-s2">
+            <input type="checkbox" id="m6t4i3-s2" data-check="m6t4i3-s2">
+            <span class="sub-tag">4-C</span>
+            <span class="sub-text">Escuchar el audio «Actividad 3»</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t4i3-s3">
+            <input type="checkbox" id="m6t4i3-s3" data-check="m6t4i3-s3">
+            <span class="sub-tag">4-D</span>
+            <span class="sub-text">Escuchar el audio «Actividad 4 - Cantemos»</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m6t4i4" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">5.</span>
+            <label class="item-label" for="m6t4i4">
+              <input type="checkbox" id="m6t4i4" data-check="m6t4i4" data-children="1">
+              <span class="item-name">Foro — «Calentamiento de mi propia autoría»</span>
+            </label>
+            <span class="badge badge-foro">💬 Foro</span>
+            
+            <span class="item-progress" data-progress="m6t4i4">0/2</span>
+          </div>
+          
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m6t4i4-s0">
+            <input type="checkbox" id="m6t4i4-s0" data-check="m6t4i4-s0">
+            <span class="sub-tag">5-A</span>
+            <span class="sub-text">Crear tu propio ejercicio de calentamiento</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t4i4-s1">
+            <input type="checkbox" id="m6t4i4-s1" data-check="m6t4i4-s1">
+            <span class="sub-tag">5-B</span>
+            <span class="sub-text">Publicarlo en el foro y compartirlo con la clase</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+<li class="item" data-item-id="m6t4i5" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">6.</span>
+            <label class="item-label" for="m6t4i5">
+              <input type="checkbox" id="m6t4i5" data-check="m6t4i5">
+              <span class="item-name">Cuestionario tutor</span>
+            </label>
+            <span class="badge badge-tutor">🔒 Solo lo abre el tutor</span>
+            <span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>
+          </div>
+          
+      
+    </li>
+      </ul>
+    </section>
+<section class="tema tema-extra" data-tema="m6t5">
+      <header class="tema-head">
+        <h3>Semana sin actividades (semana 6)</h3>
+        <span class="tema-progress" data-tema-progress="m6t5"></span>
+      </header>
+      <ul class="items">
+        <li class="item item-nota" data-item-id="m6t5i0" data-parent-id="">
+          <div class="item-head">
+            <span class="item-num">1.</span>
+            <span class="item-name">Sin actividades asignadas</span>
+            <span class="badge badge-nota">Aviso</span>
+          </div>
+          
+        </li>
+      </ul>
+    </section>
+<section class="tema tema-extra" data-tema="m6t6">
+      <header class="tema-head">
+        <h3>Semana de clases en vivo (semana 7)</h3>
+        <span class="tema-progress" data-tema-progress="m6t6"></span>
+      </header>
+      <ul class="items">
+        <li class="item item-nota" data-item-id="m6t6i0" data-parent-id="">
+          <div class="item-head">
+            <span class="item-num">1.</span>
+            <span class="item-name">Semana de clases en vivo</span>
+            <span class="badge badge-nota">Aviso</span>
+          </div>
+          <p class="nota">Semana dedicada a las clases en vivo.</p>
+        </li>
+      </ul>
+    </section>
+<section class="tema tema-extra" data-tema="m6t7">
+      <header class="tema-head">
+        <h3>Tema 16 — Descubramos: sonidos y tecnología</h3>
+        <span class="tema-progress" data-tema-progress="m6t7"></span>
+      </header>
+      <ul class="items">
+        <li class="item" data-item-id="m6t7i0" data-parent-id="">
+      <div class="item-head">
+            <span class="item-num">1.</span>
+            <label class="item-label" for="m6t7i0">
+              <input type="checkbox" id="m6t7i0" data-check="m6t7i0" data-children="1">
+              <span class="item-name">Foro — DESCUBRAMOS: Sonidos y Tecnología</span>
+            </label>
+            <span class="badge badge-foro">💬 Foro</span>
+            
+            <span class="item-progress" data-progress="m6t7i0">0/6</span>
+          </div>
+          <p class="nota">Actividad para trabajar junto a una persona mayor.</p>
+      <ul class="subs">
+        <li class="sub">
+          <label class="sub-label" for="m6t7i0-s0">
+            <input type="checkbox" id="m6t7i0-s0" data-check="m6t7i0-s0">
+            <span class="sub-tag">1-A</span>
+            <span class="sub-text">Explorar el laboratorio de sonidos en línea Chrome Music Lab (recomendado: RYTHM)</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t7i0-s1">
+            <input type="checkbox" id="m6t7i0-s1" data-check="m6t7i0-s1">
+            <span class="sub-tag">1-B</span>
+            <span class="sub-text">Parte escrita 1: escribir cuál fue el juego que más te gustó y por qué</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t7i0-s2">
+            <input type="checkbox" id="m6t7i0-s2" data-check="m6t7i0-s2">
+            <span class="sub-tag">1-C</span>
+            <span class="sub-text">Parte escrita 2: contar si pudiste crear alguna melodía, en cuál juego y cómo la hiciste</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t7i0-s3">
+            <input type="checkbox" id="m6t7i0-s3" data-check="m6t7i0-s3">
+            <span class="sub-tag">1-D</span>
+            <span class="sub-text">Parte escrita 3: inventar un juego para enseñar los sonidos a tus compañeros</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t7i0-s4">
+            <input type="checkbox" id="m6t7i0-s4" data-check="m6t7i0-s4">
+            <span class="sub-tag">1-E</span>
+            <span class="sub-text">Escribir una palabra de bendición para tus compañeros</span>
+          </label>
+        </li>
+        <li class="sub">
+          <label class="sub-label" for="m6t7i0-s5">
+            <input type="checkbox" id="m6t7i0-s5" data-check="m6t7i0-s5">
+            <span class="sub-tag">1-F</span>
+            <span class="sub-text">Grabar un video de uno de los juegos que más te gustó y compartirlo en el foro</span>
+          </label>
+        </li>
+      </ul>
+    </li>
+      </ul>
+    </section>
+  </section>
+
+  <div class="empty hidden" id="sinResultados">No hay actividades pendientes con ese filtro. ¡Felicitaciones! 🎉</div>
+
+  <footer>
+    Progreso guardado en este navegador (localStorage). Usá <strong>Exportar</strong> para guardar un respaldo en <code>.json</code>.
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var KEY = "jhs-2do-b4-v1";
+  var checks = {};
+  var filterPending = false;
+
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) checks = JSON.parse(raw) || {};
+  } catch (e) { checks = {}; }
+
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(checks)); } catch (e) {}
+  }
+
+  function allInputs() {
+    return Array.prototype.slice.call(document.querySelectorAll('input[data-check]'));
+  }
+
+  function subsOf(id) {
+    return Array.prototype.slice.call(document.querySelectorAll('input[data-check^="' + id + '-s"]'));
+  }
+
+  function setSub(id, val) {
+    if (val) checks[id] = true; else delete checks[id];
+  }
+
+  function refreshItem(li) {
+    var id = li.getAttribute("data-item-id");
+    var parent = li.querySelector('input[data-children]');
+    var subs = subsOf(id);
+    if (subs.length) {
+      var done = subs.filter(function (s) { return s.checked; }).length;
+      if (parent) parent.checked = done === subs.length;
+      var prog = li.querySelector('[data-progress]');
+      if (prog) prog.textContent = done + "/" + subs.length;
+    }
+    var own = li.querySelector('input[data-check]');
+    var isDone = subs.length ? subs.every(function (s) { return s.checked; })
+                             : !!(own && own.checked);
+    li.classList.toggle("is-done", isDone);
+  }
+
+  function refreshAll() {
+    allInputs().forEach(function (i) {
+      if (!i.hasAttribute("data-children")) i.checked = !!checks[i.id];
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("li.item[data-item-id]"), refreshItem);
+    updateProgress();
+  }
+
+  function updateProgress() {
+    var leaves = allInputs().filter(function (i) { return !i.hasAttribute("data-children"); });
+    var total = leaves.filter(function (i) { return i.id.indexOf("-s") === -1 || !isNota(i); }).length;
+    var done = leaves.filter(function (i) { return i.checked; }).length;
+    var pct = total ? Math.round(done * 100 / total) : 0;
+    document.getElementById("globalFill").style.width = pct + "%";
+    document.getElementById("globalPct").textContent = pct + "%";
+    document.getElementById("globalCount").textContent = done + " de " + total;
+
+    Array.prototype.forEach.call(document.querySelectorAll("section[data-materia]"), function (sec) {
+      var ls = leaves.filter(function (i) { return sec.contains(i); });
+      var d = ls.filter(function (i) { return i.checked; }).length;
+      var p = ls.length ? Math.round(d * 100 / ls.length) : 0;
+      var tag = sec.querySelector("[data-materia-progress]");
+      if (tag) tag.textContent = p + "%";
+      sec.classList.toggle("all-done", ls.length > 0 && d === ls.length);
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll("section[data-tema]"), function (sec) {
+      var ls = leaves.filter(function (i) { return sec.contains(i); });
+      var d = ls.filter(function (i) { return i.checked; }).length;
+      var tag = sec.querySelector("[data-tema-progress]");
+      if (tag) tag.textContent = d + "/" + ls.length;
+      sec.classList.toggle("all-done", ls.length > 0 && d === ls.length);
+    });
+  }
+
+  function isNota(i) {
+    var li = i.closest("li.item");
+    return li && li.classList.contains("item-nota");
+  }
+
+  document.addEventListener("change", function (ev) {
+    var el = ev.target;
+    if (!el.matches || !el.matches("input[data-check]")) return;
+    if (el.hasAttribute("data-children")) {
+      var id = el.id;
+      subsOf(id).forEach(function (s) {
+        s.checked = el.checked;
+        setSub(s.id, el.checked);
+      });
+    } else {
+      setSub(el.id, el.checked);
+    }
+    save();
+    refreshAll();
+    applyFilters();
+  });
+
+  function applyFilters() {
+    var q = document.getElementById("buscar").value.trim().toLowerCase();
+    document.body.classList.toggle("hide-done", filterPending);
+
+    Array.prototype.forEach.call(document.querySelectorAll("li.item[data-item-id]"), function (li) {
+      var text = li.textContent.toLowerCase();
+      var match = !q || text.indexOf(q) !== -1;
+      li.classList.toggle("hidden", !match);
+      if (match && filterPending && li.classList.contains("is-done")) li.classList.add("hidden");
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll("section[data-tema]"), function (sec) {
+      var visibles = Array.prototype.filter.call(sec.querySelectorAll("li.item[data-item-id]"), function (li) {
+        return !li.classList.contains("hidden");
+      });
+      sec.classList.toggle("hidden", visibles.length === 0);
+    });
+
+    var shown = 0;
+    Array.prototype.forEach.call(document.querySelectorAll("section[data-materia]"), function (sec) {
+      var visibles = Array.prototype.filter.call(sec.querySelectorAll("li.item[data-item-id]"), function (li) {
+        return !li.classList.contains("hidden");
+      });
+      sec.classList.toggle("hidden", visibles.length === 0);
+      shown += visibles.length;
+    });
+    document.getElementById("sinResultados").classList.toggle("hidden", shown !== 0);
+  }
+
+  document.getElementById("buscar").addEventListener("input", applyFilters);
+
+  document.getElementById("btnPendientes").addEventListener("click", function () {
+    filterPending = !filterPending;
+    this.classList.toggle("on", filterPending);
+    this.setAttribute("aria-pressed", filterPending ? "true" : "false");
+    this.textContent = filterPending ? "Mostrar todos" : "Ocultar tildados";
+    applyFilters();
+  });
+
+  document.getElementById("btnExportar").addEventListener("click", function () {
+    var payload = {
+      app: "listador-actividades",
+      grado: "2do grado",
+      bimestre: "Bimestre 4",
+      exportado: new Date().toISOString(),
+      tildes: checks
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "progreso-2do-bimestre-4.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(a.href);
+  });
+
+  document.getElementById("btnImportar").addEventListener("click", function () {
+    document.getElementById("fileImport").click();
+  });
+
+  document.getElementById("fileImport").addEventListener("change", function (ev) {
+    var file = ev.target.files && ev.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      try {
+        var obj = JSON.parse(reader.result);
+        var next = obj.tildes || obj.checks || obj;
+        if (!next || typeof next !== "object") throw new Error("formato");
+        checks = next;
+        save();
+        refreshAll();
+        applyFilters();
+        alert("Progreso importado correctamente.");
+      } catch (e) {
+        alert("No se pudo leer el archivo. Verificá que sea el JSON exportado desde esta página.");
+      }
+    };
+    reader.readAsText(file);
+    ev.target.value = "";
+  });
+
+  document.getElementById("btnReset").addEventListener("click", function () {
+    if (!confirm("¿Borrar todas las tildes guardadas en este navegador?")) return;
+    checks = {};
+    save();
+    refreshAll();
+    applyFilters();
+  });
+
+  refreshAll();
+  applyFilters();
+})();
+</script>
+</body>
+</html>
