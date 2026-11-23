@@ -216,9 +216,6 @@ def render():
       </table>
     </div>
     <p class="hint">Click en una fila para abrir su materia.</p>
-
-    <h3 class="stats-title">Detalle por tema</h3>
-    <div id="statsTemas" class="temas-stats"></div>
   </section>
 </div>"""
 
@@ -531,13 +528,6 @@ def render():
   </aside>
 
   <main class="main" id="main">
-    <header class="top">
-      <div class="wrap">
-        <h1>✅ {esc(data['titulo'])}</h1>
-        <p>{esc(data['colegio'])} · {total_items} ítems · tildá lo que ya está hecho</p>
-      </div>
-    </header>
-
     <div class="toolbar">
       <div class="toolbar-inner">
         <div class="progress-shell">
@@ -573,14 +563,59 @@ def render():
   var checks = {{}};
   var filterPending = false;
 
-  try {{
-    var raw = localStorage.getItem(KEY);
-    if (raw) checks = JSON.parse(raw) || {{}};
-  }} catch (e) {{ checks = {{}}; }}
+  /* ---------- Supabase (sincronización entre PCs) ---------- */
+  var SUPABASE_URL = "https://ztigjbhktpvwtkdjjdjl.supabase.co";
+  var SUPABASE_KEY = "sb_publishable_6mx_PPNIOms3ZiyeCy4gBA_wR3zApgs";
+  var SUPABASE_TABLE = "progreso_2do_b4";
+  var supabaseReady = false;
 
-  function save() {{
-    try {{ localStorage.setItem(KEY, JSON.stringify(checks)); }} catch (e) {{}}
+  async function supabaseGet() {{
+    try {{
+      var res = await fetch(SUPABASE_URL + "/rest/v1/" + SUPABASE_TABLE + "?select=item_id,checked", {{
+        headers: {{
+          apikey: SUPABASE_KEY,
+          Authorization: "Bearer " + SUPABASE_KEY
+        }}
+      }});
+      if (!res.ok) return null;
+      var data = await res.json();
+      var out = {{}};
+      data.forEach(function (row) {{ out[row.item_id] = row.checked === true; }});
+      return out;
+    }} catch (e) {{ return null; }}
   }}
+
+  async function supabaseSave(obj) {{
+    try {{
+      var rows = Object.keys(obj).map(function (k) {{
+        return {{ item_id: k, checked: obj[k] === true }};
+      }});
+      if (rows.length === 0) return;
+      await fetch(SUPABASE_URL + "/rest/v1/" + SUPABASE_TABLE, {{
+        method: "POST",
+        headers: {{
+          apikey: SUPABASE_KEY,
+          Authorization: "Bearer " + SUPABASE_KEY,
+          "Content-Type": "application/json",
+          Prefer: "resolution=merge-duplicates"
+        }},
+        body: JSON.stringify(rows)
+      }});
+    }} catch (e) {{}}
+  }}
+
+  /* Cargar desde Supabase al arrancar (si hay datos más recientes que localStorage) */
+  (function cargarSupabase() {{
+    supabaseGet().then(function (remoto) {{
+      if (remoto && Object.keys(remoto).length > 0) {{
+        checks = remoto;
+        save();
+        refreshAll();
+        applyFilters();
+      }}
+      supabaseReady = true;
+    }});
+  }})();
 
   function allInputs() {{
     return Array.prototype.slice.call(document.querySelectorAll('input[data-check]'));
@@ -689,8 +724,6 @@ def render():
 
     var body = document.getElementById('statsBody');
     body.innerHTML = "";
-    var temasBox = document.getElementById('statsTemas');
-    temasBox.innerHTML = "";
 
     Array.prototype.forEach.call(document.querySelectorAll('[data-materia-panel]'), function (panel) {{
       var mi = panel.getAttribute('data-materia-panel');
@@ -732,27 +765,6 @@ def render():
         applyFilters();
       }});
       body.appendChild(tr);
-
-      var grupo = document.createElement('div');
-      grupo.className = 'tema-group';
-      grupo.textContent = emoji + ' ' + name;
-      temasBox.appendChild(grupo);
-
-      Array.prototype.forEach.call(panel.querySelectorAll('[data-tema]'), function (tema) {{
-        var tleaves = ls.filter(function (i) {{ return tema.contains(i); }});
-        var tdone = tleaves.filter(function (i) {{ return i.checked; }}).length;
-        var ttag = tema.querySelector('[data-tema-progress]');
-        if (ttag) ttag.textContent = tdone + "/" + tleaves.length;
-        tema.classList.toggle('all-done', tleaves.length > 0 && tdone === tleaves.length);
-
-        var row = document.createElement('div');
-        row.className = 'tema-stat' + (tleaves.length > 0 && tdone === tleaves.length ? ' full' : '');
-        var tpct = tleaves.length ? Math.round(tdone * 100 / tleaves.length) : 0;
-        row.innerHTML = '<span class="t-name">' + tema.querySelector('h3').textContent + '</span>' +
-          '<span class="t-nums">' + tdone + '/' + tleaves.length + ' · ' + tpct + '%' +
-          (tleaves.length > 0 && tdone === tleaves.length ? ' ✔' : '') + '</span>';
-        temasBox.appendChild(row);
-      }});
     }});
   }}
 
