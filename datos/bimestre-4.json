@@ -21,30 +21,45 @@
               "subtareas": [
                 "Leer las instrucciones del bimestre con el tutor",
                 "Presentar el video de la feria de misiones como primera actividad del bimestre"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8606064759"
             }
           ]
         },
         {
           "nombre": "Tema 14 — Organismos microscópicos y macroscópicos",
           "items": [
-            { "nombre": "Video — Tema 14", "tipo": "video", "nota": "Solo se lista: el video lo ve el niño con el tutor." },
+            {
+              "nombre": "Video — Tema 14",
+              "tipo": "video",
+              "nota": "Solo se lista: el video lo ve el niño con el tutor."
+            },
             {
               "nombre": "Guía de Trabajo — Tema 14",
               "tipo": "guia",
               "subtareas": [
                 "Completar los nombres de los macroorganismos y colorear cada uno",
                 "Explicar con tus propias palabras la diferencia entre un organismo microscópico y uno macroscópico, con un ejemplo de cada uno"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8217572908"
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 15 — La célula y su descubrimiento",
           "items": [
-            { "nombre": "Video — Tema 15", "tipo": "video" },
+            {
+              "nombre": "Video — Tema 15",
+              "tipo": "video"
+            },
             {
               "nombre": "Guía de Trabajo — Tema 15",
               "tipo": "guia",
@@ -62,10 +77,17 @@
                 "Citoplasma con pegamento y agua (paso 10)",
                 "Escribir los números de cada organelo según la página 146 (paso 11)",
                 "Pegar en la guía 2 fotos: una tuya trabajando y otra solo del trabajo terminado"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8217572920"
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
@@ -79,23 +101,34 @@
                 "Escuchar la canción con el tutor (el tutor escribe la letra)",
                 "Dibujar algunas partes de la canción para poder enseñarla a otras personas",
                 "Subir la canción en PDF para que sea calificada"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8634236033"
             }
           ]
         },
         {
           "nombre": "Tema 16 — Importancia del oxígeno para la célula",
           "items": [
-            { "nombre": "Video — Tema 16", "tipo": "video" },
+            {
+              "nombre": "Video — Tema 16",
+              "tipo": "video"
+            },
             {
               "nombre": "Guía de Trabajo — Tema 16",
               "tipo": "guia",
               "subtareas": [
                 "Unir con una línea cuáles de los elementos necesitan oxígeno para vivir"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8217572927"
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
@@ -108,7 +141,10 @@
                 "Pintar la casilla con el color de la respuesta correcta"
               ]
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" }
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            }
           ]
         }
       ]
@@ -122,8 +158,14 @@
         {
           "nombre": "Lesson 8 — What are you doing?",
           "items": [
-            { "nombre": "a. Video", "tipo": "video" },
-            { "nombre": "b. Video", "tipo": "video" },
+            {
+              "nombre": "a. Video",
+              "tipo": "video"
+            },
+            {
+              "nombre": "b. Video",
+              "tipo": "video"
+            },
             {
               "nombre": "c. Workbook 8",
               "tipo": "guia",
@@ -133,9 +175,13 @@
                 "Activity 3: escribir tus rutinas diarias",
                 "Activity 4: grabar un audio MP3 diciendo tus rutinas diarias y subirlo a la plataforma",
                 "Activity 5: preguntar a un familiar sus rutinas diarias, escribirlas y dibujarlas"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8202980957/materials?f=1046828281"
             },
-            { "nombre": "d. Video", "tipo": "video" },
+            {
+              "nombre": "d. Video",
+              "tipo": "video"
+            },
             {
               "nombre": "e. Workbook 8 — Grammar (Present progressive)",
               "tipo": "guia",
@@ -144,18 +190,37 @@
                 "Activity 2: unir cada oración con su imagen",
                 "Activity 3: escuchar el audio y completar las 12 oraciones con el verbo en presente progresivo",
                 "Activity 4: escribir 8 oraciones usando presente progresivo"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8603710885"
             },
-            { "nombre": "f. Quiz 8", "tipo": "cuestionario" },
-            { "nombre": "g. Audio support", "tipo": "audio", "nota": "Audio de apoyo para la Activity 3 del Grammar (pág. 112)." },
-            { "nombre": "h. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "f. Quiz 8",
+              "tipo": "cuestionario",
+              "url": "https://jhs.schoology.com/assignment/8603710881"
+            },
+            {
+              "nombre": "g. Audio support",
+              "tipo": "audio",
+              "nota": "Audio de apoyo para la Activity 3 del Grammar (pág. 112).",
+              "url": "https://jhs.schoology.com/course/8202980957/materials?f=1046828278"
+            },
+            {
+              "nombre": "h. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Lesson 9 — Directions",
           "items": [
-            { "nombre": "a. Video", "tipo": "video" },
-            { "nombre": "b. Video", "tipo": "video" },
+            {
+              "nombre": "a. Video",
+              "tipo": "video"
+            },
+            {
+              "nombre": "b. Video",
+              "tipo": "video"
+            },
             {
               "nombre": "c. Workbook 9",
               "tipo": "guia",
@@ -163,9 +228,13 @@
                 "Activity 1: dibujar y colorear un mapa de tu barrio y mostrar cómo llegar al supermercado, parque, escuela y estación de policía",
                 "Activity 2: escribir las indicaciones para ir de tu casa al supermercado, al parque y a la estación de policía",
                 "Activity 3: dibujar los verbos break, prepare, wash e invite"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8202980957/materials?f=1046828281"
             },
-            { "nombre": "d. Video", "tipo": "video" },
+            {
+              "nombre": "d. Video",
+              "tipo": "video"
+            },
             {
               "nombre": "e. Workbook 9 — Grammar (Prepositions of place)",
               "tipo": "guia",
@@ -173,28 +242,55 @@
                 "Activity 1: completar las 5 oraciones con in, on o at",
                 "Activity 2: escuchar y completar las 6 oraciones con la preposición de lugar",
                 "Activity 3: dibujar en los recuadros según la preposición at, on e in"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8202980957/materials?f=1046828277"
             },
-            { "nombre": "f. Quiz 9", "tipo": "cuestionario" },
-            { "nombre": "g. Audio support", "tipo": "audio", "nota": "Audio de apoyo para la Activity 2 del Grammar (pág. 125)." },
-            { "nombre": "h. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "f. Quiz 9",
+              "tipo": "cuestionario",
+              "url": "https://jhs.schoology.com/assignment/8603710900"
+            },
+            {
+              "nombre": "g. Audio support",
+              "tipo": "audio",
+              "nota": "Audio de apoyo para la Activity 2 del Grammar (pág. 125).",
+              "url": "https://jhs.schoology.com/course/8202980957/materials?f=1046828278"
+            },
+            {
+              "nombre": "h. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Lesson 10 — Telephone call",
           "items": [
-            { "nombre": "a. Video", "tipo": "video" },
-            { "nombre": "b. Video", "tipo": "video" },
+            {
+              "nombre": "a. Video",
+              "tipo": "video"
+            },
+            {
+              "nombre": "b. Video",
+              "tipo": "video"
+            },
             {
               "nombre": "c. Workbook 10",
               "tipo": "guia",
               "subtareas": [
                 "Activity 1: encerrar con azul el vocabulario de la llamada telefónica",
                 "Activity 2: elegir una de las llamadas de la lección, leerla varias veces, dibujarla y grabar un audio MP3 para subirlo a la plataforma"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8202980957/materials?f=1046828281"
             },
-            { "nombre": "d. Quiz 10", "tipo": "cuestionario" },
-            { "nombre": "e. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "d. Quiz 10",
+              "tipo": "cuestionario",
+              "url": "https://jhs.schoology.com/assignment/8603710909"
+            },
+            {
+              "nombre": "e. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         }
       ]
@@ -208,7 +304,10 @@
         {
           "nombre": "Tema 13 — Los diez mandamientos",
           "items": [
-            { "nombre": "1. Video — Los diez mandamientos", "tipo": "video" },
+            {
+              "nombre": "1. Video — Los diez mandamientos",
+              "tipo": "video"
+            },
             {
               "nombre": "2. Guía de trabajo — Los diez mandamientos",
               "tipo": "guia",
@@ -221,16 +320,26 @@
                 "Recortar los diez mandamientos impresos en la guía (paso 5)",
                 "Pegar los mandamientos siguiendo el orden (paso 6)",
                 "Tomar una fotografía de tus tablas terminadas y pegarla en la guía (paso 7)"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8600314589"
             },
-            { "nombre": "3. Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "4. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "3. Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "4. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 14 — Principios de vida",
           "items": [
-            { "nombre": "a. Video — Principios de vida", "tipo": "video" },
+            {
+              "nombre": "a. Video — Principios de vida",
+              "tipo": "video"
+            },
             {
               "nombre": "b. Guía de trabajo — Principios de vida",
               "tipo": "guia",
@@ -240,10 +349,17 @@
                 "Escribir 3 formas de mostrar el agradecimiento",
                 "Escribir 3 formas de mostrar la gentileza",
                 "Escribir 3 formas de mostrar el respeto"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8201912196/materials?f=1046424214"
             },
-            { "nombre": "c. Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "d. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "c. Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "d. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
@@ -258,30 +374,44 @@
                 "Imprimir la cartilla del foro",
                 "Seguir los pasos que pide la cartilla",
                 "Publicar la evidencia en el foro"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8201912196/materials/discussion/view/8600314639"
             }
           ]
         },
         {
           "nombre": "Tema 15 — Principales autoridades de mi nación",
           "items": [
-            { "nombre": "a. Video — Principales autoridades de mi nación", "tipo": "video" },
+            {
+              "nombre": "a. Video — Principales autoridades de mi nación",
+              "tipo": "video"
+            },
             {
               "nombre": "b. Guía de trabajo — Principales autoridades de mi nación",
               "tipo": "guia",
               "subtareas": [
                 "Escribir los datos del presidente y vicepresidente de tu nación y comentar una noticia sobre ellos",
                 "Resolver el crucigrama de las autoridades"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8201912196/materials?f=1046424214"
             },
-            { "nombre": "c. Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "d. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "c. Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "d. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 16 — Reglas y normas de vialidad",
           "items": [
-            { "nombre": "a. Video — Reglas y normas de vialidad", "tipo": "video" },
+            {
+              "nombre": "a. Video — Reglas y normas de vialidad",
+              "tipo": "video"
+            },
             {
               "nombre": "b. Guía de trabajo — Maqueta de vialidad",
               "tipo": "guia",
@@ -292,11 +422,25 @@
                 "Armar en la base el escenario de una parte de tu ciudad o barrio y ubicar los personajes (d)",
                 "Armar y decorar la maqueta a tu gusto (e)",
                 "Tomar 3 fotografías del proceso y subirlas al Foro «Mi maqueta» (f)"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8201912196/materials?f=1046424214"
             },
-            { "nombre": "c. Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "d. Foro «Mi maqueta»", "tipo": "foro", "subtareas": ["Subir las 3 fotografías del proceso de la maqueta"] },
-            { "nombre": "e. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "c. Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "d. Foro «Mi maqueta»",
+              "tipo": "foro",
+              "subtareas": [
+                "Subir las 3 fotografías del proceso de la maqueta"
+              ],
+              "url": "https://jhs.schoology.com/course/8201912196/materials/discussion/view/8600314682"
+            },
+            {
+              "nombre": "e. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         }
       ]
@@ -310,7 +454,11 @@
         {
           "nombre": "Tema 20 — Las mascotas",
           "items": [
-            { "nombre": "Material del tema 20 — Las mascotas", "tipo": "enlace" },
+            {
+              "nombre": "Material del tema 20 — Las mascotas",
+              "tipo": "enlace",
+              "url": "https://jhs.schoology.com/course/8202997484/materials?f=1046214260"
+            },
             {
               "nombre": "Oraciones para escribir «Las mascotas»",
               "tipo": "tarea",
@@ -318,7 +466,8 @@
                 "Elegir 7 palabras del tema y escribir 7 oraciones",
                 "Practicar la lectura de las oraciones",
                 "Grabarlas en mp3 y subirlas a la plataforma"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598705814"
             },
             {
               "nombre": "Guía y audio — Las mascotas",
@@ -333,18 +482,29 @@
                 "Opcional: collage de las mascotas que más te gustan"
               ]
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 21 — Mi responsabilidad con los animales",
           "items": [
-            { "nombre": "Material del tema 21 — Mi responsabilidad con los animales", "tipo": "enlace" },
+            {
+              "nombre": "Material del tema 21 — Mi responsabilidad con los animales",
+              "tipo": "enlace",
+              "url": "https://jhs.schoology.com/course/8202997484/materials?f=1046214262"
+            },
             {
               "nombre": "Palabras para escribir «Mi responsabilidad con los animales»",
               "tipo": "tarea",
-              "nota": "La plataforma no muestra instrucciones escritas para esta tarea: seguí las indicaciones de la guía del tema."
+              "nota": "La plataforma no muestra instrucciones escritas para esta tarea: seguí las indicaciones de la guía del tema.",
+              "url": "https://jhs.schoology.com/assignment/8598705825"
             },
             {
               "nombre": "Guía — Mi responsabilidad con los animales",
@@ -355,20 +515,32 @@
                 "Relacionar y ordenar la secuencia de cómo limpiar a nuestra mascota",
                 "Recortar 6 tipos de perros y escribir sus nombres o razas",
                 "Opcional: pegar una foto con tu mascota o dibujar el animal que te gustaría tener"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598705828"
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 22 — Mi huerta",
           "items": [
-            { "nombre": "Material del tema 22 — Mi huerta", "tipo": "enlace" },
+            {
+              "nombre": "Material del tema 22 — Mi huerta",
+              "tipo": "enlace",
+              "url": "https://jhs.schoology.com/course/8202997484/materials?f=1046214264"
+            },
             {
               "nombre": "Oraciones «Mi huerta»",
               "tipo": "tarea",
-              "nota": "La plataforma no muestra instrucciones escritas para esta tarea: seguí las indicaciones de la guía del tema."
+              "nota": "La plataforma no muestra instrucciones escritas para esta tarea: seguí las indicaciones de la guía del tema.",
+              "url": "https://jhs.schoology.com/assignment/8598705839"
             },
             {
               "nombre": "Guía — Mi huerta",
@@ -380,16 +552,27 @@
                 "Poner las semillas en surcos y luego taparlas (paso 3)",
                 "Regar cada 2 días (paso 4)",
                 "Dibujar en el cuadro los cambios observados del día 1, día 10, día 15 y día 20 (paso 5)"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598705840"
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 23 — Mi huerta: cuidado",
           "items": [
-            { "nombre": "Material del tema 23 — Mi huerta: cuidado", "tipo": "enlace" },
+            {
+              "nombre": "Material del tema 23 — Mi huerta: cuidado",
+              "tipo": "enlace",
+              "url": "https://jhs.schoology.com/course/8202997484/materials?f=1046214266"
+            },
             {
               "nombre": "Oraciones para leer «Mi huerta - cuidado»",
               "tipo": "tarea",
@@ -398,7 +581,8 @@
                 "Escribirlas en la hoja cuadriculada",
                 "Repasar su lectura",
                 "Grabarlas en mp3 y subirlas a la plataforma"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598705846"
             },
             {
               "nombre": "Guía — Mi huerta: cuidado",
@@ -407,23 +591,35 @@
                 "Responder cuándo debemos regar las plantas, qué debemos cuidar de un huerto y cómo cuidamos las plantas de las plagas",
                 "Observar tu jardín y dibujar los insectos o bichos que hay",
                 "Dibujar los dos momentos más importantes en que debemos regar las plantas"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598705847"
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 24 — Mi huerta: cosecha",
           "items": [
-            { "nombre": "Material del tema 24 — Mi huerta: cosecha", "tipo": "enlace" },
+            {
+              "nombre": "Material del tema 24 — Mi huerta: cosecha",
+              "tipo": "enlace",
+              "url": "https://jhs.schoology.com/course/8202997484/materials?f=1046214268"
+            },
             {
               "nombre": "Oraciones para leer «Mi huerta - cosecha»",
               "tipo": "tarea",
               "subtareas": [
                 "Escribir una oración con cada palabra: maduro, fruto, recolectar, hortaliza, tomate, cosecha",
                 "Grabarlas en mp3 y subirlas a la plataforma"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598705852"
             },
             {
               "nombre": "Guía — Mi huerta: cosecha",
@@ -433,16 +629,27 @@
                 "Buscar 4 recortes de diferentes cosechas y pegarlos",
                 "Describir la lámina del cuadro",
                 "Dibujar la cosecha que hayas realizado con tus papás"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598705853"
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 25 — El parrillero",
           "items": [
-            { "nombre": "Material del tema 25 — El parrillero", "tipo": "enlace" },
+            {
+              "nombre": "Material del tema 25 — El parrillero",
+              "tipo": "enlace",
+              "url": "https://jhs.schoology.com/course/8202997484/materials?f=1046214272"
+            },
             {
               "nombre": "Oraciones «El parrillero»",
               "tipo": "tarea",
@@ -450,7 +657,8 @@
                 "Escribir 7 oraciones con palabras de la guía",
                 "Aprender las oraciones",
                 "Grabarlas en mp3 y subirlas a la plataforma"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598705860"
             },
             {
               "nombre": "Guía — El parrillero",
@@ -459,10 +667,17 @@
                 "Definir con tus palabras qué es una parrillada y mencionar 5 elementos que se ocupan en una",
                 "Dibujar cómo te imaginas la historia que leíste",
                 "Describir en un audio mp3 una parrillada que hayas hecho con tu familia y mostrar fotografías (si nunca participaste, grabar cómo te imaginas que sería)"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598705861"
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
@@ -472,7 +687,8 @@
             {
               "nombre": "Semana de ponerse al día con el material",
               "tipo": "tarea",
-              "nota": "La plataforma indica que este punto es del examen: sirve para planificar cómo hacerlo."
+              "nota": "La plataforma indica que este punto es del examen: sirve para planificar cómo hacerlo.",
+              "url": "https://jhs.schoology.com/assignment/8598705812"
             }
           ]
         }
@@ -487,7 +703,10 @@
         {
           "nombre": "Tema 16 — El ritmo en el dibujo",
           "items": [
-            { "nombre": "1. Video — El ritmo en el dibujo", "tipo": "video" },
+            {
+              "nombre": "1. Video — El ritmo en el dibujo",
+              "tipo": "video"
+            },
             {
               "nombre": "2. Guía — El ritmo en el dibujo",
               "tipo": "guia",
@@ -508,8 +727,14 @@
                 "Pegar la fotografía del trabajo terminado en la cartilla"
               ]
             },
-            { "nombre": "4. Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "5. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "4. Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "5. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
@@ -528,7 +753,10 @@
                 "Tejer con la lana el tejido rectangular"
               ]
             },
-            { "nombre": "2. Cuestionario (niño)", "tipo": "cuestionario" },
+            {
+              "nombre": "2. Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
             {
               "nombre": "3. Cartilla de motricidad — Tema 17",
               "tipo": "cartilla",
@@ -544,7 +772,9 @@
             {
               "nombre": "4. Foro — Telar",
               "tipo": "foro",
-              "subtareas": ["Subir la fotografía del telar terminado"]
+              "subtareas": [
+                "Subir la fotografía del telar terminado"
+              ]
             }
           ]
         },
@@ -552,13 +782,21 @@
           "nombre": "Foro — Clase en vivo (17 de noviembre)",
           "extra": true,
           "items": [
-            { "nombre": "Foro de «Clase en vivo»", "tipo": "foro", "nota": "Foro de la clase en vivo del 17 de noviembre." }
+            {
+              "nombre": "Foro de «Clase en vivo»",
+              "tipo": "foro",
+              "nota": "Foro de la clase en vivo del 17 de noviembre.",
+              "url": "https://jhs.schoology.com/course/8201804045/materials/discussion/view/8600338385"
+            }
           ]
         },
         {
           "nombre": "Tema 18 — El collage",
           "items": [
-            { "nombre": "1. Video — El collage", "tipo": "video" },
+            {
+              "nombre": "1. Video — El collage",
+              "tipo": "video"
+            },
             {
               "nombre": "2. Guía — El collage",
               "tipo": "guia",
@@ -568,22 +806,41 @@
                 "Subir la fotografía de la manualidad terminada al foro de la clase"
               ]
             },
-            { "nombre": "3. Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "4. Foro — El collage", "tipo": "foro", "subtareas": ["Subir la foto del collage terminado"] },
-            { "nombre": "5. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "3. Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "4. Foro — El collage",
+              "tipo": "foro",
+              "subtareas": [
+                "Subir la foto del collage terminado"
+              ]
+            },
+            {
+              "nombre": "5. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Foro — La creatividad",
           "extra": true,
           "items": [
-            { "nombre": "Foro: «La creatividad»", "tipo": "foro" }
+            {
+              "nombre": "Foro: «La creatividad»",
+              "tipo": "foro",
+              "url": "https://jhs.schoology.com/course/8201804045/materials/discussion/view/8600338420"
+            }
           ]
         },
         {
           "nombre": "Tema 19 — A cada escultura su técnica",
           "items": [
-            { "nombre": "1. Video — A cada escultura su técnica", "tipo": "video" },
+            {
+              "nombre": "1. Video — A cada escultura su técnica",
+              "tipo": "video"
+            },
             {
               "nombre": "2. Guía — A cada escultura su técnica",
               "tipo": "guia",
@@ -595,9 +852,18 @@
                 "Pegar la foto del trabajo terminado en la guía"
               ]
             },
-            { "nombre": "3. Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "4. Cartilla de manualidad — Tema 19", "tipo": "cartilla" },
-            { "nombre": "5. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "3. Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "4. Cartilla de manualidad — Tema 19",
+              "tipo": "cartilla"
+            },
+            {
+              "nombre": "5. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         }
       ]
@@ -611,7 +877,10 @@
         {
           "nombre": "Tema 21 — Estimaciones a la decena",
           "items": [
-            { "nombre": "a. Video 21", "tipo": "video" },
+            {
+              "nombre": "a. Video 21",
+              "tipo": "video"
+            },
             {
               "nombre": "b. Guía T21",
               "tipo": "guia",
@@ -622,18 +891,34 @@
                 "Realizar las restas encontrando el valor exacto y el valor aproximado",
                 "Completar la tabla del 6 y colorear los resultados en el recuadro",
                 "Escuchar la canción de la tabla del 6, memorizarla y grabar un video representándola"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8442072972"
             },
-            { "nombre": "c. Canción — Tabla del 6 (mp3)", "tipo": "audio" },
-            { "nombre": "d. Canción Tabla del 6 (PDF)", "tipo": "cancion" },
-            { "nombre": "e. Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "f. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "c. Canción — Tabla del 6 (mp3)",
+              "tipo": "audio"
+            },
+            {
+              "nombre": "d. Canción Tabla del 6 (PDF)",
+              "tipo": "cancion"
+            },
+            {
+              "nombre": "e. Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "f. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 22 — Cuerpos geométricos y sus elementos",
           "items": [
-            { "nombre": "a. Video 22", "tipo": "video" },
+            {
+              "nombre": "a. Video 22",
+              "tipo": "video"
+            },
             {
               "nombre": "b. Guía T22",
               "tipo": "guia",
@@ -644,16 +929,26 @@
                 "Marcar base, aristas, caras laterales y vértices en los cuerpos geométricos indicados",
                 "Realizar 10 tarjetas de la tabla del 6 (6 x 1 a 6 x 10) en cartulina y practicar con las 6 formas sugeridas",
                 "Sacar una foto de tus tarjetas de la tabla del 6 contigo y pegarla"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8600596328"
             },
-            { "nombre": "c. Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "d. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "c. Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "d. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 23 — Unión e intersección de conjuntos",
           "items": [
-            { "nombre": "a. Video 23", "tipo": "video" },
+            {
+              "nombre": "a. Video 23",
+              "tipo": "video"
+            },
             {
               "nombre": "b. Guía T23",
               "tipo": "guia",
@@ -663,18 +958,34 @@
                 "Resolver los problemas de unión e intersección y graficar (cuadernos de Carla y Julio, gimnasia y fútbol)",
                 "Completar la tabla del 7 y colorear los resultados en el recuadro",
                 "Escuchar la canción de la tabla del 7, memorizarla y grabar un audio cantándola con la familia"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8600596334"
             },
-            { "nombre": "c. Canción — Tabla del 7 (mp3)", "tipo": "audio" },
-            { "nombre": "d. Canción Tabla del 7 (PDF)", "tipo": "cancion" },
-            { "nombre": "e. Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "f. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "c. Canción — Tabla del 7 (mp3)",
+              "tipo": "audio"
+            },
+            {
+              "nombre": "d. Canción Tabla del 7 (PDF)",
+              "tipo": "cancion"
+            },
+            {
+              "nombre": "e. Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "f. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 24 — Medidas de longitud, peso y capacidad",
           "items": [
-            { "nombre": "a. Video 24", "tipo": "video" },
+            {
+              "nombre": "a. Video 24",
+              "tipo": "video"
+            },
             {
               "nombre": "b. Guía T24",
               "tipo": "guia",
@@ -687,10 +998,17 @@
                 "Enviar fotos de tus mediciones",
                 "Completar los círculos multiplicando por el número del centro",
                 "Practicar la tabla del 7 con tarjetas y sacar la foto correspondiente"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8600596352"
             },
-            { "nombre": "c. Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "d. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "c. Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "d. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
@@ -705,11 +1023,21 @@
                 "Completar los círculos multiplicando cada número por el número del centro",
                 "Ordenar las figuras dibujándolas de grande a pequeño",
                 "Completar la tabla del 8 y colorear los resultados en el recuadro"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8600596344"
             },
-            { "nombre": "b. Canción — Tabla del 8 (mp3)", "tipo": "audio" },
-            { "nombre": "c. Canción Tabla del 8 (PDF)", "tipo": "cancion" },
-            { "nombre": "d. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "b. Canción — Tabla del 8 (mp3)",
+              "tipo": "audio"
+            },
+            {
+              "nombre": "c. Canción Tabla del 8 (PDF)",
+              "tipo": "cancion"
+            },
+            {
+              "nombre": "d. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
@@ -722,9 +1050,13 @@
                 "Realizar 10 tarjetas de la tabla del 8 (8 x 1 a 8 x 10) en cartulina, iguales a las de la tabla del 2",
                 "Practicar con las formas 1 a 6 sugeridas en el cuadernillo",
                 "Sacar una foto de tus tarjetas de la tabla del 8 contigo y pegarla"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8600596362"
             },
-            { "nombre": "b. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "b. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
@@ -739,11 +1071,21 @@
                 "Realizar las restas con valor exacto y valor aproximado",
                 "Completar la tabla del 9 y colorear los resultados en el recuadro",
                 "Escuchar la canción de la tabla del 9, memorizarla y grabar un video cantándola"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8600596368"
             },
-            { "nombre": "b. Canción — Tabla del 9 (mp3)", "tipo": "audio" },
-            { "nombre": "c. Canción Tabla del 9 (PDF)", "tipo": "cancion" },
-            { "nombre": "d. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "b. Canción — Tabla del 9 (mp3)",
+              "tipo": "audio"
+            },
+            {
+              "nombre": "c. Canción Tabla del 9 (PDF)",
+              "tipo": "cancion"
+            },
+            {
+              "nombre": "d. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
@@ -756,9 +1098,13 @@
                 "Realizar 10 tarjetas de la tabla del 9 (9 x 1 a 9 x 10) en cartulina, iguales a las de la tabla del 2",
                 "Practicar con las formas 1 a 6 sugeridas en el cuadernillo",
                 "Sacar una foto de tus tarjetas de la tabla del 9 contigo y pegarla"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8442072956"
             },
-            { "nombre": "b. Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "b. Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         }
       ]
@@ -772,7 +1118,10 @@
         {
           "nombre": "Tema 13 — Explorando nuestro cuerpo para cantar",
           "items": [
-            { "nombre": "Video 13", "tipo": "video" },
+            {
+              "nombre": "Video 13",
+              "tipo": "video"
+            },
             {
               "nombre": "Guía de Trabajo — Explorando nuestro cuerpo para cantar",
               "tipo": "guia",
@@ -782,24 +1131,35 @@
                 "Copiar la frase del profe Samu en el orden correcto",
                 "Escuchar la canción «Caminando - Caminando» y repetir las frases de color azul",
                 "Grabar el video de la canción usando los cuadros de figuras cada vez que aparezca la frase"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598507551"
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
             {
               "nombre": "Audio de apoyo",
               "tipo": "audio",
               "subtareas": [
                 "Escuchar el audio guía «Explorando nuestro cuerpo para cantar»",
                 "Escuchar la pista «Caminando - Caminando»"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8201681261/materials?f=1046189986"
             },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 14 — Respiremos",
           "items": [
-            { "nombre": "Video 14 — Respiremos", "tipo": "video" },
+            {
+              "nombre": "Video 14 — Respiremos",
+              "tipo": "video"
+            },
             {
               "nombre": "Guía de Trabajo 14 — Respiremos",
               "tipo": "guia",
@@ -815,24 +1175,42 @@
                 "Repasar las líneas punteadas con lápices de colores",
                 "Inventar y dibujar una figura o letra como desafío",
                 "Completar el certificado derribando árboles con el soplido"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598507584"
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "Audio de apoyo — Respiremos", "tipo": "audio" },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "Audio de apoyo — Respiremos",
+              "tipo": "audio",
+              "url": "https://jhs.schoology.com/course/8201681261/materials?f=1046189986"
+            },
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Semana sin actividades (semana 3)",
           "extra": true,
           "items": [
-            { "nombre": "Sin actividades asignadas", "tipo": "nota", "bloqueado": true }
+            {
+              "nombre": "Sin actividades asignadas",
+              "tipo": "nota",
+              "bloqueado": true
+            }
           ]
         },
         {
           "nombre": "Juegos y prácticas",
           "items": [
-            { "nombre": "Video — Juegos y prácticas", "tipo": "video" },
+            {
+              "nombre": "Video — Juegos y prácticas",
+              "tipo": "video"
+            },
             {
               "nombre": "Guía de Trabajo — Juegos y prácticas",
               "tipo": "guia",
@@ -844,22 +1222,39 @@
                 "Pintar con tus colores las palabras en blanco de la canción de la rueda",
                 "Practicar la frase «Rápido ruedan las ruedas del ferrocarril» en 5 velocidades distintas",
                 "Grabar un video de tu práctica y subirlo al foro «Rápido ruedan las ruedas del ferrocarril»"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598507609"
             },
             {
               "nombre": "Foro — «Rápido ruedan las ruedas del ferrocarril»",
               "tipo": "foro",
-              "subtareas": ["Subir el video de la práctica al foro"]
+              "subtareas": [
+                "Subir el video de la práctica al foro"
+              ],
+              "url": "https://jhs.schoology.com/course/8201681261/materials/discussion/view/8598507616"
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
-            { "nombre": "Audio de apoyo — Juegos y prácticas", "tipo": "audio" },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
+            {
+              "nombre": "Audio de apoyo — Juegos y prácticas",
+              "tipo": "audio",
+              "url": "https://jhs.schoology.com/course/8201681261/materials?f=1046189986"
+            },
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Tema 15 — Cantemos",
           "items": [
-            { "nombre": "Video 15 — Cantemos", "tipo": "video" },
+            {
+              "nombre": "Video 15 — Cantemos",
+              "tipo": "video"
+            },
             {
               "nombre": "Guía de Trabajo 15 — Cantemos",
               "tipo": "guia",
@@ -870,9 +1265,13 @@
                 "Dibujar la Flor Azul (2 tiempos de aspiración y 2 de exhalación)",
                 "Dibujar la Flor Lila (3 tiempos de aspiración y 3 de exhalación)",
                 "Realizar la vocalización con 2, 3 y 5 sonidos junto al audio de apoyo"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/assignment/8598507642"
             },
-            { "nombre": "Cuestionario (niño)", "tipo": "cuestionario" },
+            {
+              "nombre": "Cuestionario (niño)",
+              "tipo": "cuestionario"
+            },
             {
               "nombre": "Audio de apoyo — Cantemos",
               "tipo": "audio",
@@ -881,7 +1280,8 @@
                 "Escuchar el audio «Actividad 2»",
                 "Escuchar el audio «Actividad 3»",
                 "Escuchar el audio «Actividad 4 - Cantemos»"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8201681261/materials?f=1046189986"
             },
             {
               "nombre": "Foro — «Calentamiento de mi propia autoría»",
@@ -889,23 +1289,36 @@
               "subtareas": [
                 "Crear tu propio ejercicio de calentamiento",
                 "Publicarlo en el foro y compartirlo con la clase"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8201681261/materials/discussion/view/8598507646"
             },
-            { "nombre": "Cuestionario tutor", "tipo": "tutor" }
+            {
+              "nombre": "Cuestionario tutor",
+              "tipo": "tutor"
+            }
           ]
         },
         {
           "nombre": "Semana sin actividades (semana 6)",
           "extra": true,
           "items": [
-            { "nombre": "Sin actividades asignadas", "tipo": "nota", "bloqueado": true }
+            {
+              "nombre": "Sin actividades asignadas",
+              "tipo": "nota",
+              "bloqueado": true
+            }
           ]
         },
         {
           "nombre": "Semana de clases en vivo (semana 7)",
           "extra": true,
           "items": [
-            { "nombre": "Semana de clases en vivo", "tipo": "nota", "nota": "Semana dedicada a las clases en vivo." }
+            {
+              "nombre": "Semana de clases en vivo",
+              "tipo": "nota",
+              "nota": "Semana dedicada a las clases en vivo.",
+              "url": "https://jhs.schoology.com/course/8201681261/materials?f=1046189993"
+            }
           ]
         },
         {

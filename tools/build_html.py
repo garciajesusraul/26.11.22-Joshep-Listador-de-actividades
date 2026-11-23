@@ -70,7 +70,16 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
     item_id = f"m{materia_idx}t{tema_idx}i{item_idx}"
     subtareas = item.get("subtareas") or []
     nota = item.get("nota")
+    url = item.get("url")
     nota_html = f'<p class="nota">{esc(nota)}</p>' if nota else ""
+
+    # Botón Link si hay URL
+    link_btn = ""
+    if url:
+        if url.lower().endswith(".pdf") or "/attachment/" in url:
+            link_btn = f'<a class="btn-link" href="{esc(url)}" target="_blank" rel="noopener" title="Descargar PDF">📄 Link</a>'
+        else:
+            link_btn = f'<a class="btn-link" href="{esc(url)}" target="_blank" rel="noopener" title="Abrir en Schoology">🔗 Link</a>'
 
     if tipo == "nota":
         return f"""<li class="item item-nota" data-item-id="{item_id}">
@@ -78,6 +87,7 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
             <span class="item-num">{numero}.</span>
             <span class="item-name">{esc(item['nombre'])}</span>
             <span class="badge badge-nota">Aviso</span>
+            {link_btn}
           </div>
           {nota_html}
         </li>"""
@@ -98,6 +108,7 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
             <span class="badge badge-{tipo}">{icono} {esc(etiqueta)}</span>
             {candado}
             <span class="item-progress" data-progress="{item_id}">0/{len(subtareas)}</span>
+            {link_btn}
           </div>
           {nota_html}"""
     else:
@@ -110,6 +121,7 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
             </label>
             <span class="badge badge-{tipo}">{icono} {esc(etiqueta)}</span>
             {candado}
+            {link_btn}
           </div>
           {nota_html}"""
 
@@ -121,17 +133,19 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
 
 def render():
     data = json.load(open(DATA, encoding="utf-8"))
-    tabs = ['<button class="tab active" role="tab" aria-selected="true" data-tab="panel-resumen" id="tab-resumen">📊 Estadísticas<span class="tab-pct" data-tab-pct-global>0%</span></button>']
+
+    # Sidebar tabs (vertical)
+    sidebar_tabs = ['<button class="stab active" role="tab" aria-selected="true" data-tab="panel-resumen" id="stab-resumen"><span class="stab-icon">📊</span><span class="stab-name">Estadísticas</span><span class="stab-pct" data-tab-pct-global>0%</span></button>']
     paneles = []
     total_items = 0
 
     for mi, materia in enumerate(data["materias"]):
         mid = f"materia-{materia['id']}"
         emoji = EMOJIS.get(materia["id"], "📁")
-        tabs.append(
-            f'<button class="tab" role="tab" aria-selected="false" data-tab="panel-m{mi}" id="tab-m{mi}">'
-            f'<span class="tab-name">{emoji} {esc(materia["nombre"])}</span>'
-            f'<span class="tab-pct" data-tab-pct="m{mi}">0%</span></button>'
+        sidebar_tabs.append(
+            f'<button class="stab" role="tab" aria-selected="false" data-tab="panel-m{mi}" id="stab-m{mi}">'
+            f'<span class="stab-icon">{emoji}</span><span class="stab-name">{esc(materia["nombre"])}</span>'
+            f'<span class="stab-pct" data-tab-pct="m{mi}">0%</span></button>'
         )
 
         temas_html = []
@@ -153,7 +167,7 @@ def render():
       </ul>
     </section>""")
 
-        paneles.append(f"""<div class="panel" id="panel-m{mi}" role="tabpanel" aria-labelledby="tab-m{mi}" data-materia-panel="m{mi}">
+        paneles.append(f"""<div class="panel" id="panel-m{mi}" role="tabpanel" aria-labelledby="stab-m{mi}" data-materia-panel="m{mi}">
   <section class="materia" id="{mid}">
     <header class="materia-head">
       <h2 data-nombre="{esc(materia['nombre'])}">{emoji} {esc(materia['nombre'])} <small>{esc(materia.get('subtitulo', ''))}</small></h2>
@@ -169,7 +183,7 @@ def render():
   </section>
 </div>""")
 
-    panel_resumen = f"""<div class="panel active" id="panel-resumen" role="tabpanel" aria-labelledby="tab-resumen">
+    panel_resumen = f"""<div class="panel active" id="panel-resumen" role="tabpanel" aria-labelledby="stab-resumen">
   <section class="resumen">
     <h2>📊 Estadísticas del bimestre</h2>
     <div class="stats-grid">
@@ -201,7 +215,7 @@ def render():
         <tbody id="statsBody"></tbody>
       </table>
     </div>
-    <p class="hint">Tocá una materia de la tabla para abrir su pestaña.</p>
+    <p class="hint">Click en una fila para abrir su materia.</p>
 
     <h3 class="stats-title">Detalle por tema</h3>
     <div id="statsTemas" class="temas-stats"></div>
@@ -225,122 +239,176 @@ def render():
     --brand-soft: #e6f2ee;
     --accent: #c9752b;
     --done: #97a3a0;
+    --sidebar-w: 220px;
+    --sidebar-w-collapsed: 56px;
     --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.05);
   }}
   * {{ box-sizing: border-box; }}
-  html, body {{ margin: 0; padding: 0; }}
+  html, body {{ margin: 0; padding: 0; height: 100%; }}
   body {{
     font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
     background: var(--bg); color: var(--ink); line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    display: flex; flex-direction: column;
   }}
-  .wrap {{ max-width: 1000px; margin: 0 auto; padding: 0 16px 64px; }}
 
-  header.top {{
-    background: linear-gradient(160deg, #1f6f5c 0%, #2b8a72 60%, #3ba07f 100%);
-    color: #fff; padding: 22px 0 18px;
+  /* --- Layout principal: sidebar fija + contenido --- */
+  .app {{ display: flex; flex: 1; overflow: hidden; }}
+  .sidebar {{
+    width: var(--sidebar-w);
+    min-width: var(--sidebar-w);
+    background: #fff;
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 50;
+    transition: width .2s;
   }}
-  header.top .wrap {{ padding-bottom: 0; }}
-  header.top h1 {{ margin: 0 0 3px; font-size: clamp(20px, 3vw, 30px); letter-spacing: .2px; }}
-  header.top p {{ margin: 0; opacity: .9; font-size: 13.5px; }}
+  .sidebar.collapsed {{ width: var(--sidebar-w-collapsed); min-width: var(--sidebar-w-collapsed); }}
+  .sidebar-header {{
+    padding: 14px 10px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }}
+  .sidebar-title {{
+    font-size: 13px; font-weight: 800; color: var(--brand);
+    text-transform: uppercase; letter-spacing: .5px; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+  }}
+  .sidebar.collapsed .sidebar-title {{ display: none; }}
+  .btn-toggle {{
+    background: none; border: 1px solid var(--line); border-radius: 6px;
+    width: 28px; height: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 14px;
+  }}
+  .btn-toggle:hover {{ background: var(--brand-soft); border-color: var(--brand); color: var(--brand); }}
 
+  .stab-list {{ list-style: none; margin: 0; padding: 8px 6px; flex: 1; }}
+  .stab {{
+    width: 100%; display: flex; align-items: center; gap: 8px;
+    padding: 8px 10px; border: 1px solid transparent; background: transparent;
+    border-radius: 8px; cursor: pointer; text-align: left; font: inherit;
+    font-size: 13px; font-weight: 600; color: #4b5563; white-space: nowrap;
+    transition: .15s;
+  }}
+  .stab:hover {{ background: var(--brand-soft); border-color: #cfe3dc; color: var(--brand); }}
+  .stab.active {{ background: var(--brand); color: #fff; border-color: var(--brand); }}
+  .stab-icon {{ font-size: 16px; flex-shrink: 0; }}
+  .stab-name {{ flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; }}
+  .stab-pct {{
+    font-size: 10.5px; font-weight: 800; background: #eef1f0; color: #55605f;
+    border-radius: 20px; padding: 0 7px; font-variant-numeric: tabular-nums;
+    flex-shrink: 0; opacity: 0; transform: translateX(-10px); transition: .15s;
+    white-space: nowrap;
+  }}
+  .stab.active .stab-pct {{ background: rgba(255,255,255,.22); color: #fff; }}
+  .stab:not(.collapsed) .stab-pct {{ opacity: 1; transform: translateX(0); }}
+  .sidebar.collapsed .stab-name,
+  .sidebar.collapsed .stab-pct {{ display: none; }}
+  .sidebar.collapsed .stab {{ justify-content: center; padding: 8px; }}
+
+  .main {{ flex: 1; overflow-y: auto; padding: 0; }}
+
+  /* --- Toolbar superior (solo en main) --- */
   .toolbar {{
     position: sticky; top: 0; z-index: 30;
     background: rgba(246,244,239,.96); backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line); padding: 9px 0;
+    border-bottom: 1px solid var(--line); padding: 8px 16px;
   }}
-  .toolbar .wrap {{ display: flex; gap: 9px; flex-wrap: wrap; align-items: center; padding-bottom: 0; }}
+  .toolbar-inner {{ display: flex; gap: 10px; flex-wrap: wrap; align-items: center; max-width: 1000px; margin: 0 auto; }}
   .progress-shell {{ flex: 1 1 200px; min-width: 160px; }}
-  .progress-bar {{ height: 9px; background: #e2ded4; border-radius: 99px; overflow: hidden; }}
+  .progress-bar {{ height: 8px; background: #e2ded4; border-radius: 99px; overflow: hidden; }}
   .progress-fill {{ height: 100%; width: 0%; background: linear-gradient(90deg, #2b8a72, #7cc4a9); transition: width .25s; }}
-  .progress-text {{ font-size: 12.5px; color: var(--muted); margin-top: 3px; }}
+  .progress-text {{ font-size: 11.5px; color: var(--muted); margin-top: 3px; }}
   .progress-text b {{ color: var(--brand); }}
 
   .btn {{
     appearance: none; border: 1px solid var(--line); background: #fff; color: var(--ink);
-    padding: 7px 12px; border-radius: 9px; font-size: 13px; cursor: pointer; font-weight: 600;
+    padding: 6px 11px; border-radius: 8px; font-size: 12.5px; cursor: pointer; font-weight: 600;
     transition: .15s; white-space: nowrap;
   }}
   .btn:hover {{ border-color: var(--brand); color: var(--brand); }}
   .btn.on {{ background: var(--brand); border-color: var(--brand); color: #fff; }}
   .btn-ghost {{ background: transparent; }}
-  .btn-mini {{ font-size: 12px; color: var(--brand); text-decoration: none; border: 1px solid #cfe3dc; padding: 4px 9px; border-radius: 8px; }}
+  .btn-mini {{ font-size: 11.5px; color: var(--brand); text-decoration: none; border: 1px solid #cfe3dc; padding: 3px 8px; border-radius: 6px; }}
   .btn-mini:hover {{ background: var(--brand-soft); }}
+  .btn-link {{
+    appearance: none; border: 1px solid var(--line); background: #fff; color: var(--brand);
+    padding: 2px 8px; border-radius: 6px; font-size: 10.5px; font-weight: 700;
+    text-decoration: none; white-space: nowrap; transition: .15s;
+    margin-left: 6px; flex-shrink: 0;
+  }}
+  .btn-link:hover {{ background: var(--brand-soft); border-color: var(--brand); color: var(--brand); }}
   input[type="search"] {{
-    padding: 7px 12px; border-radius: 9px; border: 1px solid var(--line); font-size: 13px;
-    min-width: 150px; background: #fff;
+    padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); font-size: 12.5px;
+    min-width: 140px; background: #fff; flex: 1 1 200px;
   }}
 
-  /* --- Pestañas --- */
-  nav.tabs {{
-    display: flex; gap: 6px; overflow-x: auto; padding: 12px 0 0; margin-bottom: 14px;
-    scrollbar-width: thin;
+  header.top {{
+    background: linear-gradient(160deg, #1f6f5c 0%, #2b8a72 60%, #3ba07f 100%);
+    color: #fff; padding: 16px 16px 14px; margin-left: var(--sidebar-w);
+    transition: margin-left .2s;
   }}
-  .tab {{
-    flex: 0 0 auto; cursor: pointer; border: 1px solid var(--line); background: #fff;
-    color: #4b5563; font: inherit; font-size: 13.5px; font-weight: 600;
-    padding: 9px 14px; border-radius: 11px 11px 0 0; border-bottom: 3px solid transparent;
-    transition: .15s; white-space: nowrap;
-  }}
-  .tab:hover {{ color: var(--brand); border-color: #cfe3dc; }}
-  .tab.active {{
-    background: var(--brand); color: #fff; border-color: var(--brand);
-    border-bottom-color: #f0b46a;
-  }}
-  .tab .mini {{ font-size: 11px; opacity: .8; margin-left: 5px; }}
-  .tab-name {{ display: inline; }}
-  .tab-pct {{
-    display: inline-block; margin-left: 7px; font-size: 10.5px; font-weight: 800;
-    background: #eef1f0; color: #55605f; border-radius: 20px; padding: 0 7px;
-    font-variant-numeric: tabular-nums; letter-spacing: 0;
-  }}
-  .tab.active .tab-pct {{ background: rgba(255,255,255,.22); color: #fff; }}
+  .sidebar.collapsed ~ .main header.top {{ margin-left: var(--sidebar-w-collapsed); }}
+  header.top .wrap {{ max-width: 1000px; margin: 0 auto; }}
+  header.top h1 {{ margin: 0 0 3px; font-size: clamp(18px, 2.5vw, 26px); letter-spacing: .2px; }}
+  header.top p {{ margin: 0; opacity: .9; font-size: 12.5px; }}
 
-  .panel {{ display: none; }}
+  .wrap {{ max-width: 1000px; margin: 0 auto; padding: 0 16px 48px; }}
+
+  /* --- Paneles --- */
+  .panel {{ display: none; animation: fadeIn .15s; }}
   .panel.active {{ display: block; }}
   body.searching .panel {{ display: block; }}
-  body.searching #panel-resumen {{ display: none; }}
-  body.searching nav.tabs {{ display: none; }}
+  body.searching .sidebar {{ display: none; }}
+  body.searching header.top {{ margin-left: 0; }}
+  @keyframes fadeIn {{ from {{ opacity: 0; transform: translateY(4px); }} to {{ opacity: 1; transform: none; }} }}
 
   /* --- Materia / tema --- */
   .materia {{ margin-bottom: 4px; }}
   .materia-head {{
-    display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-    border-bottom: 3px solid var(--brand); padding-bottom: 6px; margin-bottom: 12px;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    border-bottom: 2px solid var(--brand); padding-bottom: 5px; margin-bottom: 10px;
   }}
-  .materia-head h2 {{ margin: 0; font-size: clamp(17px, 2.3vw, 22px); color: var(--brand); }}
-  .materia-head h2 small {{ font-weight: 500; color: var(--muted); font-size: 13px; }}
-  .materia-meta {{ display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }}
-  .materia-progress {{ font-size: 12.5px; font-weight: 700; color: var(--brand); }}
+  .materia-head h2 {{ margin: 0; font-size: clamp(16px, 2vw, 20px); color: var(--brand); }}
+  .materia-head h2 small {{ font-weight: 500; color: var(--muted); font-size: 12px; }}
+  .materia-meta {{ display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }}
   .chip {{
-    font-size: 11.5px; font-weight: 700; padding: 3px 9px; border-radius: 99px;
+    font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 99px;
     white-space: nowrap; font-variant-numeric: tabular-nums;
   }}
   .chip-done {{ background: var(--brand-soft); color: #17614f; }}
   .chip-pend {{ background: #fdf1e3; color: #a9611f; }}
-  .materia-bar {{ height: 8px; background: #e2ded4; border-radius: 99px; overflow: hidden; margin: 0 0 14px; }}
+  .materia-bar {{ height: 6px; background: #e2ded4; border-radius: 99px; overflow: hidden; margin: 0 0 10px; }}
   .materia-fill {{ height: 100%; width: 0%; background: linear-gradient(90deg, #2b8a72, #7cc4a9); transition: width .25s; }}
 
   .tema {{
-    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-    padding: 14px 16px 8px; margin-bottom: 12px; box-shadow: var(--shadow);
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px 12px 6px; margin-bottom: 8px; box-shadow: var(--shadow);
   }}
-  .tema-extra {{ border-left: 4px solid var(--accent); }}
-  .tema-head {{ display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }}
-  .tema-head h3 {{ margin: 0 0 8px; font-size: 15.5px; }}
-  .tema-progress {{ font-size: 12px; color: var(--muted); white-space: nowrap; }}
+  .tema-extra {{ border-left: 3px solid var(--accent); }}
+  .tema-head {{ display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px; }}
+  .tema-head h3 {{ margin: 0; font-size: 14px; }}
+  .tema-progress {{ font-size: 11px; color: var(--muted); white-space: nowrap; }}
 
   ul.items, ul.subs {{ list-style: none; margin: 0; padding: 0; }}
-  li.item {{ padding: 7px 0; border-top: 1px dashed #eeebe3; }}
+  li.item {{ padding: 5px 0; border-top: 1px dashed #eeebe3; }}
   li.item:first-child {{ border-top: 0; }}
-  .item-head {{ display: flex; align-items: flex-start; gap: 8px; }}
-  .item-num {{ font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 2px; min-width: 20px; }}
-  .item-label {{ display: flex; align-items: flex-start; gap: 9px; cursor: pointer; flex: 1 1 auto; }}
-  .item-label input {{ margin: 4px 0 0; width: 17px; height: 17px; accent-color: var(--brand); cursor: pointer; }}
-  .item-name {{ font-size: 14.5px; font-weight: 600; }}
+  .item-head {{ display: flex; align-items: flex-start; gap: 6px; flex-wrap: wrap; }}
+  .item-num {{ font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 2px; min-width: 18px; }}
+  .item-label {{ display: flex; align-items: flex-start; gap: 7px; cursor: pointer; flex: 1 1 auto; min-width: 0; }}
+  .item-label input {{ margin: 3px 0 0; width: 15px; height: 15px; accent-color: var(--brand); cursor: pointer; flex-shrink: 0; }}
+  .item-name {{ font-size: 13.5px; font-weight: 600; word-break: break-word; }}
   .badge {{
-    flex: 0 0 auto; font-size: 11px; font-weight: 700; letter-spacing: .2px; text-transform: uppercase;
-    padding: 2px 7px; border-radius: 6px; background: #f0eee8; color: var(--muted); white-space: nowrap;
+    flex: 0 0 auto; font-size: 10px; font-weight: 700; letter-spacing: .2px; text-transform: uppercase;
+    padding: 2px 6px; border-radius: 5px; background: #f0eee8; color: var(--muted); white-space: nowrap;
   }}
   .badge-video {{ background: #eef2fb; color: #3a5ba0; }}
   .badge-guia {{ background: #e9f5ef; color: #1f6f5c; }}
@@ -348,17 +416,18 @@ def render():
   .badge-cuestionario, .badge-tutor {{ background: #f3e9ee; color: #8c4a63; }}
   .badge-audio, .badge-cancion {{ background: #f2ecfa; color: #6a4a9e; }}
   .badge-cartilla {{ background: #eef7f9; color: #2c7a8c; }}
-  .lock {{ font-size: 12px; }}
+  .badge-nota {{ background: #f0eee8; color: var(--muted); }}
+  .lock {{ font-size: 11px; flex-shrink: 0; }}
+  .item-progress {{ font-size: 10.5px; color: var(--muted); padding-top: 2px; font-variant-numeric: tabular-nums; flex-shrink: 0; }}
 
-  .item-progress {{ font-size: 11.5px; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }}
-  .nota {{ margin: 4px 0 2px 29px; font-size: 12.5px; color: var(--muted); font-style: italic; }}
+  .nota {{ margin: 3px 0 1px 24px; font-size: 11.5px; color: var(--muted); font-style: italic; }}
 
-  ul.subs {{ margin: 4px 0 6px 29px; border-left: 2px solid var(--brand-soft); padding-left: 12px; }}
-  li.sub {{ padding: 3px 0; }}
-  .sub-label {{ display: flex; align-items: flex-start; gap: 8px; cursor: pointer; }}
-  .sub-label input {{ margin: 3px 0 0; width: 15px; height: 15px; accent-color: var(--brand); cursor: pointer; }}
-  .sub-tag {{ font-size: 11.5px; font-weight: 700; color: var(--brand); background: var(--brand-soft); padding: 1px 6px; border-radius: 5px; white-space: nowrap; }}
-  .sub-text {{ font-size: 13.5px; color: #3b4048; }}
+  ul.subs {{ margin: 3px 0 4px 24px; border-left: 2px solid var(--brand-soft); padding-left: 10px; }}
+  li.sub {{ padding: 2px 0; }}
+  .sub-label {{ display: flex; align-items: flex-start; gap: 6px; cursor: pointer; }}
+  .sub-label input {{ margin: 2px 0 0; width: 13px; height: 13px; accent-color: var(--brand); cursor: pointer; flex-shrink: 0; }}
+  .sub-tag {{ font-size: 10.5px; font-weight: 700; color: var(--brand); background: var(--brand-soft); padding: 1px 5px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }}
+  .sub-text {{ font-size: 12.5px; color: #3b4048; }}
 
   input[type="checkbox"]:checked + .item-name,
   input[type="checkbox"]:checked ~ .sub-text {{ text-decoration: line-through; color: var(--done); }}
@@ -367,115 +436,132 @@ def render():
   .hide-done li.item.is-done {{ display: none; }}
   .hidden {{ display: none !important; }}
 
-  /* --- Resumen --- */
-  .resumen h2 {{ margin: 4px 0 14px; font-size: clamp(18px, 2.4vw, 23px); color: var(--brand); }}
-  .stats-grid {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }}
+  /* --- Resumen / Estadísticas --- */
+  .resumen h2 {{ margin: 4px 0 12px; font-size: clamp(17px, 2.2vw, 21px); color: var(--brand); }}
+  .stats-grid {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }}
   .stat-card {{
-    background: #fff; border: 1px solid var(--line); border-radius: 14px;
-    padding: 14px 10px; text-align: center; box-shadow: var(--shadow);
+    background: #fff; border: 1px solid var(--line); border-radius: 12px;
+    padding: 12px 8px; text-align: center; box-shadow: var(--shadow);
   }}
-  .stat-num {{ font-size: clamp(24px, 5vw, 34px); font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }}
-  .stat-lbl {{ font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); font-weight: 700; }}
+  .stat-num {{ font-size: clamp(22px, 4vw, 30px); font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }}
+  .stat-lbl {{ font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); font-weight: 700; }}
   .stat-card.done .stat-num {{ color: var(--brand); }}
   .stat-card.pending .stat-num {{ color: var(--accent); }}
   .stat-card.pct .stat-num {{ color: #2e5d8a; }}
 
-  .stats-block {{ background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; box-shadow: var(--shadow); }}
-  .progress-bar.big {{ height: 16px; }}
-  .stats-caption {{ margin: 8px 0 0; font-size: 12.5px; color: var(--muted); }}
-  .stats-title {{ margin: 22px 0 8px; font-size: 14px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); }}
+  .stats-block {{ background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); }}
+  .progress-bar.big {{ height: 14px; }}
+  .stats-caption {{ margin: 6px 0 0; font-size: 11.5px; color: var(--muted); }}
+  .stats-title {{ margin: 18px 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); }}
 
-  .table-wrap {{ overflow-x: auto; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); }}
-  table.stats-table {{ width: 100%; border-collapse: collapse; font-size: 13.5px; }}
-  table.stats-table th {{ text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); padding: 9px 12px; border-bottom: 1px solid var(--line); }}
+  .table-wrap {{ overflow-x: auto; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }}
+  table.stats-table {{ width: 100%; border-collapse: collapse; font-size: 12.5px; }}
+  table.stats-table th {{ text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); padding: 7px 10px; border-bottom: 1px solid var(--line); }}
   table.stats-table th:nth-child(n+2), table.stats-table td:nth-child(n+2) {{ text-align: center; }}
-  table.stats-table td {{ padding: 9px 12px; border-bottom: 1px solid #f1eee7; vertical-align: middle; }}
+  table.stats-table td {{ padding: 7px 10px; border-bottom: 1px solid #f1eee7; vertical-align: middle; }}
   table.stats-table tr:last-child td {{ border-bottom: 0; }}
   table.stats-table tr.row-link {{ cursor: pointer; }}
   table.stats-table tr.row-link:hover td {{ background: #f7fbf9; }}
   .cell-name {{ font-weight: 600; white-space: nowrap; }}
   .cell-num {{ font-variant-numeric: tabular-nums; white-space: nowrap; }}
-  .cell-bar {{ min-width: 110px; }}
-  .mini-bar {{ height: 7px; background: #ece8df; border-radius: 99px; overflow: hidden; }}
+  .cell-bar {{ min-width: 100px; }}
+  .mini-bar {{ height: 6px; background: #ece8df; border-radius: 99px; overflow: hidden; }}
   .mini-fill {{ height: 100%; background: var(--brand); }}
   .pct-tag {{ font-weight: 700; color: var(--brand); font-variant-numeric: tabular-nums; }}
 
-  .temas-stats {{ display: grid; gap: 7px; }}
+  .temas-stats {{ display: grid; gap: 5px; }}
   .tema-group {{
-    margin: 12px 0 2px; font-size: 11.5px; font-weight: 800; letter-spacing: .5px;
+    margin: 10px 0 1px; font-size: 10.5px; font-weight: 800; letter-spacing: .5px;
     text-transform: uppercase; color: var(--brand);
   }}
   .tema-group:first-child {{ margin-top: 0; }}
   .tema-stat {{
-    display: flex; justify-content: space-between; gap: 10px; align-items: center;
-    background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; font-size: 13px;
+    display: flex; justify-content: space-between; gap: 8px; align-items: center;
+    background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font-size: 12px;
   }}
   .tema-stat .t-name {{ font-weight: 600; }}
-  .tema-stat .t-nums {{ font-size: 12px; color: var(--muted); white-space: nowrap; }}
+  .tema-stat .t-nums {{ font-size: 11px; color: var(--muted); white-space: nowrap; }}
   .tema-stat.full {{ opacity: .55; }}
-  .hint {{ font-size: 12px; color: var(--muted); margin: 8px 0 0; }}
 
-  .panel-empty {{ text-align: center; background: #fff; border: 1px dashed #cfe3dc; color: var(--brand); border-radius: 12px; padding: 22px; font-weight: 600; }}
+  .panel-empty {{ text-align: center; background: #fff; border: 1px dashed #cfe3dc; color: var(--brand); border-radius: 10px; padding: 18px; font-weight: 600; font-size: 13.5px; }}
 
-  footer {{ text-align: center; color: var(--muted); font-size: 12px; padding: 26px 10px 0; }}
-  footer code {{ background: #efede6; padding: 1px 5px; border-radius: 4px; }}
+  .empty {{ text-align: center; color: var(--muted); padding: 24px; font-size: 13.5px; }}
 
-  @media (max-width: 640px) {{
-    .badge {{ display: none; }}
-    .item-name {{ font-size: 14px; }}
-    .sub-text {{ font-size: 13px; }}
-    header.top {{ padding: 16px 0 14px; }}
-    .tab {{ font-size: 12.5px; padding: 8px 11px; }}
-    .stats-grid {{ gap: 7px; }}
+  footer {{ text-align: center; color: var(--muted); font-size: 11px; padding: 20px 10px 0; }}
+  footer code {{ background: #efede6; padding: 1px 4px; border-radius: 4px; }}
+
+  @media (max-width: 900px) {{
+    .sidebar {{ width: var(--sidebar-w-collapsed); min-width: var(--sidebar-w-collapsed); }}
+    .sidebar .sidebar-title, .sidebar .stab-name, .sidebar .stab-pct {{ display: none; }}
+    .sidebar .stab {{ justify-content: center; padding: 8px; }}
+    header.top, .sidebar.collapsed ~ .main header.top {{ margin-left: var(--sidebar-w-collapsed); }}
+    .badge, .item-progress {{ display: none; }}
+    .stats-grid {{ gap: 6px; }}
     .cell-bar {{ display: none; }}
   }}
+  @media (max-width: 600px) {{
+    .sidebar {{ position: fixed; left: 0; top: 0; bottom: 0; z-index: 100; transform: translateX(-100%); box-shadow: 4px 0 20px rgba(0,0,0,.1); }}
+    .sidebar.open {{ transform: none; }}
+    header.top, .sidebar.collapsed ~ .main header.top {{ margin-left: 0; }}
+    .toolbar {{ padding: 8px 12px; }}
+    .btn-mini, .btn-ghost {{ display: none; }}
+    .stab-list {{ padding-bottom: 60px; }}
+  }}
   @media print {{
-    .toolbar, nav.tabs, .btn, .btn-mini {{ display: none !important; }}
+    .sidebar, .toolbar, .btn, .btn-mini, .btn-link {{ display: none !important; }}
     body {{ background: #fff; }}
-    .panel {{ display: block !important; }}
+    .panel {{ display: block !important; page-break-inside: avoid; }}
     #panel-resumen {{ page-break-after: always; }}
     .tema {{ box-shadow: none; break-inside: avoid; }}
     .hide-done li.item.is-done {{ display: list-item; }}
+    header.top {{ margin-left: 0; }}
   }}
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="wrap">
-    <h1>✅ {esc(data['titulo'])}</h1>
-    <p>{esc(data['colegio'])} · {total_items} ítems · tildá lo que ya está hecho</p>
-  </div>
-</header>
-
-<div class="toolbar">
-  <div class="wrap">
-    <div class="progress-shell">
-      <div class="progress-bar"><div class="progress-fill" id="globalFill"></div></div>
-      <div class="progress-text"><b id="globalPct">0%</b> completado · <span id="globalCount">0 de 0</span></div>
+<div class="app">
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Materias y estadísticas">
+    <div class="sidebar-header">
+      <span class="sidebar-title">Materias</span>
+      <button class="btn-toggle" id="btnToggleSidebar" aria-label="Colapsar sidebar" title="Colapsar/Expandir">◀</button>
     </div>
-    <input type="search" id="buscar" placeholder="Buscar actividad…" aria-label="Buscar actividad">
-    <button class="btn" id="btnPendientes" aria-pressed="false">Ocultar tildados</button>
-    <button class="btn btn-ghost" id="btnExportar">Exportar</button>
-    <button class="btn btn-ghost" id="btnImportar">Importar</button>
-    <input type="file" id="fileImport" accept="application/json" class="hidden">
-    <button class="btn btn-ghost" id="btnReset" title="Borra todo el progreso guardado">Reiniciar</button>
-  </div>
-</div>
+    <ul class="stab-list" role="tablist">
+      {chr(10).join(sidebar_tabs)}
+    </ul>
+  </aside>
 
-<div class="wrap">
-  <nav class="tabs" role="tablist" aria-label="Materias y estadísticas">
-    {chr(10).join(tabs)}
-  </nav>
+  <main class="main" id="main">
+    <header class="top">
+      <div class="wrap">
+        <h1>✅ {esc(data['titulo'])}</h1>
+        <p>{esc(data['colegio'])} · {total_items} ítems · tildá lo que ya está hecho</p>
+      </div>
+    </header>
 
-  {panel_resumen}
+    <div class="toolbar">
+      <div class="toolbar-inner">
+        <div class="progress-shell">
+          <div class="progress-bar"><div class="progress-fill" id="globalFill"></div></div>
+          <div class="progress-text"><b id="globalPct">0%</b> completado · <span id="globalCount">0 de 0</span></div>
+        </div>
+        <input type="search" id="buscar" placeholder="Buscar actividad…" aria-label="Buscar actividad">
+        <button class="btn" id="btnPendientes" aria-pressed="false">Ocultar tildados</button>
+        <button class="btn btn-ghost" id="btnExportar">Exportar</button>
+        <button class="btn btn-ghost" id="btnImportar">Importar</button>
+        <input type="file" id="fileImport" accept="application/json" class="hidden">
+        <button class="btn btn-ghost" id="btnReset" title="Borra todo el progreso guardado">Reiniciar</button>
+      </div>
+    </div>
 
-  {chr(10).join(paneles)}
-
-  <div class="empty hidden" id="sinResultados">No hay actividades que coincidan con la búsqueda.</div>
-
-  <footer>
-    Progreso guardado en este navegador (localStorage). Usá <strong>Exportar</strong> para guardar un respaldo en <code>.json</code>.
-  </footer>
+    <div class="wrap">
+      {panel_resumen}
+      {chr(10).join(paneles)}
+      <div class="empty hidden" id="sinResultados">No hay actividades que coincidan con la búsqueda.</div>
+      <footer>
+        Progreso guardado en este navegador (localStorage). Usá <strong>Exportar</strong> para guardar un respaldo en <code>.json</code>.
+      </footer>
+    </div>
+  </main>
 </div>
 
 <script>
@@ -483,6 +569,7 @@ def render():
   "use strict";
   var KEY = "jhs-2do-b4-v1";
   var TAB_KEY = "jhs-2do-b4-tab";
+  var SIDEBAR_KEY = "jhs-2do-b4-sidebar";
   var checks = {{}};
   var filterPending = false;
 
@@ -508,11 +595,15 @@ def render():
     if (val) checks[id] = true; else delete checks[id];
   }}
 
-  /* ---------- pestañas ---------- */
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('[data-tab]'));
+  /* ---------- pestañas / sidebar ---------- */
+  var stabs = Array.prototype.slice.call(document.querySelectorAll('[data-tab]'));
+  var sidebar = document.getElementById('sidebar');
+  var main = document.getElementById('main');
+  var btnToggle = document.getElementById('btnToggleSidebar');
+
   function activateTab(panelId, remember) {{
     var activeBtn = null;
-    tabs.forEach(function (t) {{
+    stabs.forEach(function (t) {{
       var on = t.getAttribute('data-tab') === panelId;
       if (on) activeBtn = t;
       t.classList.toggle('active', on);
@@ -521,27 +612,34 @@ def render():
     Array.prototype.forEach.call(document.querySelectorAll('.panel'), function (p) {{
       p.classList.toggle('active', p.id === panelId);
     }});
-    if (activeBtn && activeBtn.parentNode) {{
-      var nav = activeBtn.parentNode;
-      var navRect = nav.getBoundingClientRect();
-      var btnRect = activeBtn.getBoundingClientRect();
-      if (btnRect.left < navRect.left || btnRect.right > navRect.right) {{
-        nav.scrollLeft += (btnRect.left - navRect.left) - 12;
-        if (nav.scrollLeft < 0) nav.scrollLeft = 0;
-      }}
-    }}
     if (remember !== false) {{
       try {{ localStorage.setItem(TAB_KEY, panelId); }} catch (e) {{}}
     }}
-    window.scrollTo({{ top: 0, behavior: 'smooth' }});
+    // Scroll suave al top del contenido
+    main.scrollTo({{ top: 0, behavior: 'smooth' }});
   }}
-  tabs.forEach(function (t) {{
+
+  stabs.forEach(function (t) {{
     t.addEventListener('click', function () {{
       document.getElementById('buscar').value = '';
       document.body.classList.remove('searching');
       activateTab(t.getAttribute('data-tab'));
       applyFilters();
+      // En móvil, cerrar sidebar al elegir
+      if (window.innerWidth <= 600) sidebar.classList.remove('open');
     }});
+  }});
+
+  // Toggle sidebar collapse
+  var sidebarCollapsed = false;
+  try {{ sidebarCollapsed = localStorage.getItem(SIDEBAR_KEY) === '1'; }} catch (e) {{}}
+  if (sidebarCollapsed) {{ sidebar.classList.add('collapsed'); btnToggle.textContent = '▶'; btnToggle.setAttribute('aria-label', 'Expandir sidebar'); }}
+  btnToggle.addEventListener('click', function () {{
+    sidebarCollapsed = !sidebarCollapsed;
+    sidebar.classList.toggle('collapsed', sidebarCollapsed);
+    btnToggle.textContent = sidebarCollapsed ? '▶' : '◀';
+    btnToggle.setAttribute('aria-label', sidebarCollapsed ? 'Expandir sidebar' : 'Colapsar sidebar');
+    try {{ localStorage.setItem(SIDEBAR_KEY, sidebarCollapsed ? '1' : '0'); }} catch (e) {{}}
   }});
 
   /* ---------- estado de ítems ---------- */
@@ -556,8 +654,7 @@ def render():
       if (prog) prog.textContent = done + "/" + subs.length;
     }}
     var own = li.querySelector('input[data-check]');
-    var isDone = subs.length ? subs.every(function (s) {{ return s.checked; }})
-                             : !!(own && own.checked);
+    var isDone = subs.length ? subs.every(function (s) {{ return s.checked; }}) : !!(own && own.checked);
     li.classList.toggle('is-done', isDone);
   }}
 
@@ -670,7 +767,7 @@ def render():
     }} else {{
       setSub(el.id, el.checked);
     }}
-    save();
+    save();           // <-- AUTO-GUARDADO en cada cambio
     refreshAll();
     applyFilters();
   }});
@@ -780,16 +877,13 @@ def render():
 }})();
 </script>
 </body>
-</html>
-"""
-
+</html>"""
 
 def main():
     html_out = render()
     with open(OUT, "w", encoding="utf-8") as fh:
         fh.write(html_out)
     print(f"OK  {OUT}  {len(html_out)} bytes")
-
 
 if __name__ == "__main__":
     main()
