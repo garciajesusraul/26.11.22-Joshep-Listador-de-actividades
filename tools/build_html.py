@@ -227,7 +227,7 @@ def render():
   }}
   .chip:hover {{ background: #d5ebe3; }}
 
-  .materia {{ margin-bottom: 26px; }}
+  .materia {{ margin-bottom: 26px; scroll-margin-top: 96px; }}
   .materia-head {{
     display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap;
     border-bottom: 3px solid var(--brand); padding-bottom: 6px; margin-bottom: 12px;
