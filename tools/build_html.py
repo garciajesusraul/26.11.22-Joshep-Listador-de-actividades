@@ -23,7 +23,7 @@ ICONOS = {
 
 ETIQUETAS = {
     "video": "Video",
-    "guia": "Guía",
+    "guia": "Descargar Guía",
     "cartilla": "Cartilla",
     "audio": "Audio",
     "cancion": "Canción",
@@ -94,6 +94,12 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
 
     candado = '<span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>' if bloqueado else ""
 
+    # Badge de guía clickeable si hay URL de descarga
+    if tipo == "guia" and url:
+        badge_html = f'<a class="badge badge-guia" href="{esc(url)}" target="_blank" rel="noopener">{icono} {esc(etiqueta)}</a>'
+    else:
+        badge_html = f'<span class="badge badge-{tipo}">{icono} {esc(etiqueta)}</span>'
+
     if subtareas:
         hijos = "\n        ".join(render_sub(item_id, numero, i, s) for i, s in enumerate(subtareas))
         cuerpo = f"""<ul class="subs">
@@ -105,7 +111,7 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
               <input type="checkbox" id="{item_id}" data-check="{item_id}" data-children="1">
               <span class="item-name">{esc(item['nombre'])}</span>
             </label>
-            <span class="badge badge-{tipo}">{icono} {esc(etiqueta)}</span>
+            {badge_html}
             {candado}
             <span class="item-progress" data-progress="{item_id}">0/{len(subtareas)}</span>
             {link_btn}
@@ -119,7 +125,7 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
               <input type="checkbox" id="{item_id}" data-check="{item_id}">
               <span class="item-name">{esc(item['nombre'])}</span>
             </label>
-            <span class="badge badge-{tipo}">{icono} {esc(etiqueta)}</span>
+            {badge_html}
             {candado}
             {link_btn}
           </div>
