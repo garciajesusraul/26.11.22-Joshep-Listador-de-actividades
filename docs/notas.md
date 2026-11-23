@@ -62,6 +62,16 @@ al agregar o quitar ítems del JSON no hay que renumerar a mano.
 - **Foros de Luces y Colores**: la plataforma no trae descripción; las instrucciones (subir la foto
   del trabajo) están en la guía y en la cartilla del tema, y así se anotaron.
 
+## Interfaz
+
+La vista está organizada en **pestañas**: una por materia y una de **estadísticas**. Solo se
+muestra la pestaña activa (se recuerda la última usada en `localStorage`). Cada pestaña de materia
+muestra el **% hecho** y el **% que falta**, con su barra de avance; la pestaña de estadísticas
+resume el total hecho/pendiente y el desglose por materia y por tema.
+
+El buscador recorre todas las materias a la vez (muestra los paneles con coincidencias) y el botón
+**«Ocultar tildados»** esconde lo que ya está completo dentro de la materia abierta.
+
 ## Cómo seguir con Kinder
 
 Kinder tiene una sola materia: alcanza con repetir el recorrido sobre ese curso y agregar las

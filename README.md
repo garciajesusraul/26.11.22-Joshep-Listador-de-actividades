@@ -14,15 +14,19 @@ sin dependencias, sin build y sin CDN. Se puede abrir con doble clic o publicar 
 - Los **cuestionarios** aparecen listados con candado 🔒 y **sin enlace**: los abren únicamente
   el niño y el tutor.
 - Progreso guardado en `localStorage`, con **Exportar / Importar** en JSON.
+- Navegación por **pestañas: una por materia + una de estadísticas**; se recuerda la última pestaña abierta.
+- Cada pestaña muestra el **% hecho y el % que falta**, con barra de avance por materia.
+- Pestaña **Estadísticas**: total hecho/pendiente, avance global y desglose por materia y por tema.
 - Botón **«Ocultar tildados»** para ver únicamente lo que falta.
-- Buscador de actividades y barra de progreso por materia y por tema.
+- Buscador de actividades que recorre todas las materias a la vez.
 
 ## Cómo usarlo
 
 1. Abrir `2do-grado-bimestre-4.html` en el navegador.
-2. Tildar las subtareas a medida que se completan (el ítem padre se tilda solo cuando están todas).
-3. Usar «Ocultar tildados» para quedarse solo con lo pendiente.
-4. Exportar el progreso de vez en cuando como respaldo (`progreso-2do-bimestre-4.json`).
+2. Elegir la materia en las pestañas (o mirar **📊 Estadísticas** para el panorama general).
+3. Tildar las subtareas a medida que se completan (el ítem padre se tilda solo cuando están todas).
+4. Usar «Ocultar tildados» para quedarse solo con lo pendiente.
+5. Exportar el progreso de vez en cuando como respaldo (`progreso-2do-bimestre-4.json`).
 
 ## Publicarlo en GitHub Pages
 
