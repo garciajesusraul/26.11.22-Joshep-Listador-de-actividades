@@ -119,11 +119,17 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
 
     candado = '<span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>' if bloqueado else ""
 
+    # Copia local del PDF (sobrevive a que Schoology borre los archivos del bimestre)
+    pdf_local = item.get("pdf_local")
+    if pdf_local and not os.path.exists(os.path.join(ROOT, pdf_local.replace("/", os.sep))):
+        pdf_local = None
+
     # Badge clickeable cuando el ítem tiene archivo adjunto (PDF, audio, canción, cartilla…)
     tipos_archivo = ("guia", "audio", "cancion", "cartilla")
     tiene_archivo = bool(url) and ("/attachment/" in url or "/materials/gp/" in url)
-    if tipo in tipos_archivo and tiene_archivo and not bloqueado:
-        badge_html = f'<a class="badge badge-{tipo}" href="{esc(url)}" target="_blank" rel="noopener" title="Descargar">{icono} {esc(etiqueta)} ⬇</a>'
+    destino_badge = pdf_local or (url if tiene_archivo else None)
+    if tipo in tipos_archivo and destino_badge and not bloqueado:
+        badge_html = f'<a class="badge badge-{tipo}" href="{esc(destino_badge)}" target="_blank" rel="noopener" title="Descargar">{icono} {esc(etiqueta)} ⬇</a>'
     else:
         badge_html = f'<span class="badge badge-{tipo}">{icono} {esc(etiqueta)}</span>'
 
