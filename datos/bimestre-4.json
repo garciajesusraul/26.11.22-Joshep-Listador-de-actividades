@@ -1,6 +1,9 @@
 {
   "titulo": "2do grado — Bimestre 4",
   "grado": "2do grado",
+  "grado_id": "2do-grado",
+  "slug": "2do-b4",
+  "tabla_progreso": "progreso_2do_b4",
   "bimestre": "Bimestre 4",
   "colegio": "Joseph's House School",
   "fuente": "https://jhs.schoology.com",
@@ -197,7 +200,7 @@
             {
               "nombre": "f. Quiz 8",
               "tipo": "cuestionario",
-              "url": "https://jhs.schoology.com/assignment/8603710881"
+              "url": null
             },
             {
               "nombre": "g. Audio support",
@@ -249,7 +252,7 @@
             {
               "nombre": "f. Quiz 9",
               "tipo": "cuestionario",
-              "url": "https://jhs.schoology.com/assignment/8603710900"
+              "url": null
             },
             {
               "nombre": "g. Audio support",
@@ -286,7 +289,7 @@
             {
               "nombre": "d. Quiz 10",
               "tipo": "cuestionario",
-              "url": "https://jhs.schoology.com/assignment/8603710909"
+              "url": null
             },
             {
               "nombre": "e. Cuestionario tutor",
@@ -734,7 +737,8 @@
               "subtareas": [
                 "Completar el dibujo con bolitas de papel crepé de colores",
                 "Pegar la fotografía del trabajo terminado en la cartilla"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/attachment/3566815129/source/2da0117b4e5a96383d36fbf20277bcbd.pdf"
             },
             {
               "nombre": "4. Cuestionario (niño)",
@@ -777,14 +781,16 @@
                 "El tutor recorta los sobrantes de las cintas (paso 4)",
                 "Pegar los accesorios en el lugar que corresponde de cada animal (paso 5)",
                 "Subir la fotografía del trabajo terminado al foro de la actividad"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/attachment/3566815137/source/8ac1ffa1bbaa54d1f2d9af1f17eb9b6a.pdf"
             },
             {
               "nombre": "4. Foro — Telar",
               "tipo": "foro",
               "subtareas": [
                 "Subir la fotografía del telar terminado"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8201804045/materials/discussion/view/8600338370"
             }
           ]
         },
@@ -826,7 +832,8 @@
               "tipo": "foro",
               "subtareas": [
                 "Subir la foto del collage terminado"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8201804045/materials/discussion/view/8600338405"
             },
             {
               "nombre": "5. Cuestionario tutor",
@@ -870,7 +877,8 @@
             },
             {
               "nombre": "4. Cartilla de manualidad — Tema 19",
-              "tipo": "cartilla"
+              "tipo": "cartilla",
+              "url": "https://jhs.schoology.com/attachment/3566815163/source/7d8f8bee6648c2e8b080645c40485eaa.pdf"
             },
             {
               "nombre": "5. Cuestionario tutor",
@@ -908,11 +916,13 @@
             },
             {
               "nombre": "c. Canción — Tabla del 6 (mp3)",
-              "tipo": "audio"
+              "tipo": "audio",
+              "url": "https://jhs.schoology.com/course/8202767047/materials/gp/8603737006"
             },
             {
               "nombre": "d. Canción Tabla del 6 (PDF)",
-              "tipo": "cancion"
+              "tipo": "cancion",
+              "url": "https://jhs.schoology.com/course/8202767047/materials/gp/8603737420"
             },
             {
               "nombre": "e. Cuestionario (niño)",
@@ -975,11 +985,13 @@
             },
             {
               "nombre": "c. Canción — Tabla del 7 (mp3)",
-              "tipo": "audio"
+              "tipo": "audio",
+              "url": "https://jhs.schoology.com/course/8202767047/materials/gp/8603742650"
             },
             {
               "nombre": "d. Canción Tabla del 7 (PDF)",
-              "tipo": "cancion"
+              "tipo": "cancion",
+              "url": "https://jhs.schoology.com/course/8202767047/materials/gp/8603742439"
             },
             {
               "nombre": "e. Cuestionario (niño)",
@@ -1040,11 +1052,13 @@
             },
             {
               "nombre": "b. Canción — Tabla del 8 (mp3)",
-              "tipo": "audio"
+              "tipo": "audio",
+              "url": "https://jhs.schoology.com/course/8202767047/materials/gp/8600596336"
             },
             {
               "nombre": "c. Canción Tabla del 8 (PDF)",
-              "tipo": "cancion"
+              "tipo": "cancion",
+              "url": "https://jhs.schoology.com/course/8202767047/materials/gp/8603758315"
             },
             {
               "nombre": "d. Cuestionario tutor",
@@ -1088,11 +1102,13 @@
             },
             {
               "nombre": "b. Canción — Tabla del 9 (mp3)",
-              "tipo": "audio"
+              "tipo": "audio",
+              "url": "https://jhs.schoology.com/course/8202767047/materials/gp/8603759637"
             },
             {
               "nombre": "c. Canción Tabla del 9 (PDF)",
-              "tipo": "cancion"
+              "tipo": "cancion",
+              "url": "https://jhs.schoology.com/course/8202767047/materials/gp/8603759655"
             },
             {
               "nombre": "d. Cuestionario tutor",
@@ -1348,7 +1364,8 @@
                 "Parte escrita 3: inventar un juego para enseñar los sonidos a tus compañeros",
                 "Escribir una palabra de bendición para tus compañeros",
                 "Grabar un video de uno de los juegos que más te gustó y compartirlo en el foro"
-              ]
+              ],
+              "url": "https://jhs.schoology.com/course/8201681261/materials/discussion/view/8598507686"
             }
           ]
         }

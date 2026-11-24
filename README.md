@@ -10,13 +10,17 @@ sin dependencias, sin build y sin CDN. Se puede abrir con doble clic o publicar 
 
 - 7 materias: Ciencias de la Vida, English, Historia, Lenguaje, Luces y Colores, Matemáticas y Sonidos.
 - Cada tema con sus ítems numerados (1, 2, 3…) y las subtareas reales de cada guía en PDF
-  etiquetadas como `2-A)`, `2-B)`, `2-C)`…
+  etiquetadas como `2-A)`, `2-B)`, `2-C)`… (y `2-C-1)`, `2-C-2)` si una subtarea tiene partes).
+- **Enlace de descarga en cada ítem con archivo**: badge `📘 Descargar Guía` (PDF directo),
+  `🎧 Audio`, `🎵 Canción`, `✂️ Cartilla`, más un botón **Link** en todos los ítems abribles.
 - Los **cuestionarios** aparecen listados con candado 🔒 y **sin enlace**: los abren únicamente
   el niño y el tutor.
-- Progreso guardado en `localStorage`, con **Exportar / Importar** en JSON.
+- Progreso guardado en `localStorage` + sincronización en **Supabase**, con **Exportar / Importar**
+  en JSON como respaldo.
 - Navegación por **pestañas: una por materia + una de estadísticas**; se recuerda la última pestaña abierta.
 - Cada pestaña muestra el **% hecho y el % que falta**, con barra de avance por materia.
-- Pestaña **Estadísticas**: total hecho/pendiente, avance global y desglose por materia y por tema.
+- Pestaña **Estadísticas**: total hecho/pendiente, avance global y desglose por materia.
+- **Selector de grado** arriba a la izquierda (2do grado activo; Kinder marcado «próximamente»).
 - Botón **«Ocultar tildados»** para ver únicamente lo que falta.
 - Buscador de actividades que recorre todas las materias a la vez.
 
@@ -52,6 +56,7 @@ La página queda en `https://<usuario>.github.io/<repo>/2do-grado-bimestre-4.htm
 ```
 2do-grado-bimestre-4.html   ← checklist final (autocontenido)
 datos/bimestre-4.json       ← fuente de verdad curada
+datos/grados.json           ← grados del selector (Kinder, 2do, futuros)
 tools/build_html.py         ← genera el HTML a partir del JSON
 tools/pdf_text.py           ← extrae texto de los PDF de las guías
 tools/show_tree.py          ← imprime el árbol scrapeado de Schoology

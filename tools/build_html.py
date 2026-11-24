@@ -98,11 +98,11 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
     url = item.get("url")
     nota_html = f'<p class="nota">{esc(nota)}</p>' if nota else ""
 
-    # Botón Link si hay URL
+    # Botón Link si hay URL (nunca en ítems bloqueados: cuestionarios/tutor)
     link_btn = ""
-    if url:
-        if url.lower().endswith(".pdf") or "/attachment/" in url:
-            link_btn = f'<a class="btn-link" href="{esc(url)}" target="_blank" rel="noopener" title="Descargar PDF">📄 Link</a>'
+    if url and not bloqueado:
+        if url.lower().endswith(".pdf") or "/attachment/" in url or "/materials/gp/" in url:
+            link_btn = f'<a class="btn-link" href="{esc(url)}" target="_blank" rel="noopener" title="Descargar archivo">📄 Link</a>'
         else:
             link_btn = f'<a class="btn-link" href="{esc(url)}" target="_blank" rel="noopener" title="Abrir en Schoology">🔗 Link</a>'
 
@@ -119,9 +119,11 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
 
     candado = '<span class="lock" title="Ítem que solo abren el niño y el tutor">🔒</span>' if bloqueado else ""
 
-    # Badge de guía clickeable si hay URL de descarga
-    if tipo == "guia" and url:
-        badge_html = f'<a class="badge badge-guia" href="{esc(url)}" target="_blank" rel="noopener">{icono} {esc(etiqueta)}</a>'
+    # Badge clickeable cuando el ítem tiene archivo adjunto (PDF, audio, canción, cartilla…)
+    tipos_archivo = ("guia", "audio", "cancion", "cartilla")
+    tiene_archivo = bool(url) and ("/attachment/" in url or "/materials/gp/" in url)
+    if tipo in tipos_archivo and tiene_archivo and not bloqueado:
+        badge_html = f'<a class="badge badge-{tipo}" href="{esc(url)}" target="_blank" rel="noopener" title="Descargar">{icono} {esc(etiqueta)} ⬇</a>'
     else:
         badge_html = f'<span class="badge badge-{tipo}">{icono} {esc(etiqueta)}</span>'
 
@@ -164,6 +166,25 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
 
 def render():
     data = json.load(open(DATA, encoding="utf-8"))
+    slug = data.get("slug", "2do-b4")
+    tabla_supabase = data.get("tabla_progreso", "progreso_2do_b4")
+
+    # Cargar grados para el selector
+    grados_path = os.path.join(ROOT, "datos", "grados.json")
+    grados_data = json.load(open(grados_path, encoding="utf-8"))
+    grados = grados_data.get("grados", [])
+    grado_options = ""
+    for g in grados:
+        es_actual = g["id"] == data.get("grado_id", "2do-grado")
+        selected = " selected" if es_actual else ""
+        if g.get("disponible"):
+            grado_options += (
+                f'<option value="{esc(g["pagina"])}"{selected}>{esc(g["nombre"])}</option>'
+            )
+        else:
+            grado_options += (
+                f'<option value="" disabled{selected}>{esc(g["nombre"])} (próximamente)</option>'
+            )
 
     # Convertir subtareas de string a objetos para soportar jerarquía recursiva
     def normalizar_subtareas(items):
@@ -365,6 +386,14 @@ def render():
     border-bottom: 1px solid var(--line); padding: 8px 16px;
   }}
   .toolbar-inner {{ display: flex; gap: 10px; flex-wrap: wrap; align-items: center; max-width: 1000px; margin: 0 auto; }}
+  .grado-selector {{
+    display: flex; align-items: center; gap: 6px;
+  }}
+  .grado-selector label {{ font-size: 12px; color: var(--muted); }}
+  .grado-selector select {{
+    padding: 5px 8px; border-radius: 7px; border: 1px solid var(--line); background: #fff;
+    font-size: 12.5px; font-weight: 700; color: var(--brand); cursor: pointer; max-width: 130px;
+  }}
   .progress-shell {{ flex: 1 1 200px; min-width: 160px; }}
   .progress-bar {{ height: 8px; background: #e2ded4; border-radius: 99px; overflow: hidden; }}
   .progress-fill {{ height: 100%; width: 0%; background: linear-gradient(90deg, #2b8a72, #7cc4a9); transition: width .25s; }}
@@ -575,6 +604,11 @@ def render():
   <main class="main" id="main">
     <div class="toolbar">
       <div class="toolbar-inner">
+        <div class="grado-selector">
+          <select id="gradoSelect" aria-label="Grado" title="Cambiar de grado">
+            {grado_options}
+          </select>
+        </div>
         <div class="progress-shell">
           <div class="progress-bar"><div class="progress-fill" id="globalFill"></div></div>
           <div class="progress-text"><b id="globalPct">0%</b> completado · <span id="globalCount">0 de 0</span></div>
@@ -602,16 +636,16 @@ def render():
 <script>
 (function () {{
   "use strict";
-  var KEY = "jhs-2do-b4-v1";
-  var TAB_KEY = "jhs-2do-b4-tab";
-  var SIDEBAR_KEY = "jhs-2do-b4-sidebar";
+  var KEY = "jhs-{slug}-v1";
+  var TAB_KEY = "jhs-{slug}-tab";
+  var SIDEBAR_KEY = "jhs-{slug}-sidebar";
   var checks = {{}};
   var filterPending = false;
 
   /* ---------- Supabase (sincronización entre PCs) ---------- */
   var SUPABASE_URL = "https://ztigjbhktpvwtkdjjdjl.supabase.co";
   var SUPABASE_KEY = "sb_publishable_6mx_PPNIOms3ZiyeCy4gBA_wR3zApgs";
-  var SUPABASE_TABLE = "progreso_2do_b4";
+  var SUPABASE_TABLE = "{tabla_supabase}";
   var supabaseReady = false;
 
   async function supabaseGet() {{
@@ -863,6 +897,18 @@ def render():
 
   document.getElementById('buscar').addEventListener('input', applyFilters);
 
+  /* ---------- selector de grado ---------- */
+  var gradoSelect = document.getElementById('gradoSelect');
+  if (gradoSelect) {{
+    gradoSelect.addEventListener('change', function () {{
+      var destino = this.value;
+      if (!destino) {{ return; }}
+      var actual = window.location.pathname.split('/').pop();
+      if (destino === actual) {{ return; }}
+      window.location.href = destino;
+    }});
+  }}
+
   document.getElementById('btnPendientes').addEventListener('click', function () {{
     filterPending = !filterPending;
     this.classList.toggle('on', filterPending);
@@ -875,15 +921,15 @@ def render():
   document.getElementById('btnExportar').addEventListener('click', function () {{
     var payload = {{
       app: 'listador-actividades',
-      grado: '2do grado',
-      bimestre: 'Bimestre 4',
+      grado: '{esc(data["grado"])}',
+      bimestre: '{esc(data["bimestre"])}',
       exportado: new Date().toISOString(),
       tildes: checks
     }};
     var blob = new Blob([JSON.stringify(payload, null, 2)], {{ type: 'application/json' }});
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'progreso-2do-bimestre-4.json';
+    a.download = 'progreso-{esc(slug)}.json';
     document.body.appendChild(a);
     a.click();
     a.remove();

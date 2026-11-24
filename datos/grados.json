@@ -1,0 +1,20 @@
+{
+  "grados": [
+    {
+      "id": "2do-grado",
+      "nombre": "2do grado",
+      "bimestre": "Bimestre 4",
+      "pagina": "2do-grado-bimestre-4.html",
+      "datos": "bimestre-4.json",
+      "disponible": true
+    },
+    {
+      "id": "kinder",
+      "nombre": "Kinder",
+      "bimestre": null,
+      "pagina": null,
+      "datos": null,
+      "disponible": false
+    }
+  ]
+}

@@ -67,13 +67,51 @@ al agregar o quitar ítems del JSON no hay que renumerar a mano.
 La vista está organizada en **pestañas**: una por materia y una de **estadísticas**. Solo se
 muestra la pestaña activa (se recuerda la última usada en `localStorage`). Cada pestaña de materia
 muestra el **% hecho** y el **% que falta**, con su barra de avance; la pestaña de estadísticas
-resume el total hecho/pendiente y el desglose por materia y por tema.
+resume el total hecho/pendiente y el desglose por materia.
 
 El buscador recorre todas las materias a la vez (muestra los paneles con coincidencias) y el botón
 **«Ocultar tildados»** esconde lo que ya está completo dentro de la materia abierta.
 
+## Enlaces de descarga
+
+- Cada ítem con archivo adjunto muestra un badge clickeable (`📘 Descargar Guía`, `🎧 Audio ⬇`,
+  `🎵 Canción ⬇`, `✂️ Cartilla ⬇`) que apunta al archivo, más un botón **Link**.
+- En las guías y cartillas el enlace es la **descarga directa del PDF**
+  (`https://jhs.schoology.com/attachment/<id>/source/<token>.pdf`), extraída de la página
+  `/assignment/<id>`.
+- En los audios y canciones el enlace es la página del archivo en Schoology
+  (`/course/<curso>/materials/gp/<id>`), porque el token de descarga directa solo aparece en el
+  reproductor y no en el HTML de la carpeta.
+- Los ítems bloqueados (`cuestionario`, `tutor`) **nunca** llevan enlace: el generador lo fuerza y
+  además `tools/limpiar_urls_bloqueadas.py` borra cualquier URL que se cuele en el JSON.
+
+## Jerarquía recursiva
+
+`subtareas` acepta dos formas:
+
+- texto suelto: `"Realizar las estimaciones…"` → se numera `2-A`, `2-B`, …
+- objeto con hijos:
+  ```json
+  { "nombre": "Clasificar los animales", "url": "…", "subtareas": ["Mamíferos", "Aves"] }
+  ```
+  → el padre es `2-C` y los hijos `2-C-1`, `2-C-2`, … (niveles ilimitados).
+
+El progreso de un ítem se calcula con sus **hojas** (los descendientes sin hijos): tildar el padre
+tilda todo; destildar una hoja destilda el padre.
+
+## Selector de grado
+
+`datos/grados.json` lista los grados del menú (esquina superior izquierda). Cada entrada tiene
+`nombre`, `pagina` (el HTML de ese grado), `datos` y `disponible`. El `<select>` navega a
+`pagina`; los grados sin contenido aparecen como `(próximamente)` y quedan deshabilitados.
+
+El generador toma de `datos/bimestre-4.json` las claves `grado_id`, `slug` y `tabla_progreso`,
+así que un grado nuevo solo necesita su propio JSON con esas tres claves.
+
 ## Cómo seguir con Kinder
 
-Kinder tiene una sola materia: alcanza con repetir el recorrido sobre ese curso y agregar las
-materias a `datos/bimestre-4.json` (el HTML se regenera solo). El generador ya soporta cualquier
-cantidad de materias, temas e ítems.
+Kinder tiene una sola materia: alcanza con repetir el recorrido sobre ese curso, copiar el JSON
+como `datos/kinder-bimestre-N.json` (con `grado_id`, `slug` y `tabla_progreso` propios), generar
+su HTML y marcar la entrada de `datos/grados.json` como `disponible: true` apuntando a esa página.
+El generador ya soporta cualquier cantidad de materias, temas e ítems.
+
