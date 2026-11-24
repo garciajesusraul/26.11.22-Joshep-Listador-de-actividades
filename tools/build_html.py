@@ -50,15 +50,40 @@ def esc(t):
     return html.escape(str(t), quote=True)
 
 
-def render_sub(item_id, num, idx, texto):
-    sid = f"{item_id}-s{idx}"
-    letra = chr(ord("A") + idx)
+def render_sub(item_id, num, letra, item):
+    """Renderiza una subtarea recursivamente (soporta sub-subítems)."""
+    sid = f"{item_id}-{letra}"
+    num_tag = f"{num}-{letra}" if num else letra
+    nombre = item.get("nombre", "")
+    tipo = item.get("tipo", "sub")
+    subtareas = item.get("subtareas") or []
+    url = item.get("url")
+
+    link_btn = ""
+    if url:
+        if url.lower().endswith(".pdf") or "/attachment/" in url:
+            link_btn = f'<a class="btn-link" href="{esc(url)}" target="_blank" rel="noopener" title="Descargar PDF">📄 Link</a>'
+        else:
+            link_btn = f'<a class="btn-link" href="{esc(url)}" target="_blank" rel="noopener" title="Abrir en Schoology">🔗 Link</a>'
+
+    hijos_html = ""
+    if subtareas:
+        hijos_items = []
+        for j, hijo in enumerate(subtareas):
+            hijo_letra = chr(ord("a") + j)
+            hijos_items.append(render_sub(sid, num_tag, hijo_letra, hijo))
+        hijos_html = f"""<ul class="subs">
+        {"".join(hijos_items)}
+      </ul>"""
+
     return f"""<li class="sub">
           <label class="sub-label" for="{sid}">
             <input type="checkbox" id="{sid}" data-check="{sid}">
-            <span class="sub-tag">{num}-{letra}</span>
-            <span class="sub-text">{esc(texto)}</span>
+            <span class="sub-tag">{num_tag}</span>
+            <span class="sub-text">{esc(nombre)}</span>
+            {link_btn}
           </label>
+          {hijos_html}
         </li>"""
 
 
@@ -101,7 +126,7 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
         badge_html = f'<span class="badge badge-{tipo}">{icono} {esc(etiqueta)}</span>'
 
     if subtareas:
-        hijos = "\n        ".join(render_sub(item_id, numero, i, s) for i, s in enumerate(subtareas))
+        hijos = "\n        ".join(render_sub(item_id, numero, chr(ord("A") + i), s) for i, s in enumerate(subtareas))
         cuerpo = f"""<ul class="subs">
         {hijos}
       </ul>"""
@@ -139,6 +164,20 @@ def render_item(materia_idx, tema_idx, item_idx, numero, item):
 
 def render():
     data = json.load(open(DATA, encoding="utf-8"))
+
+    # Convertir subtareas de string a objetos para soportar jerarquía recursiva
+    def normalizar_subtareas(items):
+        for item in items:
+            subs = item.get("subtareas")
+            if subs:
+                item["subtareas"] = [
+                    s if isinstance(s, dict) else {"nombre": s}
+                    for s in subs
+                ]
+                normalizar_subtareas(item["subtareas"])
+    for materia in data["materias"]:
+        for tema in materia["temas"]:
+            normalizar_subtareas(tema["items"])
 
     # Sidebar tabs (vertical)
     sidebar_tabs = ['<button class="stab active" role="tab" aria-selected="true" data-tab="panel-resumen" id="stab-resumen"><span class="stab-icon">📊</span><span class="stab-name">Estadísticas</span><span class="stab-pct" data-tab-pct-global>0%</span></button>']
@@ -630,7 +669,7 @@ def render():
     return allInputs().filter(function (i) {{ return !i.hasAttribute('data-children'); }});
   }}
   function subsOf(id) {{
-    return Array.prototype.slice.call(document.querySelectorAll('input[data-check^="' + id + '-s"]'));
+    return Array.prototype.slice.call(document.querySelectorAll('input[data-check^="' + id + '-"]'));
   }}
   function setSub(id, val) {{
     if (val) checks[id] = true; else delete checks[id];
@@ -687,15 +726,16 @@ def render():
   function refreshItem(li) {{
     var id = li.getAttribute('data-item-id');
     var parent = li.querySelector('input[data-children]');
-    var subs = subsOf(id);
-    if (subs.length) {{
-      var done = subs.filter(function (s) {{ return s.checked; }}).length;
-      if (parent) parent.checked = done === subs.length;
+    var allSubs = subsOf(id);
+    var leafSubs = allSubs.filter(function (s) {{ return !s.hasAttribute('data-children'); }});
+    if (leafSubs.length) {{
+      var done = leafSubs.filter(function (s) {{ return s.checked; }}).length;
+      if (parent) parent.checked = done === leafSubs.length;
       var prog = li.querySelector('[data-progress]');
-      if (prog) prog.textContent = done + "/" + subs.length;
+      if (prog) prog.textContent = done + "/" + leafSubs.length;
     }}
     var own = li.querySelector('input[data-check]');
-    var isDone = subs.length ? subs.every(function (s) {{ return s.checked; }}) : !!(own && own.checked);
+    var isDone = leafSubs.length ? leafSubs.every(function (s) {{ return s.checked; }}) : !!(own && own.checked);
     li.classList.toggle('is-done', isDone);
   }}
 
